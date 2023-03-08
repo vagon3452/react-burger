@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./BurgerIngredients.module.css";
-import Item from "./Items/Item";
+import Item from "./Item";
 import PropTypes from "prop-types";
 
 const burgerPropTypes = PropTypes.shape({
