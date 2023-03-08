@@ -1,58 +1,72 @@
 import React from "react";
 import styles from "./BurgerConstructor.module.css";
+import PropTypes from "prop-types";
 import {
   CurrencyIcon,
   Button,
+  ConstructorElement,
+  DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import CreateBurger1 from "./CreateComponents/CreateBurger1";
-import CreateBurger2 from "./CreateComponents/CreateBurger2";
-import CreateBurger3 from "./CreateComponents/CreateBurger3";
-import CreateBurger4 from "./CreateComponents/CreateBurger4";
-import CreateBurger5 from "./CreateComponents/CreateBurger5";
-import CreateBurger6 from "./CreateComponents/CreateBurger6";
-import CreateBurger7 from "./CreateComponents/CreateBurger7";
 
-export default function BurgerConstructor() {
-  const url = "https://norma.nomoreparties.space/api/ingredients";
+const burgerPropTypes = PropTypes.shape({
+  _id: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
+  proteins: PropTypes.number.isRequired,
+  fat: PropTypes.number.isRequired,
+  carbohydrates: PropTypes.number.isRequired,
+  calories: PropTypes.number.isRequired,
+  price: PropTypes.number.isRequired,
+  image: PropTypes.string.isRequired,
+  image_mobile: PropTypes.string.isRequired,
+  image_large: PropTypes.string.isRequired,
+  __v: PropTypes.number.isRequired,
+}).isRequired;
 
-  const [state, setState] = React.useState({
-    isLoading: false,
-    hasError: false,
-    data: [],
-  });
+BurgerConstructor.propTypes = {
+  data: PropTypes.arrayOf(burgerPropTypes).isRequired
+};
 
-  React.useEffect(() => {
-    setState({ ...state, isLoading: true, hasError: false });
-    fetch(url)
-      .then((res) => res.json())
-      .then((json) =>
-        setState({
-          ...state,
-          isLoading: false,
-          hasError: false,
-          data: json.data,
-        })
-      )
-      .catch((err) => setState({ ...state, isLoading: false, hasError: true }));
-  }, []);
-  const { data, isLoading, hasError } = state;
+function BurgerConstructor({ data }) {
+  const bun = data.filter((item) => item.type === "bun");
+  const ingridients = data.filter((item) => item.type !== "bun");
+
   return (
     <div className={styles.container}>
-      {isLoading && "Loading..."}
-      {hasError && "error"}
-      {!isLoading && !hasError && data.length && (
-        <>
       <div className={styles.burgerComponents}>
-        <CreateBurger1 data={data[0]} />
-        <CreateBurger2 data={data[5]} />
-        <CreateBurger3 data={data[4]} />
-        <CreateBurger4 data={data[7]} />
-        <CreateBurger5 data={data[10]} />
-        <CreateBurger6 data={data[10]} />
-        <CreateBurger7 data={data[0]} />
+        <div className={styles.ingridient} style={{ paddingLeft: "24px" }}>
+          <ConstructorElement
+            type="top"
+            isLocked={true}
+            text={`${bun[0].name} (верх)`}
+            price={bun[0].price}
+            thumbnail={bun[0].image}
+          />
+        </div>
+        {ingridients.map(item => (
+          <div className={styles.ingridient} key={item._id}>
+            <div style={{ alignSelf: "center" }} >
+              <DragIcon type="primary"/>
+            </div>
+            <ConstructorElement
+              type={item.type}
+              text={item.name}
+              price={item.price}
+              thumbnail={item.image}
+            />
+          </div>
+        ))}
+        <div className={styles.ingridient} style={{ paddingLeft: "24px" }}>
+          <ConstructorElement
+            type="bottom"
+            isLocked={true}
+            text={`${bun[0].name} (низ)`}
+            price={bun[0].price}
+            thumbnail={bun[0].image}
+          />
+        </div>
       </div>
-      </>
-      )}
+
       <div className={styles.info}>
         <p className="text text_type_main-medium">610</p>
         <CurrencyIcon type="primary" />
@@ -60,7 +74,8 @@ export default function BurgerConstructor() {
           Оформить заказ
         </Button>
       </div>
-     
     </div>
   );
 }
+
+export default BurgerConstructor

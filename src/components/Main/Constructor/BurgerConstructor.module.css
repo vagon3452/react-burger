@@ -49,3 +49,10 @@
   order: 0;
   flex-grow: 0;
 }
+
+.ingridient {
+  display: flex;
+  flex-direction: row;
+  width: 568px;
+  height: 80px;
+}

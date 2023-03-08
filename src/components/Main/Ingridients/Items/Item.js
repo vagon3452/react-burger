@@ -20,28 +20,25 @@ const burgerPropTypes = PropTypes.shape({
   __v: PropTypes.number.isRequired,
 }).isRequired;
 
-function Item4({ data }) {
-  const [state, setState] = useState(data);
+function Item({ data }) {
 
   return (
-    <>
-      <Counter count={1} size="default" />
+    <div style={{ position: "relative", flexGrow: 0, width: "272px", height: "208px" }}>
+      <Counter count={0} size="default" />
       <div style={{ display: "flex", flexDirection: "column" }}>
-        <img src={state.image} />
+        <img src={data.image} />
         <div style={{ height: "24px", alignSelf: "center" }}>
-          <div style={{ alignSelf: "center" }}>
-            {state.price} <CurrencyIcon type="primary" />
-          </div>
+          {data.price} <CurrencyIcon type="primary" />
         </div>
         <div style={{ height: "48px" }}>
-          <p style={{ textAlign: "center" }}>{state.name}</p>
+          <p style={{ textAlign: "center" }}>{data.name}</p>
         </div>
       </div>
-    </>
+    </div>
   );
 }
-Item4.propTypes = {
+Item.propTypes = {
   data: burgerPropTypes,
 };
 
-export default Item4;
+export default Item;
