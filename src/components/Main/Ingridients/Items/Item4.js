@@ -1,0 +1,47 @@
+import React, { useState } from "react";
+import PropTypes from "prop-types";
+import {
+  CurrencyIcon,
+  Counter,
+} from "@ya.praktikum/react-developer-burger-ui-components";
+
+const burgerPropTypes = PropTypes.shape({
+  _id: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
+  proteins: PropTypes.number.isRequired,
+  fat: PropTypes.number.isRequired,
+  carbohydrates: PropTypes.number.isRequired,
+  calories: PropTypes.number.isRequired,
+  price: PropTypes.number.isRequired,
+  image: PropTypes.string.isRequired,
+  image_mobile: PropTypes.string.isRequired,
+  image_large: PropTypes.string.isRequired,
+  __v: PropTypes.number.isRequired,
+}).isRequired;
+
+function Item4({ data }) {
+  const [state, setState] = useState(data);
+
+  return (
+    <>
+      <Counter count={1} size="default" />
+      <div style={{ display: "flex", flexDirection: "column" }}>
+        <img src={state.image} />
+        <div style={{ height: "24px", alignSelf: "center" }}>
+          <div style={{ alignSelf: "center" }}>
+            {state.price} <CurrencyIcon type="primary" />
+          </div>
+        </div>
+        <div style={{ height: "48px" }}>
+          <p style={{ textAlign: "center" }}>{state.name}</p>
+        </div>
+      </div>
+    </>
+  );
+}
+Item4.propTypes = {
+  data: burgerPropTypes,
+};
+
+export default Item4;
