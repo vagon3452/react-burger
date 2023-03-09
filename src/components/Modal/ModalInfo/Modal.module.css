@@ -22,6 +22,7 @@
   justify-content: space-between;
   align-items: center;
   margin-left: 40px;
+  text-align: center;
   width: 640px;
   height: 64px;
 }
@@ -29,15 +30,15 @@
 .image {
   width: 520px;
   height: 240px;
-  /* border: 2px solid red; */
   align-self: center;
 }
 
 .frame {
   align-self: center;
+  text-align: center;
   margin-top: 16px;
   width: 520px;
-  height: 30px;
+  min-height: 30px;
 }
 .nutrition {
   gap: 20px;
@@ -50,4 +51,5 @@
 .value {
   width: 120px;
   height: 56px;
+  text-align: center;
 }

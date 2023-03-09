@@ -34,8 +34,8 @@ function modal () {
       <Counter count={0} size="default" />
       <div style={{ display: "flex", flexDirection: "column" }}>
         <img src={data.image} alt={data.name} onClick={modal}/>
-        <div style={{ height: "24px", alignSelf: "center" }}>
-          {data.price} <CurrencyIcon type="primary" />
+        <div style={{ height: "24px", alignSelf: "center",display: "flex",  flexDirection: "row" }}>
+        <p className="text text_type_digits-default mr-4">{data.price}</p> <CurrencyIcon type="primary" />
         </div>
         <div style={{ height: "48px" }}>
           <p style={{ textAlign: "center" }}>{data.name}</p>

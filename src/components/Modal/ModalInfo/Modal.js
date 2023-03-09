@@ -29,23 +29,23 @@ function Modal({ data, closeModal }) {
         <div className={styles.nutrition}>
           <div className={styles.value}>
             <p className="text text_type_main-default">Калории,ккал</p>
-            <p className="text text_type_digits-default pl-9">
+            <p className="text text_type_digits-default" >
               {data.calories}
             </p>
           </div>
           <div className={styles.value}>
-            <p className="text text_type_main-default pl-4">Белки, г </p>
-            <p className="text text_type_digits-default pl-9">
+            <p className="text text_type_main-default">Белки, г </p>
+            <p className="text text_type_digits-default">
               {data.proteins}
             </p>
           </div>
           <div className={styles.value}>
-            <p className="text text_type_main-default pl-4">Жиры, г</p>
-            <p className="text text_type_digits-default pl-9">{data.fat}</p>
+            <p className="text text_type_main-default">Жиры, г</p>
+            <p className="text text_type_digits-default ">{data.fat}</p>
           </div>
           <div className={styles.value}>
             <p className="text text_type_main-default">Углеводы, г</p>
-            <p className="text text_type_digits-default pl-9">
+            <p className="text text_type_digits-default">
               {data.carbohydrates}
             </p>
           </div>
