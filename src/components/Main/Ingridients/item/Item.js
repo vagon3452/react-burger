@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import Modal from "../../../Modal/Modal";
+import Modal from "../../../Modal//ModalInfo/Modal";
 import {
   CurrencyIcon,
   Counter,
@@ -21,7 +21,6 @@ const burgerPropTypes = PropTypes.shape({
   __v: PropTypes.number.isRequired,
 }).isRequired;
 
-// const modalRoot = document.getElementById("react-modals")
 
 function Item({ data }) {
 const [openModal, setOpenModal] = useState(false)
@@ -34,7 +33,7 @@ function modal () {
     <div style={{ position: "relative", flexGrow: 0, width: "272px", height: "208px" }}>
       <Counter count={0} size="default" />
       <div style={{ display: "flex", flexDirection: "column" }}>
-        <img src={data.image} onClick={modal}/>
+        <img src={data.image} alt={data.name} onClick={modal}/>
         <div style={{ height: "24px", alignSelf: "center" }}>
           {data.price} <CurrencyIcon type="primary" />
         </div>

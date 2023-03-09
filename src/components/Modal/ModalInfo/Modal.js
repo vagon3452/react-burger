@@ -15,14 +15,14 @@ function Modal({ data, closeModal }) {
 
   return ReactDOM.createPortal(
     <div className={styles.modalBackground} onClick={close}>
-      <div className={styles.content}>
+      <div className={styles.content} onClick={e=>e.stopPropagation()}>
         <div className={styles.title}>
           <p className="text text_type_main-large">Детали ингридиента</p>
           <div>
             <CloseIcon type="primary" onClick={close} />
           </div>
         </div>
-        <img src={data.image} className={styles.image} />
+        <img src={data.image}  className={styles.image} />
         <div className={styles.frame}>
           <p className="text text_type_main-medium">{data.name}</p>
         </div>

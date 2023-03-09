@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./BurgerConstructor.module.css";
 import PropTypes from "prop-types";
+import ModalFinish from "../../Modal/ModalFinish/ModalFinish"
 import {
   CurrencyIcon,
   Button,
@@ -28,9 +29,13 @@ BurgerConstructor.propTypes = {
 };
 
 function BurgerConstructor({ data }) {
+  const [openModal, setOpenModal] = React.useState(false)
   const bun = data.filter((item) => item.type === "bun");
   const ingridients = data.filter((item) => item.type !== "bun");
 
+  function modal() {
+    setOpenModal(true)
+  }
   return (
     <div className={styles.container}>
       <div className={styles.burgerComponents}>
@@ -53,6 +58,7 @@ function BurgerConstructor({ data }) {
               text={item.name}
               price={item.price}
               thumbnail={item.image}
+              
             />
           </div>
         ))}
@@ -70,10 +76,11 @@ function BurgerConstructor({ data }) {
       <div className={styles.info}>
         <p className="text text_type_main-medium">610</p>
         <CurrencyIcon type="primary" />
-        <Button htmlType="button" type="primary" size="large">
+        <Button htmlType="button" type="primary" size="large" onClick={modal}>
           Оформить заказ
         </Button>
       </div>
+      {openModal && <ModalFinish closeModal={setOpenModal}/>}
     </div>
   );
 }
