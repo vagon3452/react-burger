@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./BurgerIngredients.module.css";
-import Item from "./Item";
+import Item from "./item/Item";
 import PropTypes from "prop-types";
 
 const burgerPropTypes = PropTypes.shape({
@@ -21,6 +21,8 @@ const burgerPropTypes = PropTypes.shape({
 BurgerIngredients.propTypes = {
   data: PropTypes.arrayOf(burgerPropTypes).isRequired
 };
+
+
 export default function BurgerIngredients({ data }) {
   const bun = data.filter((item) => item.type === "bun");
   const saus = data.filter((item) => item.type === "sauce");
