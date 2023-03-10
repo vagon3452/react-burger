@@ -34,7 +34,6 @@
   width: 200px;
   height: 56px;
   flex: none;
-  /* order: 0; */
   flex-grow: 1;
 }
 
