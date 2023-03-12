@@ -1,18 +1,30 @@
-import React from "react";
+import React, {useCallback, useEffect} from "react";
+import PropTypes from "prop-types";
 import styles from "./ModalFinish.module.css";
 import ReactDOM from "react-dom";
 import image from "../../../images/done.png";
 import {
   CloseIcon,
-  CheckMarkIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
+
 
 const modalRoot = document.getElementById("react-modals");
 
 function Modal({ closeModal }) {
-  function close() {
-    closeModal(false);
-  }
+  const close = useCallback(
+    (e) => {
+      (e.keyCode === 27 || e.type === "click") && closeModal(false);
+    },
+    [closeModal]
+  );
+
+  useEffect(() => {
+    document.addEventListener("keydown", close);
+
+    return () => {
+      document.removeEventListener("keydown", close);
+    };
+  }, [close]);
 
   return ReactDOM.createPortal(
     <div className={styles.modalBackground} onClick={close}>
@@ -26,7 +38,7 @@ function Modal({ closeModal }) {
         <div className={styles.text}>
           <p className="text text_type_main-large">идинтификатор заказа</p>
         </div>
-          <img src={image} className={styles.image}/>
+          <img src={image} alt="OK" className={styles.image}/>
         <div className={styles.text}>
           <p className="text text_type_main-default">
             ваш заказ начали готовить
@@ -39,6 +51,10 @@ function Modal({ closeModal }) {
     </div>,
     modalRoot
   );
+}
+
+Modal.propTypes = {
+  closeModal: PropTypes.func.isRequired,
 }
 
 export default Modal;

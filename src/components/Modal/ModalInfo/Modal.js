@@ -1,11 +1,28 @@
 import React, { useCallback, useEffect } from "react";
+import PropTypes from "prop-types";
 import styles from "./Modal.module.css";
 import ReactDOM from "react-dom";
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 
 const modalRoot = document.getElementById("react-modals");
 
+const burgerPropTypes = PropTypes.shape({
+  _id: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
+  proteins: PropTypes.number.isRequired,
+  fat: PropTypes.number.isRequired,
+  carbohydrates: PropTypes.number.isRequired,
+  calories: PropTypes.number.isRequired,
+  price: PropTypes.number.isRequired,
+  image: PropTypes.string.isRequired,
+  image_mobile: PropTypes.string.isRequired,
+  image_large: PropTypes.string.isRequired,
+  __v: PropTypes.number.isRequired,
+}).isRequired;
+
 function Modal({ data, closeModal }) {
+
   const close = useCallback(
     (e) => {
       (e.keyCode === 27 || e.type === "click") && closeModal(false);
@@ -18,7 +35,6 @@ function Modal({ data, closeModal }) {
 
     return () => {
       document.removeEventListener("keydown", close);
-
     };
   }, [close]);
 
@@ -36,29 +52,34 @@ function Modal({ data, closeModal }) {
           <p className="text text_type_main-medium">{data.name}</p>
         </div>
         <div className={styles.nutrition}>
-          <div className={styles.value}>
-            <p className="text text_type_main-default">Калории,ккал</p>
-            <p className="text text_type_digits-default">{data.calories}</p>
-          </div>
-          <div className={styles.value}>
-            <p className="text text_type_main-default">Белки, г </p>
-            <p className="text text_type_digits-default">{data.proteins}</p>
-          </div>
-          <div className={styles.value}>
-            <p className="text text_type_main-default">Жиры, г</p>
-            <p className="text text_type_digits-default ">{data.fat}</p>
-          </div>
-          <div className={styles.value}>
-            <p className="text text_type_main-default">Углеводы, г</p>
-            <p className="text text_type_digits-default">
-              {data.carbohydrates}
-            </p>
-          </div>
+          <Nutritions data={data.calories}>Калории,ккал</Nutritions>
+          <Nutritions data={data.proteins}>Белки, г</Nutritions>
+          <Nutritions data={data.fat}>Жиры, г</Nutritions>
+          <Nutritions data={data.carbohydrates}>Углеводы, г</Nutritions>
         </div>
       </div>
     </div>,
     modalRoot
   );
 }
+
+function Nutritions(props) {
+  return (
+    <div className={styles.value}>
+      <p className="text text_type_main-default">{props.children}</p>
+      <p className="text text_type_digits-default">{props.data}</p>
+    </div>
+  );
+}
+
+Nutritions.propTypes = {
+  data: PropTypes.number.isRequired,
+  children: PropTypes.string.isRequired,
+}
+
+Modal.propTypes = {
+  data: burgerPropTypes,
+  closeModal: PropTypes.func.isRequired,
+};
 
 export default Modal;

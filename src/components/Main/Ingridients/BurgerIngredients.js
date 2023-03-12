@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import styles from "./BurgerIngredients.module.css";
 import Item from "./item/Item";
 import PropTypes from "prop-types";
@@ -18,15 +18,27 @@ const burgerPropTypes = PropTypes.shape({
   __v: PropTypes.number.isRequired,
 }).isRequired;
 
+const type_bun = "bun";
+const type_sauce = "sauce";
+const type_main = "main";
+
 BurgerIngredients.propTypes = {
-  data: PropTypes.arrayOf(burgerPropTypes).isRequired
+  data: PropTypes.arrayOf(burgerPropTypes).isRequired,
 };
 
-
 export default function BurgerIngredients({ data }) {
-  const bun = data.filter((item) => item.type === "bun");
-  const saus = data.filter((item) => item.type === "sauce");
-  const main = data.filter((item) => item.type === "main");
+  const bun = useMemo(
+    () => data.filter((item) => item.type === type_bun),
+    [data]
+  );
+  const saus = useMemo(
+    () => data.filter((item) => item.type === type_sauce),
+    [data]
+  );
+  const main = useMemo(
+    () => data.filter((item) => item.type === type_main),
+    [data]
+  );
 
   return (
     <div className={styles.container}>
@@ -44,26 +56,25 @@ export default function BurgerIngredients({ data }) {
         </div>
         <div className={styles.columnsPuns}>
           {bun.map((item) => (
-            <Item key={item._id} data={item}/>
+            <Item key={item._id} data={item} />
           ))}
         </div>
         <div className={styles.headline}>
           <h2>Соусы</h2>
         </div>
         <div className={styles.columnsSaus}>
-        {saus.map((item) => (
-            <Item key={item._id} data={item}/>
+          {saus.map((item) => (
+            <Item key={item._id} data={item} />
           ))}
         </div>
         <div className={styles.headline}>
           <h2>Начинка</h2>
         </div>
         <div className={styles.columnsContent}>
-        {main.map((item) => (
-            <Item key={item._id} data={item}/>
+          {main.map((item) => (
+            <Item key={item._id} data={item} />
           ))}
-            
-            </div>
+        </div>
       </div>
     </div>
   );
