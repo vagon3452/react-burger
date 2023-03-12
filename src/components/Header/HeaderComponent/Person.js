@@ -1,9 +1,6 @@
-import React from "react";
-
+import React, { useEffect } from "react";
 
 function Person() {
-
-  
   return (
     <>
       <p>Личный кабинет</p>

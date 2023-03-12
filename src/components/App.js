@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 
 import AppHeader from "./Header/AppHeader";
 import BurgerConstructor from "./Main/Constructor/BurgerConstructor";
@@ -8,13 +8,13 @@ import styles from "./App.module.css";
 function App() {
   const url = "https://norma.nomoreparties.space/api/ingredients";
 
-  const [state, setState] = React.useState({
+  const [state, setState] = useState({
     isLoading: false,
     hasError: false,
     data: [],
   });
 
-  React.useEffect(() => {
+  useEffect(() => {
     setState({ ...state, isLoading: true, hasError: false });
     fetch(url)
       .then((res) => res.json())
