@@ -1,7 +1,8 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useContext } from "react";
 import styles from "./BurgerIngredients.module.css";
 import Item from "./item/Item";
 import PropTypes from "prop-types";
+import { BurgerContext } from "../../Services/BurgerContext";
 
 const burgerPropTypes = PropTypes.shape({
   _id: PropTypes.string.isRequired,
@@ -26,7 +27,9 @@ BurgerIngredients.propTypes = {
   data: PropTypes.arrayOf(burgerPropTypes).isRequired,
 };
 
-export default function BurgerIngredients({ data }) {
+export default function BurgerIngredients() {
+  const {data} = useContext(BurgerContext)
+  
   const bun = useMemo(
     () => data.filter((item) => item.type === type_bun),
     [data]

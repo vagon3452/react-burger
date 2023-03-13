@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import PropTypes from "prop-types";
 import styles from "./Modal.module.css";
 import ReactDOM from "react-dom";
@@ -23,13 +23,10 @@ const burgerPropTypes = PropTypes.shape({
 
 function Modal({ data, closeModal }) {
 
-  const close = useCallback(
-    (e) => {
+  function close (e) {
       (e.keyCode === 27 || e.type === "click") && closeModal(false);
-    },
-    [closeModal]
-  );
-
+    }
+  
   useEffect(() => {
     document.addEventListener("keydown", close);
 

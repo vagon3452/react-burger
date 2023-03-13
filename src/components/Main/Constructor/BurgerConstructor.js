@@ -1,7 +1,8 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState, useContext } from "react";
 import styles from "./BurgerConstructor.module.css";
 import PropTypes from "prop-types";
 import ModalFinish from "../../Modal/ModalFinish/ModalFinish";
+import {BurgerContext} from "../../Services/BurgerContext"
 import {
   CurrencyIcon,
   Button,
@@ -26,7 +27,9 @@ const burgerPropTypes = PropTypes.shape({
 
 const type_bun = "bun"
 
-function BurgerConstructor({ data }) {
+function BurgerConstructor() {
+  const {data} = useContext(BurgerContext)
+  console.log(data)
   const [openModal, setOpenModal] = useState(false);
   const [state, setState] = useState([]);
   

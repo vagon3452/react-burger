@@ -1,23 +1,27 @@
-const request = () => {
+const RequestAPI = () => {
   const url = "https://norma.nomoreparties.space/api/ingredients";
 
-  return new Promise((resolve, reject) => {
-    const xhr = new XMLHttpRequest();
-
-    xhr.open("get", url);
-
-    xhr.responseType = "json";
-
-    xhr.onload = () => {
-      resolve(xhr.response);
-    };
-
-    xhr.onerror = () => {
-      reject(xhr.response);
-    };
-
-    xhr.send();
+  const [state, setState] = useState({
+    isLoading: false,
+    hasError: false,
+    data: [],
   });
+
+  useEffect(() => {
+    setState({ ...state, isLoading: true, hasError: false });
+    fetch(url)
+      .then((res) => res.json())
+      .then((json) =>
+        setState({
+          ...state,
+          isLoading: false,
+          hasError: false,
+          data: json.data,
+        })
+      )
+      .catch((err) => setState({ ...state, isLoading: false, hasError: true }));
+  }, []);
+  const { data, isLoading, hasError } = state;
 };
 
-export default request;
+export default RequestAPI;
