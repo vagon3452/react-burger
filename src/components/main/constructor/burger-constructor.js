@@ -23,17 +23,13 @@ import {
 
 const type_bun = "bun";
 
-
-
-
 const BurgerConstructor = () => {
-
   const dispatch = useDispatch();
 
   const total = useSelector(totalPriceSelector);
 
   const handleDrag = (bun) => {
-    dispatch({ type: ADD_BUN, item: {...bun, uuid: uuid()} });
+    dispatch({ type: ADD_BUN, item: { ...bun, uuid: uuid() } });
   };
 
   const ingredientDrag = useCallback(

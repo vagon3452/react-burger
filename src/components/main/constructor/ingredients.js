@@ -36,7 +36,7 @@ console.log(data)
         isDragging: monitor.isDragging(),
       }),
     },
-    [data]
+    [data, index]
   );
 
   const opacity = isDragging ? 0 : 1;
