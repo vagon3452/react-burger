@@ -115,3 +115,10 @@
   top: 60px;
   right: 40px;
 }
+
+.linkStyle {
+  text-decoration: 'none';
+  color: 'inherit';
+  font-size: 'inherit';
+  font-weight: 'inherit';
+};

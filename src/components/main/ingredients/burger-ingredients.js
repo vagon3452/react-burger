@@ -20,7 +20,12 @@ export default function BurgerIngredients() {
   const bunsRef = useRef(null);
   const sausRef = useRef(null);
   const mainRef = useRef(null);
-
+  const linkStyle = {
+    textDecoration: "none",
+    color: "inherit",
+    fontSize: "inherit",
+    fontWeight: "inherit",
+  };
   const bun = useMemo(
     () => items.filter((item) => item.type === type_bun),
     [items]
@@ -79,7 +84,14 @@ export default function BurgerIngredients() {
             </div>
             <div className={styles.columns}>
               {bun.map((item) => (
-                <Item key={item._id} data={item} />
+                <Link
+                  to={`/ingredients/${item._id}`}
+                  state={{ background: location }}
+                  key={item._id}
+                  style={linkStyle}
+                >
+                  <Item data={item} />
+                </Link>
               ))}
             </div>
             <div className={styles.headline} ref={sausRef}>
@@ -91,6 +103,7 @@ export default function BurgerIngredients() {
                   to={`/ingredients/${item._id}`}
                   state={{ background: location }}
                   key={item._id}
+                  style={linkStyle}
                 >
                   <Item data={item} />
                 </Link>
@@ -101,7 +114,14 @@ export default function BurgerIngredients() {
             </div>
             <div className={styles.columns}>
               {main.map((item) => (
-                <Item key={item._id} data={item} />
+                <Link
+                  to={`/ingredients/${item._id}`}
+                  state={{ background: location }}
+                  key={item._id}
+                  style={linkStyle}
+                >
+                  <Item data={item} />
+                </Link>
               ))}
             </div>
           </>

@@ -7,9 +7,9 @@ import { Link, useParams } from "react-router-dom";
 const modalRoot = document.getElementById("react-modals");
 
 function Modal({ closeModal, children, onClose }) {
-  console.log(onClose)
+  console.log(onClose);
   const close = (e) => {
-    (e.keyCode === 27 || e.type === "click") && closeModal(false);
+    (e.keyCode === 27 || e.type === "click") && (onClose() && closeModal(false));
   };
 
   useEffect(() => {

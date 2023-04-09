@@ -16,7 +16,6 @@ import { Bun } from "./buns";
 import { Ingredients } from "./ingredients";
 
 import {
-  CloseIcon,
   CurrencyIcon,
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";

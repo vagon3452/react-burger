@@ -11,13 +11,12 @@ import {
   CurrencyIcon,
   Counter,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 export default function Item({ data }) {
   const { image, name, price, _id } = data;
   const total = useSelector(totalPriceSelector);
   const currentCount = total[_id] || 0;
-  const navigate = useNavigate();
   const dispatch = useDispatch()
   const location = useLocation();
   const [openModal, setOpenModal] = useState(false);
@@ -35,7 +34,6 @@ export default function Item({ data }) {
   const modal = () => {
     setOpenModal((prev) => !prev);
     dispatch({type: "SET_MODAL", payload: data})
-    // navigate("", { state: { background: location } });
   };
 
   return (
@@ -54,7 +52,7 @@ export default function Item({ data }) {
 
       {openModal && (
         <Modal closeModal={setOpenModal}>
-          <IngredientsDetails data={data} modal={modal} />
+          <IngredientsDetails />
         </Modal>
       )}
     </section>
