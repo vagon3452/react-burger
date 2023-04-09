@@ -1,16 +1,21 @@
 import styles from "./item.module.css";
 import PropTypes from "prop-types";
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
+import { useSelector } from "react-redux";
+import { Link, useParams } from "react-router-dom";
 
-export const IngredientsDetails = ({ data, modal }) => {
+export const IngredientsDetails = () => {
+  const {data} = useSelector(store=>({data:store.cart.data}))
   const { name, image, calories, proteins, fat, carbohydrates } = data;
-
+  const id = useParams()
+  console.log(id)
+// onClick={modal}
   return (
     <>
       <div className={styles.title}>
         <p className="text text_type_main-large">Детали ингридиента</p>
         <div>
-          <CloseIcon type="primary" onClick={modal} />
+          <CloseIcon type="primary" />
         </div>
       </div>
       <img src={image} alt={name} className={styles.image} />

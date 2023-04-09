@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import { OnlyAuth, OnlyUnAuth } from "./protected-route";
 import { checkUserAuth } from "../services/actions/user";
 import { getItems } from "../services/actions/cart";
+import { AppHeader } from "./header/app-header";
 import {
   Main,
   LoginPage,
@@ -33,6 +34,7 @@ function App() {
   }, []);
   return (
     <>
+      {/* <AppHeader /> */}
       <Routes location={background || location}>
         <Route path="/" element={<Main />} />
         <Route

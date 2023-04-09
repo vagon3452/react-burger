@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { burgerPropTypes } from "../../../utils/prop-types";
 import { totalPriceSelector } from "../../../common/total-price";
 import { useDrag } from "react-dnd";
@@ -18,6 +18,7 @@ export default function Item({ data }) {
   const total = useSelector(totalPriceSelector);
   const currentCount = total[_id] || 0;
   const navigate = useNavigate();
+  const dispatch = useDispatch()
   const location = useLocation();
   const [openModal, setOpenModal] = useState(false);
 
@@ -33,7 +34,8 @@ export default function Item({ data }) {
   );
   const modal = () => {
     setOpenModal((prev) => !prev);
-    navigate("", { state: { background: location } });
+    dispatch({type: "SET_MODAL", payload: data})
+    // navigate("", { state: { background: location } });
   };
 
   return (

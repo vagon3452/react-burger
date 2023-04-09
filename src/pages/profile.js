@@ -76,12 +76,6 @@ export function ProfilePage() {
           </Button>
         </div>
         <div className={styles.actions}>
-          <p>
-            Вы - новый пользователь? <Link>Зарегистрироваться</Link>
-          </p>
-          <p>
-            Забыли пароль? <Link>Восстановить пароль</Link>
-          </p>
         </div>
       </div>
     </div>
