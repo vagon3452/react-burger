@@ -1,27 +1,22 @@
 import React, { useMemo, useEffect, useRef } from "react";
 import styles from "./burger-ingredients.module.css";
 import Item from "./item";
-import { getItems } from "../../../services/actions/cart";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
+import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 const type_bun = "bun";
 const type_sauce = "sauce";
 const type_main = "main";
 
 export default function BurgerIngredients() {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getItems());
-  }, [dispatch]);
-
-  const { items, isLoading, hasError} = useSelector((state) => ({
+  const { items, isLoading, hasError } = useSelector((state) => ({
     items: state.cart.items,
     isLoading: state.cart.isLoading,
     hasError: state.cart.hasError,
   }));
-
+  const location = useLocation();
   const bunsRef = useRef(null);
   const sausRef = useRef(null);
   const mainRef = useRef(null);
@@ -49,21 +44,27 @@ export default function BurgerIngredients() {
         <Tab
           value={type_bun}
           active={current === type_bun}
-          onClick={() => (bunsRef.current.scrollIntoView(), setCurrent(type_bun))}
+          onClick={() => (
+            bunsRef.current.scrollIntoView(), setCurrent(type_bun)
+          )}
         >
           Булки
         </Tab>
         <Tab
           value={type_sauce}
           active={current === type_sauce}
-          onClick={() => (sausRef.current.scrollIntoView(), setCurrent(type_sauce))}
+          onClick={() => (
+            sausRef.current.scrollIntoView(), setCurrent(type_sauce)
+          )}
         >
           Соусы
         </Tab>
         <Tab
           value={type_main}
           active={current === type_main}
-          onClick={() => (mainRef.current.scrollIntoView(), setCurrent(type_main))}
+          onClick={() => (
+            mainRef.current.scrollIntoView(), setCurrent(type_main)
+          )}
         >
           Начинки
         </Tab>
@@ -86,7 +87,13 @@ export default function BurgerIngredients() {
             </div>
             <div className={styles.columns}>
               {saus.map((item) => (
-                <Item key={item._id} data={item} />
+                <Link
+                  to={`/ingredients/${item._id}`}
+                  state={{ background: location }}
+                  key={item._id}
+                >
+                  <Item data={item} />
+                </Link>
               ))}
             </div>
             <div className={styles.headline} ref={mainRef}>

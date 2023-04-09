@@ -20,6 +20,7 @@ import {
   CurrencyIcon,
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
+import { OrderDetails } from "./order-details";
 
 const type_bun = "bun";
 
@@ -56,7 +57,9 @@ const BurgerConstructor = () => {
     (dragIndex, hoverIndex) => {
       const dragCard = ingredients[dragIndex];
       const newCards = [...ingredients];
+
       newCards.splice(dragIndex, 1);
+
       newCards.splice(hoverIndex, 0, dragCard);
 
       dispatch({ type: REPLACE, item: newCards });
@@ -113,26 +116,7 @@ const BurgerConstructor = () => {
       {openModal && hasError && "что-то пошло не так"}
       {openModal && !isLoading && !hasError && order && (
         <Modal closeModal={setOpenModal}>
-          <>
-            <div className={styles.title}>
-              <p className="text text_type_digits-large">{order.number}</p>
-              <div className={styles.close}>
-                <CloseIcon onClick={() => setOpenModal(false)} />
-              </div>
-            </div>
-            <div className={styles.text}>
-              <p className="text text_type_main-large">идинтификатор заказа</p>
-            </div>
-            <img src={image} alt="OK" className={styles.image} />
-            <div className={styles.text}>
-              <p className="text text_type_main-default">
-                ваш заказ начали готовить
-              </p>
-              <p className="text text_type_main-default text_color_inactive">
-                дождитесь готовности на орбитальной станции
-              </p>
-            </div>
-          </>
+          <OrderDetails image={image} number={order.number} closeModal={setOpenModal} />
         </Modal>
       )}
     </section>

@@ -12,6 +12,12 @@ const initialState = {
 
 export const burgerReducer = (state = initialState, action) => {
   switch (action.type) {
+    case REPLACE: {
+      return {
+        ...state,
+        ingredients: action.item,
+      };
+    }
     case ADD_BUN: {
       return {
         ...state,
@@ -24,6 +30,7 @@ export const burgerReducer = (state = initialState, action) => {
         ingredients: [...state.ingredients, action.item],
       };
     }
+
     case DELETE_ITEM: {
       return {
         ...state,
@@ -32,12 +39,7 @@ export const burgerReducer = (state = initialState, action) => {
         ),
       };
     }
-    case REPLACE: {
-      return {
-        ...state,
-        ingredients: action.item
-      };
-    }
+
     default: {
       return state;
     }

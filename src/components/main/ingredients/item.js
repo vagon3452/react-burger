@@ -1,24 +1,24 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import PropTypes from "prop-types";
 import { burgerPropTypes } from "../../../utils/prop-types";
 import { totalPriceSelector } from "../../../common/total-price";
 import { useDrag } from "react-dnd";
 import Modal from "../../modal/modal";
 import styles from "./item.module.css";
+import { IngredientsDetails } from "./ingredient-details";
 
 import {
   CurrencyIcon,
   Counter,
-  CloseIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 
-function Item({ data }) {
-  const { image, name, price, _id, calories, carbohydrates, fat, proteins } =
-    data;
+export default function Item({ data }) {
+  const { image, name, price, _id } = data;
   const total = useSelector(totalPriceSelector);
   const currentCount = total[_id] || 0;
-
+  const navigate = useNavigate();
+  const location = useLocation();
   const [openModal, setOpenModal] = useState(false);
 
   const [{ opacity }, ref] = useDrag(
@@ -33,6 +33,7 @@ function Item({ data }) {
   );
   const modal = () => {
     setOpenModal((prev) => !prev);
+    navigate("", { state: { background: location } });
   };
 
   return (
@@ -48,48 +49,16 @@ function Item({ data }) {
           <p style={{ textAlign: "center" }}>{name}</p>
         </div>
       </div>
+
       {openModal && (
         <Modal closeModal={setOpenModal}>
-          <>
-            <div className={styles.title}>
-              <p className="text text_type_main-large">Детали ингридиента</p>
-              <div>
-                <CloseIcon type="primary" onClick={modal} />
-              </div>
-            </div>
-            <img src={image} alt={name} className={styles.image} />
-            <div className={styles.frame}>
-              <p className="text text_type_main-medium">{name}</p>
-            </div>
-            <div className={styles.nutrition}>
-              <Nutritions data={calories}>Калории,ккал</Nutritions>
-              <Nutritions data={proteins}>Белки, г</Nutritions>
-              <Nutritions data={fat}>Жиры, г</Nutritions>
-              <Nutritions data={carbohydrates}>Углеводы, г</Nutritions>
-            </div>
-          </>
+          <IngredientsDetails data={data} modal={modal} />
         </Modal>
       )}
     </section>
   );
 }
 
-function Nutritions({ data, children }) {
-  return (
-    <div className={styles.value}>
-      <p className="text text_type_main-default">{children}</p>
-      <p className="text text_type_digits-default">{data}</p>
-    </div>
-  );
-}
-
-Nutritions.propTypes = {
-  data: PropTypes.number.isRequired,
-  children: PropTypes.string.isRequired,
-};
-
 Item.propTypes = {
   data: burgerPropTypes.isRequired,
 };
-
-export default Item;

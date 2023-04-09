@@ -1,17 +1,15 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useMemo, useEffect } from "react";
 import PropTypes from "prop-types";
 import styles from "./modal.module.css";
 import ReactDOM from "react-dom";
+import { Link, useParams } from "react-router-dom";
 
 const modalRoot = document.getElementById("react-modals");
 
 function Modal({ closeModal, children }) {
-  const close = useCallback(
-    (e) => {
-      (e.keyCode === 27 || e.type === "click") && closeModal(false);
-    },
-    [closeModal]
-  );
+  const close = (e) => {
+    (e.keyCode === 27 || e.type === "click") && closeModal(false);
+  };
 
   useEffect(() => {
     document.addEventListener("keydown", close);
