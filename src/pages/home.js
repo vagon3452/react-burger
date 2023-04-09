@@ -14,7 +14,7 @@ export const Main = () => {
   };
   return (
     <section style={styles}>
-      <AppHeader />
+      {/* <AppHeader /> */}
       <DndProvider backend={HTML5Backend}>
         <BurgerConstructor />
         <BurgerIngredients />

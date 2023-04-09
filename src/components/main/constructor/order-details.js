@@ -1,15 +1,10 @@
 import styles from "./burger-constructor.module.css";
-import PropTypes from "prop-types";
-import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 
-export const OrderDetails = ({ image, closeModal, number }) => {
+export const OrderDetails = ({ image, number, onClose }) => {
   return (
     <>
       <div className={styles.title}>
         <p className="text text_type_digits-large">{number}</p>
-        <div className={styles.close}>
-          <CloseIcon onClick={() => closeModal(false)} />
-        </div>
       </div>
       <div className={styles.text}>
         <p className="text text_type_main-large">идинтификатор заказа</p>

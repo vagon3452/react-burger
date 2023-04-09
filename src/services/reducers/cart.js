@@ -8,7 +8,6 @@ const initialState = {
   items: [],
   isLoading: false,
   hasError: false,
-  data: null,
 };
 export const cartReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -24,12 +23,6 @@ export const cartReducer = (state = initialState, action) => {
         hasError: false,
         items: action.items,
         isLoading: false,
-      };
-    }
-    case "SET_MODAL": {
-      return {
-        ...state,
-        data: action.payload,
       };
     }
     case GET_ITEMS_FAILED: {

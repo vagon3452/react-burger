@@ -16,7 +16,14 @@
   left: 640px;
   top: 230px;
 }
-.title {
+
+.closeIcon {
+  position: absolute;
+  top: 60px;
+  right: 40px;
+}
+
+/* .title {
   margin-top: 40px;
   display: flex;
   justify-content: space-between;
@@ -25,13 +32,13 @@
   text-align: center;
   width: 640px;
   height: 64px;
-}
+} */
 
-.image {
+/* .image {
   width: 520px;
   height: 240px;
   align-self: center;
-}
+} */
 
 .frame {
   align-self: center;
@@ -52,4 +59,51 @@
   width: 120px;
   height: 56px;
   text-align: center;
+}
+
+.modal {
+  position: absolute;
+  width: 640px;
+  height: 575px;
+  left: 640px;
+  top: 208px;
+}
+.content_modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0px;
+  gap: 32px;
+
+  position: absolute;
+  width: 520px;
+  height: 118px;
+  left: 60px;
+  top: 321px;
+}
+.title {
+  position: absolute;
+  width: 640px;
+  height: 64px;
+  left: 0px;
+  top: 0px;
+
+  font-family: "JetBrains Mono";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 40px;
+
+  display: flex;
+  align-items: center;
+  text-align: center;
+
+  color: #f2f2f3;
+}
+.image {
+  position: absolute;
+  width: 480px;
+  height: 240px;
+  left: calc(50% - 480px / 2);
+  top: 65px;
 }

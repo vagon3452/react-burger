@@ -1,15 +1,14 @@
-import React, { useMemo, useEffect } from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import styles from "./modal.module.css";
 import ReactDOM from "react-dom";
-import { Link, useParams } from "react-router-dom";
+import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 
 const modalRoot = document.getElementById("react-modals");
 
-function Modal({ closeModal, children, onClose }) {
-  console.log(onClose);
+function Modal({ children, onClose }) {
   const close = (e) => {
-    (e.keyCode === 27 || e.type === "click") && (onClose() && closeModal(false));
+    (e.keyCode === 27 || e.type === "click") && onClose();
   };
 
   useEffect(() => {
@@ -23,6 +22,9 @@ function Modal({ closeModal, children, onClose }) {
   return ReactDOM.createPortal(
     <div className={styles.modalBackground} onClick={close}>
       <div className={styles.content} onClick={(e) => e.stopPropagation()}>
+        <div className={styles.closeIcon}>
+          <CloseIcon type="primary" onClick={close}/>
+        </div>
         {children}
       </div>
     </div>,

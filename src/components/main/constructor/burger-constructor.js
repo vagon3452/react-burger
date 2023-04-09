@@ -115,7 +115,7 @@ const BurgerConstructor = () => {
       {openModal && hasError && "что-то пошло не так"}
       {openModal && !isLoading && !hasError && order && (
         <Modal closeModal={setOpenModal}>
-          <OrderDetails image={image} number={order.number} closeModal={setOpenModal} />
+          <OrderDetails image={image} number={order.number} onClose={setOpenModal} />
         </Modal>
       )}
     </section>
