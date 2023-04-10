@@ -4,7 +4,7 @@ import { getUserAction } from "../services/actions/user";
 import { signInAction } from "../services/actions/user";
 
 import styles from "./login.module.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
   EmailInput,
   PasswordInput,
@@ -25,8 +25,8 @@ export function LoginPage() {
 
   useEffect(() => {
     dispatch(getUserAction());
-  }, []);
-  const { user } = useSelector((store) => ({ user: store.user.user }));
+  }, [dispatch]);
+  // const { user } = useSelector((store) => ({ user: store.user.user }));
 
   const onChange = (e) => {
     setValue({ ...form, [e.target.name]: e.target.value });

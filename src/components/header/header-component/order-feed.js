@@ -1,10 +1,5 @@
-import React, { useEffect } from "react";
-import {
-  NavLink,
-  useNavigate,
-  useMatch,
-  useResolvedPath,
-} from "react-router-dom";
+import React from "react";
+import { NavLink, useMatch, useResolvedPath } from "react-router-dom";
 import styles from "../app-header.module.css";
 import { ListIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 

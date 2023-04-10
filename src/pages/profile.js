@@ -29,7 +29,7 @@ export function ProfilePage() {
       e.preventDefault();
       reversUserAction(form);
     },
-    [form, user]
+    [form]
   );
 
   const onChange = (e) => {
@@ -81,14 +81,13 @@ export function ProfilePage() {
             errorText={"Ошибка"}
             size={"default"}
             extraClass={styles.input}
-          />{" "}
+          />
           <PasswordInput
             onChange={onChange}
             value={form.password}
             name={"password"}
             extraClass={styles.input}
             placeholder="Пароль"
-            icon="EditIcon"
           />
           <div className={styles.button}>
             <div className={styles.back}>Отмена</div>

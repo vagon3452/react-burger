@@ -1,4 +1,4 @@
-import styles from "./item.module.css";
+import styles from "./ingredient-details.module.css";
 import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -17,11 +17,13 @@ export const IngredientsDetails = () => {
     carbohydrates: "",
   };
   return (
-    <>
+    <div>
       <div className={styles.title}>
         <p className="text text_type_main-large">Детали ингридиента</p>
       </div>
+
       <img src={image} alt={name} className={styles.image} />
+
       <div className={styles.frame}>
         <p className="text text_type_main-medium">{name}</p>
       </div>
@@ -31,7 +33,7 @@ export const IngredientsDetails = () => {
         <Nutritions data={fat}>Жиры, г</Nutritions>
         <Nutritions data={carbohydrates}>Углеводы, г</Nutritions>
       </div>
-    </>
+    </div>
   );
 };
 

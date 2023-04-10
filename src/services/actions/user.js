@@ -1,4 +1,3 @@
-import React from "react";
 import { setCookie, deleteCookie } from "../cookie";
 import {
   loginRequest,

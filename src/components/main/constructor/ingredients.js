@@ -1,5 +1,4 @@
-import React, { useMemo, useRef } from "react";
-// import { moveCard } from "../../../services/actions/create-burger";
+import React, { useRef } from "react";
 import PropTypes from "prop-types";
 import { useDrag, useDrop } from "react-dnd";
 import { useDispatch } from "react-redux";
@@ -10,8 +9,6 @@ import {
   ConstructorElement,
   DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-
-// moveCard
 
 export const Ingredients = ({ data, index, moveCard }) => {
   const { name, price, image, uuid } = data;
