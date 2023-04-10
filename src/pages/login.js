@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { Navigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { getUserAction } from "../services/actions/user";
 import { signInAction } from "../services/actions/user";
 
@@ -13,16 +13,20 @@ import {
 
 export function LoginPage() {
   const dispatch = useDispatch();
-  const onClick = (e) => {
-    dispatch(signInAction(form));
-    e.preventDefault();
-  };
+  const [form, setValue] = useState({ email: "", password: "" });
+
+  const onClick = useCallback(
+    (e) => {
+      e.preventDefault();
+      dispatch(signInAction(form));
+    },
+    [dispatch, form]
+  );
+
   useEffect(() => {
     dispatch(getUserAction());
   }, []);
   const { user } = useSelector((store) => ({ user: store.user.user }));
-
-  const [form, setValue] = useState({ email: "", password: "" });
 
   const onChange = (e) => {
     setValue({ ...form, [e.target.name]: e.target.value });

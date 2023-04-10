@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 
 import { signOutAction, reversUserAction } from "../services/actions/user";
 import styles from "./profile.module.css";
@@ -6,21 +6,31 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   Button,
   Input,
+  PasswordInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 
 export function ProfilePage() {
+  const [form, setValue] = useState({ name: "", email: "", password: "" });
   const dispatch = useDispatch();
-  const signOut = (e) => {
-    dispatch(signOutAction());
-    e.preventDefault();
-  };
+
+  const signOut = useCallback(
+    (e) => {
+      e.preventDefault();
+      dispatch(signOutAction());
+    },
+    [dispatch]
+  );
   const { user } = useSelector((store) => ({ user: store.user.user }));
-  const saveNewUser = () => {
-    console.log(form);
-    reversUserAction(form);
+  const test = () => {
     console.log(user);
   };
-  const [form, setValue] = useState({ name: "", email: "", password: "" });
+  const saveNewUser = useCallback(
+    (e) => {
+      e.preventDefault();
+      reversUserAction(form);
+    },
+    [form, user]
+  );
 
   const onChange = (e) => {
     setValue({ ...form, [e.target.name]: e.target.value });
@@ -30,7 +40,9 @@ export function ProfilePage() {
     <>
       <div className={styles.navigation}>
         <div className={styles.frame}>
-          <div className={styles.text}>Профиль</div>
+          <div className={styles.text} onClick={test}>
+            Профиль
+          </div>
         </div>
         <div className={styles.frame}>
           <div className={styles.text}>История заказов</div>
@@ -69,18 +81,14 @@ export function ProfilePage() {
             errorText={"Ошибка"}
             size={"default"}
             extraClass={styles.input}
-          />
-          <Input
-            type={"text"}
-            placeholder={"Пароль"}
+          />{" "}
+          <PasswordInput
             onChange={onChange}
-            icon="EditIcon"
             value={form.password}
             name={"password"}
-            error={false}
-            errorText={"Ошибка"}
-            size={"default"}
             extraClass={styles.input}
+            placeholder="Пароль"
+            icon="EditIcon"
           />
           <div className={styles.button}>
             <div className={styles.back}>Отмена</div>

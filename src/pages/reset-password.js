@@ -10,18 +10,17 @@ import {
 
 export function ResetPassword() {
   const navigate = useNavigate();
-  useEffect(() => {
-    if (!localStorage.getItem("reset-password")) {
-      navigate("/");
-    }
-  }, []);
+
+  if (!localStorage.getItem("reset-password")) {
+    navigate("/");
+  }
 
   const onClick = (e) => {
     e.preventDefault();
     resetPasswordRequest(form)
       .then(() => {
         localStorage.removeItem("reset-password");
-        navigate("/");
+        navigate("/login");
       })
       .catch(() => {
         setError(true);

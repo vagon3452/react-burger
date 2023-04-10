@@ -66,7 +66,6 @@ export const reversUserAction = (form) => {
   return async (dispatch) => {
     try {
       const data = await reversUserRequest(form);
-      console.log(data);
       if (data.success) {
         dispatch(setUserAction(data.user));
         dispatch({ type: SET_AUTH_CHECKED, payload: true });
