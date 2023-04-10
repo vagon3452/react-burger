@@ -5,7 +5,7 @@ import {
   registerRequest,
   getUserRequest,
   logoutRequest,
-  forgotPasswordRequest,
+  reversUserRequest,
 } from "../burger-api";
 
 export const SET_USER = "SET_USER";
@@ -62,6 +62,24 @@ export const getUserAction = () => {
     }
   };
 };
+export const reversUserAction = (form) => {
+  return async (dispatch) => {
+    try {
+      const data = await reversUserRequest(form);
+      console.log(data);
+      if (data.success) {
+        dispatch(setUserAction(data.user));
+        dispatch({ type: SET_AUTH_CHECKED, payload: true });
+      }
+    } catch (error) {
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("refreshToken");
+      dispatch(setUserAction(null));
+    } finally {
+      dispatch({ type: SET_AUTH_CHECKED, payload: true });
+    }
+  };
+};
 
 export const signOutAction = () => {
   return async (dispatch) => {
@@ -82,8 +100,6 @@ export const checkUserAuth = () => {
     }
   };
 };
-
-
 
 // export const fetchWithRefresh = (url, options) => async (dispatch) => {
 //   try {

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 
-import { signOutAction } from "../services/actions/user";
+import { signOutAction, reversUserAction } from "../services/actions/user";
 import styles from "./profile.module.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   Button,
   Input,
@@ -10,11 +10,16 @@ import {
 
 export function ProfilePage() {
   const dispatch = useDispatch();
-  const onClick = (e) => {
+  const signOut = (e) => {
     dispatch(signOutAction());
     e.preventDefault();
   };
-
+  const { user } = useSelector((store) => ({ user: store.user.user }));
+  const saveNewUser = () => {
+    console.log(form);
+    reversUserAction(form);
+    console.log(user);
+  };
   const [form, setValue] = useState({ name: "", email: "", password: "" });
 
   const onChange = (e) => {
@@ -22,55 +27,74 @@ export function ProfilePage() {
   };
 
   return (
-    <div className={styles.content}>
-      <div className={styles.edit}>
-        <h1>страница профиля</h1>
-        <Input
-          type={"text"}
-          placeholder={"Имя"}
-          onChange={onChange}
-          icon="EditIcon"
-          value={form.name}
-          name={"name"}
-          error={false}
-          errorText={"Ошибка"}
-          size={"default"}
-          extraClass={styles.input}
-        />
-        <Input
-          type={"text"}
-          placeholder={"Логин"}
-          onChange={onChange}
-          icon="EditIcon"
-          value={form.email}
-          name={"email"}
-          error={false}
-          errorText={"Ошибка"}
-          size={"default"}
-          extraClass={styles.input}
-        />
-        <Input
-          type={"text"}
-          placeholder={"Пароль"}
-          onChange={onChange}
-          icon="EditIcon"
-          value={form.password}
-          name={"password"}
-          error={false}
-          errorText={"Ошибка"}
-          size={"default"}
-          extraClass={styles.input}
-        />
-
-        <Button
-          htmlType="button"
-          type="primary"
-          size="medium"
-          onClick={onClick}
-        >
-          Выйти
-        </Button>
+    <>
+      <div className={styles.navigation}>
+        <div className={styles.frame}>
+          <div className={styles.text}>Профиль</div>
+        </div>
+        <div className={styles.frame}>
+          <div className={styles.text}>История заказов</div>
+        </div>
+        <div className={styles.frame}>
+          <div className={styles.text} onClick={signOut}>
+            Выход
+          </div>
+        </div>
       </div>
-    </div>
+      <div className={styles.caption}>
+        <p>Здесь вы можете изменять свои персональные данные</p>
+      </div>
+      <div className={styles.content}>
+        <div className={styles.edit}>
+          <Input
+            type={"text"}
+            placeholder={"Имя"}
+            onChange={onChange}
+            icon="EditIcon"
+            value={form.name}
+            name={"name"}
+            error={false}
+            errorText={"Ошибка"}
+            size={"default"}
+            extraClass={styles.input}
+          />
+          <Input
+            type={"text"}
+            placeholder={"Логин"}
+            onChange={onChange}
+            icon="EditIcon"
+            value={form.email}
+            name={"email"}
+            error={false}
+            errorText={"Ошибка"}
+            size={"default"}
+            extraClass={styles.input}
+          />
+          <Input
+            type={"text"}
+            placeholder={"Пароль"}
+            onChange={onChange}
+            icon="EditIcon"
+            value={form.password}
+            name={"password"}
+            error={false}
+            errorText={"Ошибка"}
+            size={"default"}
+            extraClass={styles.input}
+          />
+          <div className={styles.button}>
+            <div className={styles.back}>Отмена</div>
+            <Button
+              htmlType="button"
+              type="primary"
+              size="medium"
+              onClick={saveNewUser}
+            >
+              Сохранить
+            </Button>
+          </div>
+        </div>
+      </div>
+    </>
   );
 }

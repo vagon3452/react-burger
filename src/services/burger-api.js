@@ -100,11 +100,25 @@ export const getUserRequest = async () => {
     referrerPolicy: "no-referrer",
   }).then(checkResponse);
 };
+export const reversUserRequest = async (form) => {
+  const url = "https://norma.nomoreparties.space/api/auth/user";
+  return await fetchWithRefresh(url, {
+    method: "PATCH",
+    mode: "cors",
+    cache: "no-cache",
+    credentials: "same-origin",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: localStorage.getItem("accessToken"),
+    },
+    redirect: "follow",
+    referrerPolicy: "no-referrer",
+    body: JSON.stringify(form),
+  }).then(checkResponse);
+};
 
 export const logoutRequest = async () => {
   const url = "https://norma.nomoreparties.space/api/auth/logout";
-  // localStorage.removeItem("refreshToken");
-  // localStorage.removeItem("accessToken");
   return await fetch(url, {
     method: "POST",
     mode: "cors",
