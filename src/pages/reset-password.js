@@ -25,7 +25,7 @@ export function ResetPassword() {
   };
 
   const { hasError, setError } = useState(false);
-  const [form, setValue] = useState({ password: "", code: "" });
+  const [form, setValue] = useState({ password: "", token: "" });
 
   const onChange = (e) => {
     setValue({ ...form, [e.target.name]: e.target.value });
@@ -43,8 +43,8 @@ export function ResetPassword() {
         />
         <PasswordInput
           onChange={onChange}
-          value={form.code}
-          name={"code"}
+          value={form.token}
+          name={"token"}
           extraClass="mb-2"
         />
         <Button

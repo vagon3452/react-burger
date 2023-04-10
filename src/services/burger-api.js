@@ -103,6 +103,8 @@ export const getUserRequest = async () => {
 
 export const logoutRequest = async () => {
   const url = "https://norma.nomoreparties.space/api/auth/logout";
+  // localStorage.removeItem("refreshToken");
+  // localStorage.removeItem("accessToken");
   return await fetch(url, {
     method: "POST",
     mode: "cors",

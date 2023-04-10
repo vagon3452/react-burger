@@ -10,12 +10,15 @@ import {
 export function ForgotPass() {
   const navigate = useNavigate();
   const location = useLocation();
-  const onClick = async (e) => {
-    const data = await forgotPasswordRequest(form);
-    if (data?.success) {
-      navigate("/reset-password", { state: { reset: location } });
-    }
+  const onClick = (e) => {
     e.preventDefault();
+    forgotPasswordRequest(form)
+      .then(() => {
+        navigate("/reset-password", { state: { reset: location } });
+      })
+      .catch(() => {
+        setError(true);
+      });
   };
   const { hasError, setError } = useState(false);
   const [form, setValue] = useState({ email: "" });
