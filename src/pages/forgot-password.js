@@ -1,7 +1,7 @@
-import React, { useCallback, useState } from "react";
-import { Navigate, Link, useNavigate, useLocation } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { forgotPasswordRequest } from "../services/burger-api";
-import styles from "./login.module.css";
+import styles from "./forgot-password.module.css";
 import {
   EmailInput,
   Button,
@@ -9,12 +9,12 @@ import {
 
 export function ForgotPass() {
   const navigate = useNavigate();
-  const location = useLocation();
   const onClick = (e) => {
     e.preventDefault();
     forgotPasswordRequest(form)
       .then(() => {
-        navigate("/reset-password", { state: { reset: location } });
+        localStorage.setItem("reset-password", true);
+        navigate("/reset-password");
       })
       .catch(() => {
         setError(true);
@@ -36,6 +36,8 @@ export function ForgotPass() {
           value={form.email}
           name={"email"}
           isIcon={false}
+          placeholder="Укажите E-mail"
+          extraClass={styles.input}
         />
         <Button
           htmlType="button"

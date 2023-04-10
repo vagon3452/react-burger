@@ -1,9 +1,3 @@
-.container {
-  position: absolute;
-  width: 2000px;
-  height: 1080px;
-  background: #131316;
-}
 
 .content {
   display: flex;
@@ -22,12 +16,9 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
   padding-bottom: 24px;
-
   width: 480px;
   height: 286px;
-
   flex: none;
   order: 1;
   flex-grow: 0;
@@ -50,9 +41,3 @@
   margin-bottom: 24px;
 }
 
-.linkStyle {
-  text-decoration: "none";
-  color: "inherit";
-  font-size: "inherit";
-  font-weight: "inherit";
-}

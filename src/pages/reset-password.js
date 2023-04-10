@@ -1,30 +1,33 @@
-import React, { useCallback, useState } from "react";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { resetPasswordRequest } from "../services/burger-api";
-import styles from "./login.module.css";
-import { useDispatch } from "react-redux";
+import styles from "./reset-password.module.css";
 import {
+  Input,
   PasswordInput,
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 
 export function ResetPassword() {
   const navigate = useNavigate();
-  const location = useLocation();
-  const dispatch = useDispatch();
-  console.log(location);
-  const onClick = async (e) => {
-    console.log(form);
-    const data = await resetPasswordRequest(form);
-    if (data?.success) {
+  useEffect(() => {
+    if (!localStorage.getItem("reset-password")) {
       navigate("/");
-    } else {
-      setError(true);
     }
-    e.preventDefault();
-  };
+  }, []);
 
-  const { hasError, setError } = useState(false);
+  const onClick = (e) => {
+    e.preventDefault();
+    resetPasswordRequest(form)
+      .then(() => {
+        localStorage.removeItem("reset-password");
+        navigate("/");
+      })
+      .catch(() => {
+        setError(true);
+      });
+  };
+  const { error, setError } = useState(false);
   const [form, setValue] = useState({ password: "", token: "" });
 
   const onChange = (e) => {
@@ -39,13 +42,15 @@ export function ResetPassword() {
           onChange={onChange}
           value={form.password}
           name={"password"}
-          extraClass="mb-2"
+          extraClass={styles.input}
+          placeholder="Введите новый пароль"
         />
-        <PasswordInput
+        <Input
           onChange={onChange}
           value={form.token}
           name={"token"}
-          extraClass="mb-2"
+          extraClass={styles.input}
+          placeholder="Введите код из письма"
         />
         <Button
           htmlType="button"
@@ -53,14 +58,14 @@ export function ResetPassword() {
           size="medium"
           onClick={onClick}
         >
-          Восстановить
+          Сохранить
         </Button>
       </div>
       <div className={styles.actions}>
         <p>
           Вспомнили пароль? <Link to="/login">Войти</Link>
         </p>
-        {hasError && <p>что-то пошло не так</p>}
+        {error && <p>что-то пошло не так</p>}
       </div>
     </div>
   );

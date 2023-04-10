@@ -1,6 +1,6 @@
 import React from "react";
 import { registerUserAction } from "../services/actions/user";
-import styles from "./login.module.css";
+import styles from "./register.module.css";
 import { useDispatch } from "react-redux";
 import {
   EmailInput,
@@ -17,7 +17,6 @@ export const RegisterPage = () => {
     password: "",
     name: "",
   });
-  //ToPsEcReT3452
 
   function onClick() {
     dispatch(registerUserAction(value));
@@ -31,26 +30,29 @@ export const RegisterPage = () => {
         <h1>Регистрация</h1>
         <Input
           type={"text"}
-          placeholder={"Имя"}
+          placeholder="Имя"
           onChange={onChange}
           value={value.name}
           name={"name"}
           error={false}
           errorText={"Ошибка"}
           size={"default"}
-          extraClass="ml-1"
+          extraClass={styles.input}
         />
         <EmailInput
           onChange={onChange}
           value={value.email}
           name={"email"}
           isIcon={false}
+          placeholder="E-mail"
+          extraClass={styles.input}
         />
         <PasswordInput
           onChange={onChange}
           value={value.password}
           name={"password"}
-          extraClass="mb-2"
+          extraClass={styles.input}
+          placeholder="Пароль"
         />
         <Button
           htmlType="button"

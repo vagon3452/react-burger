@@ -38,12 +38,14 @@ export function LoginPage() {
           name={"email"}
           isIcon={false}
           extraClass={styles.input}
+          placeholder="E-mail"
         />
         <PasswordInput
           onChange={onChange}
           value={form.password}
           name={"password"}
           extraClass={styles.input}
+          placeholder="Пароль"
         />
         <Button
           htmlType="button"
