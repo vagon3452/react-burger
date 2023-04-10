@@ -23,7 +23,7 @@ function Modal({ children, onClose }) {
     <div className={styles.modalBackground} onClick={close}>
       <div className={styles.content} onClick={(e) => e.stopPropagation()}>
         <div className={styles.closeIcon}>
-          <CloseIcon type="primary" onClick={close}/>
+          <CloseIcon type="primary" onClick={close} />
         </div>
         {children}
       </div>

@@ -7,10 +7,10 @@
 }
 
 .price {
-    height: 24px;
-    align-self: center;
-    display: flex;
-    flex-direction: row;
+  height: 24px;
+  align-self: center;
+  display: flex;
+  flex-direction: row;
 }
 
 .title {

@@ -94,7 +94,7 @@ export const getUserRequest = async () => {
     credentials: "same-origin",
     headers: {
       "Content-Type": "application/json",
-      Authorization: "Bearer " + localStorage.getItem("accessToken"),
+      Authorization: localStorage.getItem("accessToken"),
     },
     redirect: "follow",
     referrerPolicy: "no-referrer",
@@ -133,7 +133,7 @@ export const forgotPasswordRequest = async (form) => {
   }).then(checkResponse);
 };
 export const resetPasswordRequest = async (form) => {
-  const url = "https://norma.nomoreparties.space/api/password-reset/reset.";
+  const url = "https://norma.nomoreparties.space/api/password-reset/reset";
   return await fetch(url, {
     method: "POST",
     mode: "cors",

@@ -1,18 +1,34 @@
 import React, { useEffect } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import {
+  NavLink,
+  useNavigate,
+  useMatch,
+  useResolvedPath,
+} from "react-router-dom";
 import styles from "../app-header.module.css";
 import { ListIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 
 function Order() {
+  const linkStyle = {
+    textDecoration: "none",
+    color: "inherit",
+    fontSize: "inherit",
+    fontWeight: "inherit",
+  };
+  const matchPattern = useMatch("/order");
   return (
-    <NavLink to="/order">
+    <NavLink to="/order" style={linkStyle}>
       <div className={styles.nav1}>
-        <ListIcon type="primary" />
-        <div
-          className="text text_type_main-default text_color_inactive"
+        <ListIcon type={matchPattern ? "primary" : "secondary"} />
+        <p
+          className={
+            matchPattern
+              ? "text text_type_main-default"
+              : "text text_type_main-default text_color_inactive"
+          }
         >
           Лента заказов
-        </div>
+        </p>
       </div>
     </NavLink>
   );

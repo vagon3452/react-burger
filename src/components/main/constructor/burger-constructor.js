@@ -42,9 +42,10 @@ const BurgerConstructor = () => {
     [dispatch]
   );
 
-  const { bun, ingredients, order, isLoading, hasError } = useSelector(
+  const { bun, ingredients, order, isLoading, hasError, user } = useSelector(
     (state) => ({
       bun: state.create.bun,
+      user: state.user.user,
       ingredients: state.create.ingredients,
       order: state.checkout.order,
       isLoading: state.checkout.isLoading,
@@ -67,9 +68,12 @@ const BurgerConstructor = () => {
   );
 
   const [openModal, setOpenModal] = useState(false);
+  const closeModal = () => {
+    setOpenModal(false);
+  };
 
   const modal = useCallback(() => {
-    if (!!total.ingredients) {
+    if (!!total.ingredients && user) {
       dispatch(postItems({ ingredients: total.ingredients }));
       setOpenModal(true);
     }
@@ -114,8 +118,8 @@ const BurgerConstructor = () => {
       {openModal && isLoading && "Загрузка..."}
       {openModal && hasError && "что-то пошло не так"}
       {openModal && !isLoading && !hasError && order && (
-        <Modal closeModal={setOpenModal}>
-          <OrderDetails image={image} number={order.number} onClose={setOpenModal} />
+        <Modal onClose={closeModal}>
+          <OrderDetails image={image} number={order.number} />
         </Modal>
       )}
     </section>

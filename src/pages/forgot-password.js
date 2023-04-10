@@ -12,15 +12,14 @@ import {
 export function ForgotPass() {
   const navigate = useNavigate();
   const location = useLocation();
-  const dispatch = useDispatch();
   const onClick = async (e) => {
-    // const data = await forgotPasswordRequest(form);
-    // if (data.success) {
-    navigate("/reset-password", { state: { reset: location } });
-    // }
+    const data = await forgotPasswordRequest(form);
+    if (data?.success) {
+      navigate("/reset-password", { state: { reset: location } });
+    }
     e.preventDefault();
   };
-
+  const { hasError, setError } = useState(false);
   const [form, setValue] = useState({ email: "" });
 
   const onChange = (e) => {
@@ -28,31 +27,29 @@ export function ForgotPass() {
   };
 
   return (
-    <div className={styles.container}>
-      <AppHeader />
-      <div className={styles.content}>
-        <div className={styles.edit}>
-          <h1>Восстановление пароля</h1>
-          <EmailInput
-            onChange={onChange}
-            value={form.email}
-            name={"email"}
-            isIcon={false}
-          />
-          <Button
-            htmlType="button"
-            type="primary"
-            size="medium"
-            onClick={onClick}
-          >
-            Восстановить
-          </Button>
-        </div>
-        <div className={styles.actions}>
-          <p>
-            Вспомнили пароль? <Link to="/login">Войти</Link>
-          </p>
-        </div>
+    <div className={styles.content}>
+      <div className={styles.edit}>
+        <h1>Восстановление пароля</h1>
+        <EmailInput
+          onChange={onChange}
+          value={form.email}
+          name={"email"}
+          isIcon={false}
+        />
+        <Button
+          htmlType="button"
+          type="primary"
+          size="medium"
+          onClick={onClick}
+        >
+          Восстановить
+        </Button>
+      </div>
+      <div className={styles.actions}>
+        <p>
+          Вспомнили пароль? <Link to="/login">Войти</Link>
+        </p>
+        {hasError && <p>что-то пошло не так</p>}
       </div>
     </div>
   );

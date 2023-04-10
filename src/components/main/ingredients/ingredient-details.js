@@ -1,6 +1,5 @@
 import styles from "./item.module.css";
 import PropTypes from "prop-types";
-import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
@@ -21,9 +20,6 @@ export const IngredientsDetails = () => {
     <>
       <div className={styles.title}>
         <p className="text text_type_main-large">Детали ингридиента</p>
-        {/* <div>
-          <CloseIcon type="primary" />
-        </div> */}
       </div>
       <img src={image} alt={name} className={styles.image} />
       <div className={styles.frame}>

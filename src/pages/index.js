@@ -4,6 +4,7 @@ import { ProfilePage } from "./profile";
 import { RegisterPage } from "./register";
 import { ForgotPass } from "./forgot-password";
 import { ResetPassword } from "./reset-password";
+import { NotMatch404 } from "./pages404";
 
 export {
   Main,
@@ -12,4 +13,5 @@ export {
   RegisterPage,
   ForgotPass,
   ResetPassword,
+  NotMatch404,
 };

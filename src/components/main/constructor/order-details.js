@@ -1,6 +1,6 @@
 import styles from "./burger-constructor.module.css";
 
-export const OrderDetails = ({ image, number, onClose }) => {
+export const OrderDetails = ({ image, number }) => {
   return (
     <>
       <div className={styles.title}>

@@ -11,6 +11,7 @@ import {
   RegisterPage,
   ForgotPass,
   ResetPassword,
+  NotMatch404,
 } from "../pages";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -69,7 +70,7 @@ function App() {
           path="/profile"
           element={<OnlyAuth component={<ProfilePage />} />}
         />
-        <Route path="*" element={<h1>404</h1>} />
+        <Route path="*" element={<NotMatch404 />} />
       </Routes>
       {background && (
         <Routes>

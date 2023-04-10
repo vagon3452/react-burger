@@ -31,3 +31,19 @@
   order: 1;
   flex-grow: 0;
 }
+.input {
+  margin-bottom: 20px;
+}
+
+.navigation {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+
+  position: absolute;
+  width: 320px;
+  height: 192px;
+  left: 380px;
+  top: 228px;
+}

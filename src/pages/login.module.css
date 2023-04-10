@@ -15,7 +15,6 @@
   height: 430px;
   left: calc(50% - 480px / 2);
   top: 288px;
-
 }
 
 .edit {
@@ -39,11 +38,21 @@
   flex-direction: column;
   align-items: center;
   padding: 0px;
-  /* gap: 16px; */
   width: 480px;
   height: 64px;
-
+  margin-top: 80px;
   flex: none;
   order: 2;
   flex-grow: 0;
+}
+
+.input {
+  margin-bottom: 24px;
+}
+
+.linkStyle {
+  text-decoration: "none";
+  color: "inherit";
+  font-size: "inherit";
+  font-weight: "inherit";
 }
