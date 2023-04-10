@@ -1,9 +1,7 @@
 import React, { useCallback, useState } from "react";
 import { Navigate, Link, useNavigate, useLocation } from "react-router-dom";
 import { forgotPasswordRequest } from "../services/burger-api";
-import { AppHeader } from "../components/header/app-header";
 import styles from "./login.module.css";
-import { useDispatch } from "react-redux";
 import {
   EmailInput,
   Button,
