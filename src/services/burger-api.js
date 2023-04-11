@@ -3,16 +3,18 @@ import { REFRESH_TOKEN_KEY, ACCESS_TOKEN_KEY } from "./actions/user";
 const checkResponse = (res) => {
   return res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
 };
+
+const BURGER_API_URL = "https://norma.nomoreparties.space/api";
 const ENDPOINTS = {
-  login: "https://norma.nomoreparties.space/api/auth/login",
-  register: "https://norma.nomoreparties.space/api/auth/register",
-  ingredients: "https://norma.nomoreparties.space/api/ingredients",
-  orders: "https://norma.nomoreparties.space/api/orders",
-  user: "https://norma.nomoreparties.space/api/auth/user",
-  logout: "https://norma.nomoreparties.space/api/auth/logout",
-  forgotPassword: "https://norma.nomoreparties.space/api/password-reset",
-  resetPassword: "https://norma.nomoreparties.space/api/password-reset/reset",
-  refresh: "https://norma.nomoreparties.space/api/auth/token",
+  login: `${BURGER_API_URL}/auth/login`,
+  register: `${BURGER_API_URL}/auth/register`,
+  ingredients: `${BURGER_API_URL}/ingredients`,
+  orders: `${BURGER_API_URL}/orders`,
+  user: `${BURGER_API_URL}/auth/user`,
+  logout: `${BURGER_API_URL}/auth/logout`,
+  forgotPassword: `${BURGER_API_URL}/password-reset`,
+  resetPassword: `${BURGER_API_URL}/password-reset/reset`,
+  refresh: `${BURGER_API_URL}/auth/token`,
 };
 
 const refreshToken = async () => {
@@ -49,28 +51,23 @@ const fetchWithRefresh = async (url, options) => {
   }
 };
 
-const createRequest =
-  (endpoint, method = "GET") =>
-  async (data) => {
-    const url = endpoint;
-    const requestOptions = {
-      headers: {
-        "Content-Type": "application/json",
-      },
-      method,
-      body: JSON.stringify(data),
-    };
-    if (method !== "GET") {
-      requestOptions.headers.authorization =
-        localStorage.getItem(ACCESS_TOKEN_KEY);
-    }
-    return await fetchWithRefresh(url, requestOptions);
+const createRequest = (endpoint, method) => async (data) => {
+  const url = endpoint;
+  const requestOptions = {
+    headers: {
+      "Content-Type": "application/json",
+      authorization: localStorage.getItem(ACCESS_TOKEN_KEY),
+    },
+    method,
+    body: JSON.stringify(data),
   };
+  return await fetchWithRefresh(url, requestOptions);
+};
 export const loginRequest = createRequest(ENDPOINTS.login, "POST");
 export const registerRequest = createRequest(ENDPOINTS.register, "POST");
-export const getItemsRequest = createRequest(ENDPOINTS.ingredients);
+export const getItemsRequest = createRequest(ENDPOINTS.ingredients, "GET");
 export const postItemsRequest = createRequest(ENDPOINTS.orders, "POST");
-export const getUserRequest = createRequest(ENDPOINTS.user);
+export const getUserRequest = createRequest(ENDPOINTS.user, "GET");
 export const reversUserRequest = createRequest(ENDPOINTS.user, "PATCH");
 export const logoutRequest = createRequest(ENDPOINTS.logout, "POST");
 export const forgotPasswordRequest = createRequest(
@@ -138,7 +135,7 @@ export const resetPasswordRequest = createRequest(
 //     credentials: "same-origin",
 //     headers: {
 //       "Content-Type": "application/json",
-//       Authorization: localStorage.getItem("accessToken"),
+//       authorization: localStorage.getItem("accessToken"),
 //     },
 //     redirect: "follow",
 //     referrerPolicy: "no-referrer",
