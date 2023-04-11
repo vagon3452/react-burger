@@ -6,11 +6,16 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   Button,
   Input,
-  PasswordInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 
 export function ProfilePage() {
-  const [form, setValue] = useState({ name: "", email: "", password: "" });
+  const { user } = useSelector((store) => ({ user: store.user.user }));
+  const { name, email } = user;
+
+  const [form, setValue] = useState({ name: name, email: email, password: "" });
+  const cancellation = () => {
+    setValue({ name: name, email: email, password: "" });
+  };
   const dispatch = useDispatch();
 
   const signOut = useCallback(
@@ -20,7 +25,7 @@ export function ProfilePage() {
     },
     [dispatch]
   );
-  const { user } = useSelector((store) => ({ user: store.user.user }));
+
   const test = () => {
     console.log(user);
   };
@@ -89,15 +94,22 @@ export function ProfilePage() {
             size={"default"}
             extraClass={styles.input}
           />
-          <PasswordInput
+          <Input
+            type={"text"}
+            placeholder={"Пароль"}
             onChange={onChange}
+            icon="EditIcon"
             value={form.password}
             name={"password"}
+            error={false}
+            errorText={"Ошибка"}
+            size={"default"}
             extraClass={styles.input}
-            placeholder="Пароль"
           />
           <div className={styles.button}>
-            <div className={styles.back}>Отмена</div>
+            <div className={styles.back} onClick={cancellation}>
+              Отмена
+            </div>
             <Button
               htmlType="button"
               type="primary"
