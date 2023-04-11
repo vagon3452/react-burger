@@ -16,10 +16,10 @@ export const TOKEN_COOKIE_NAME = "token";
 
 const handleAuthData = (data) => {
   if (data.accessToken) {
-    // const authToken = data.accessToken.split("Bearer ")[1];
-    // setCookie("token", authToken);
-    localStorage.setItem("accessToken", data.accessToken);
-    localStorage.setItem("refreshToken", data.refreshToken);
+    // const authToken = data.accessToken.split("Bearer ")[1]; пока не использую куки
+    // setCookie(TOKEN_COOKIE_NAME, authToken);
+    localStorage.setItem(ACCESS_TOKEN_KEY, data.accessToken);
+    localStorage.setItem(REFRESH_TOKEN_KEY, data.refreshToken);
   }
   return data.user;
 };
@@ -104,17 +104,17 @@ export const reversUserAction = (form) => {
 
 export const signOutAction = () => {
   return async (dispatch) => {
-    await logoutRequest({ token: localStorage.getItem("refreshToken") });
+    await logoutRequest({ token: localStorage.getItem(REFRESH_TOKEN_KEY) });
     dispatch(setUserAction(null));
     // deleteCookie("token");
-    localStorage.removeItem("accessToken");
-    localStorage.removeItem("refreshToken");
+    localStorage.removeItem(ACCESS_TOKEN_KEY);
+    localStorage.removeItem(REFRESH_TOKEN_KEY);
   };
 };
 
 export const checkUserAuth = () => {
   return (dispatch) => {
-    if (localStorage.getItem("accessToken")) {
+    if (localStorage.getItem(ACCESS_TOKEN_KEY)) {
       dispatch(getUserAction());
     } else {
       dispatch({ type: SET_AUTH_CHECKED, payload: true });

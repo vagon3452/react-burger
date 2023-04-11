@@ -1,3 +1,5 @@
+import { REFRESH_TOKEN_KEY, ACCESS_TOKEN_KEY } from "./actions/user";
+
 const checkResponse = (res) => {
   return res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
 };
@@ -21,7 +23,7 @@ const refreshToken = async () => {
       "Content-Type": "application/json;charset=utf-8",
     },
     body: JSON.stringify({
-      token: localStorage.getItem("refreshToken"),
+      token: localStorage.getItem(REFRESH_TOKEN_KEY),
     }),
   }).then(checkResponse);
 };
@@ -36,8 +38,8 @@ const fetchWithRefresh = async (url, options) => {
       if (!refreshData.success) {
         return Promise.reject(refreshData);
       }
-      localStorage.setItem("refreshToken", refreshData.refreshToken);
-      localStorage.setItem("accessToken", refreshData.accessToken);
+      localStorage.setItem(REFRESH_TOKEN_KEY, refreshData.refreshToken);
+      localStorage.setItem(ACCESS_TOKEN_KEY, refreshData.accessToken);
       options.headers.authorization = refreshData.accessToken;
       const res = await fetch(url, options);
       return await checkResponse(res);
@@ -59,8 +61,8 @@ const createRequest =
       body: JSON.stringify(data),
     };
     if (method !== "GET") {
-      requestOptions.headers.Authorization =
-        localStorage.getItem("accessToken");
+      requestOptions.headers.authorization =
+        localStorage.getItem(ACCESS_TOKEN_KEY);
     }
     return await fetchWithRefresh(url, requestOptions);
   };
