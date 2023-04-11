@@ -34,7 +34,14 @@ export function LoginPage() {
 
   return (
     <div className={styles.content}>
-      <div className={styles.edit}>
+      <form
+        className={styles.edit}
+        onKeyDown={(e) => {
+          if (e.key === "Enter") {
+            onClick(e);
+          }
+        }}
+      >
         <h1>Вход</h1>
         <EmailInput
           onChange={onChange}
@@ -59,7 +66,7 @@ export function LoginPage() {
         >
           Войти
         </Button>
-      </div>
+      </form>
       <div className={styles.actions}>
         <div>
           Вы - новый пользователь?

@@ -29,7 +29,14 @@ export function ForgotPass() {
 
   return (
     <div className={styles.content}>
-      <div className={styles.edit}>
+      <form
+        className={styles.edit}
+        onKeyDown={(e) => {
+          if (e.key === "Enter") {
+            onClick(e);
+          }
+        }}
+      >
         <h1>Восстановление пароля</h1>
         <EmailInput
           onChange={onChange}
@@ -47,7 +54,7 @@ export function ForgotPass() {
         >
           Восстановить
         </Button>
-      </div>
+      </form>
       <div className={styles.actions}>
         <p>
           Вспомнили пароль? <Link to="/login">Войти</Link>

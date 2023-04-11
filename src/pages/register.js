@@ -26,7 +26,14 @@ export const RegisterPage = () => {
   };
   return (
     <div className={styles.content}>
-      <div className={styles.edit}>
+      <form
+        className={styles.edit}
+        onKeyDown={(e) => {
+          if (e.key === "Enter") {
+            onClick(e);
+          }
+        }}
+      >
         <h1>Регистрация</h1>
         <Input
           type={"text"}
@@ -62,7 +69,7 @@ export const RegisterPage = () => {
         >
           Зарегистрироваться
         </Button>
-      </div>
+      </form>
       <div className={styles.actions}>
         <p>
           Уже зарегестрированы? <Link to="/login">Войти</Link>

@@ -57,7 +57,14 @@ export function ProfilePage() {
         <p>Здесь вы можете изменять свои персональные данные</p>
       </div>
       <div className={styles.content}>
-        <div className={styles.edit}>
+        <form
+          className={styles.edit}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              saveNewUser(e);
+            }
+          }}
+        >
           <Input
             type={"text"}
             placeholder={"Имя"}
@@ -100,7 +107,7 @@ export function ProfilePage() {
               Сохранить
             </Button>
           </div>
-        </div>
+        </form>
       </div>
     </>
   );
