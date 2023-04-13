@@ -1,5 +1,5 @@
 .content {
-  composes: custom-scroll from global;
+  /* composes: custom-scroll from global; */
 
   display: flex;
   flex-direction: column;
@@ -11,7 +11,7 @@
   height: 800px;
   left: 700px;
   top: 150px;
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
 }
 .content::-webkit-scrollbar {
   width: 10px;
@@ -24,7 +24,7 @@
   gap: 24px;
 
   width: 856px;
-  height: 246px;
+  height: 180px;
 
   background: #1c1c21;
 
@@ -34,5 +34,192 @@
 
   flex: none;
   order: 0;
+  flex-grow: 0;
+}
+
+.list {
+  composes: custom-scroll from global;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 16px;
+  height: 768px;
+  overflow-y: scroll;
+}
+
+.order_id {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px;
+  gap: 16px;
+  height: 24px;
+  justify-content: space-between;
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+}
+.info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 8px;
+  width: 536px;
+  height: 30px;
+  flex: none;
+  order: 1;
+  align-self: stretch;
+  flex-grow: 0;
+}
+.title {
+  width: 536px;
+  height: 30px;
+  font-family: "JetBrains Mono";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 30px;
+  display: flex;
+  align-items: center;
+  color: #f2f2f3;
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+}
+.stats {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 60px;
+  margin-left: 56px;
+  width: 584px;
+  height: 626px;
+}
+
+.orders_board {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 40px;
+
+  width: 584px;
+  height: 206px;
+  order: 0;
+  flex-grow: 0;
+}
+.ingred_price {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px;
+  gap: 24px;
+  justify-content: space-between;
+  height: 64px;
+  flex: none;
+  order: 2;
+  align-self: stretch;
+  flex-grow: 0;
+}
+.ingredients {
+  width: 304px;
+  height: 64px;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+.price {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0px;
+  gap: 8px;
+  width: 208px;
+  height: 24px;
+  flex: none;
+  order: 1;
+  flex-grow: 1;
+}
+.preview {
+  box-sizing: border-box;
+  width: 64px;
+  height: 64px;
+  left: 0px;
+  top: 0px;
+  background: #131316;
+  border-radius: 100px;
+}
+.illustation {
+  position: absolute;
+  left: -37.5%;
+  right: -37.5%;
+  top: 6.25%;
+  bottom: 6.25%;
+}
+.img {
+  position: absolute;
+  left: 0%;
+  right: 0%;
+  top: 0%;
+  bottom: 0%;
+  background: #000000;
+}
+.done {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 24px;
+  width: 272px;
+  height: 206px;
+  flex: none;
+  order: 0;
+  flex-grow: 1;
+}
+.text {
+  width: 584px;
+  height: 30px;
+  font-family: "JetBrains Mono";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 30px;
+  display: flex;
+  align-items: center;
+  color: #f2f2f3;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+.complited {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+
+  width: 584px;
+  height: 150px;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+}
+.total_complit {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 8px;
+  width: 584px;
+  height: 120px;
+  flex: none;
+  order: 1;
+  align-self: stretch;
   flex-grow: 0;
 }
