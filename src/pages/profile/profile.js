@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import { signOutAction } from "../../services/actions/user";
 import styles from "./profile.module.css";

@@ -35,11 +35,9 @@ function App() {
   };
   useEffect(() => {
     dispatch(getItems());
+    dispatch(checkUserAuth());
   }, [dispatch]);
 
-  useEffect(() => {
-    dispatch(checkUserAuth());
-  }, []);
   return isLoading ? (
     <>"Загрузка..."</>
   ) : hasError ? (
