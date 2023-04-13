@@ -7,6 +7,7 @@ import { postItems } from "../../../services/actions/checkout";
 import Modal from "../../modal/modal";
 import { totalPriceSelector } from "../../../common/total-price";
 import image from "../../../images/done.png";
+import { CLEAR_ORDER } from "../../../services/actions/checkout";
 import {
   ADD_BUN,
   ADD_INGREDIENTS,
@@ -20,11 +21,13 @@ import {
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { OrderDetails } from "./order-details";
+import { useNavigate } from "react-router-dom";
 
 const type_bun = "bun";
 
 const BurgerConstructor = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const total = useSelector(totalPriceSelector);
 
@@ -53,31 +56,32 @@ const BurgerConstructor = () => {
     })
   );
 
-  const moveCard = useCallback(
-    (dragIndex, hoverIndex) => {
-      const dragCard = ingredients[dragIndex];
-      const newCards = [...ingredients];
+  const moveCard = (dragIndex, hoverIndex) => {
+    const dragCard = ingredients[dragIndex];
+    const newCards = [...ingredients];
 
-      newCards.splice(dragIndex, 1);
+    newCards.splice(dragIndex, 1);
 
-      newCards.splice(hoverIndex, 0, dragCard);
+    newCards.splice(hoverIndex, 0, dragCard);
 
-      dispatch({ type: REPLACE, item: newCards });
-    },
-    [ingredients, dispatch]
-  );
+    dispatch({ type: REPLACE, item: newCards });
+  };
 
   const [openModal, setOpenModal] = useState(false);
   const closeModal = () => {
     setOpenModal(false);
+    dispatch({ type: CLEAR_ORDER });
   };
 
-  const modal = useCallback(() => {
-    if (!!total.ingredients && user) {
+  const modal = () => {
+    if (!!total.ingredients) {
+      if (!user) {
+        navigate("/login");
+      }
       dispatch(postItems({ ingredients: total.ingredients }));
       setOpenModal(true);
     }
-  }, [dispatch, total.ingredients, openModal]);
+  };
 
   const [, drop] = useDrop({
     accept: "items",
@@ -117,7 +121,7 @@ const BurgerConstructor = () => {
       </div>
       {openModal && isLoading && "Загрузка..."}
       {openModal && hasError && "что-то пошло не так"}
-      {openModal && !isLoading && !hasError && order && (
+      {openModal && !isLoading && !hasError && order.number && (
         <Modal onClose={closeModal}>
           <OrderDetails image={image} number={order.number} />
         </Modal>

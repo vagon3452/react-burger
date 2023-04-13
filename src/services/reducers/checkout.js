@@ -2,6 +2,7 @@ import {
   POST_ITEMS_REQUEST,
   POST_ITEMS_FAILED,
   POST_ITEMS_SUCCESS,
+  CLEAR_ORDER,
 } from "../actions/checkout";
 
 const initialState = {
@@ -27,7 +28,15 @@ export const checkoutReducer = (state = initialState, action) => {
       };
     }
     case POST_ITEMS_FAILED: {
-      return { ...state, hasError: true, isLoading: false, message: action.message };
+      return {
+        ...state,
+        hasError: true,
+        isLoading: false,
+        message: action.message,
+      };
+    }
+    case CLEAR_ORDER: {
+      return { ...state, order: null };
     }
     default: {
       return state;

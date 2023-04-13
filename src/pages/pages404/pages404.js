@@ -1,6 +1,6 @@
 import React from "react";
 
-import styles from "./login.module.css";
+import styles from "./pages404.module.css";
 
 export function NotMatch404() {
 

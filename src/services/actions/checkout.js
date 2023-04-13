@@ -3,6 +3,7 @@ import { postItemsRequest } from "../burger-api";
 export const POST_ITEMS_REQUEST = "POST_ITEMS_REQUEST";
 export const POST_ITEMS_SUCCESS = "POST_ITEMS_SUCCESS";
 export const POST_ITEMS_FAILED = "POST_ITEMS_FAILED";
+export const CLEAR_ORDER = "CLEAR_ORDER"
 
 export function postItems(ingridientsID) {
   return function (dispatch) {

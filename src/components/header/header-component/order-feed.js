@@ -10,9 +10,9 @@ function Order() {
     fontSize: "inherit",
     fontWeight: "inherit",
   };
-  const matchPattern = useMatch("/order");
+  const matchPattern = useMatch("/feed");
   return (
-    <NavLink to="/order" style={linkStyle}>
+    <NavLink to="/feed" style={linkStyle}>
       <div className={styles.nav1}>
         <ListIcon type={matchPattern ? "primary" : "secondary"} />
         <p

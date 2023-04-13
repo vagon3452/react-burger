@@ -1,5 +1,5 @@
 import React from "react";
-import { registerUserAction } from "../services/actions/user";
+import { registerUserAction } from "../../services/actions/user";
 import styles from "./register.module.css";
 import { useDispatch } from "react-redux";
 import {
@@ -27,7 +27,8 @@ export const RegisterPage = () => {
   return (
     <div className={styles.content}>
       <form
-        className={styles.edit}
+        onSubmit={onClick}
+        className={styles.form}
         onKeyDown={(e) => {
           if (e.key === "Enter") {
             onClick(e);
@@ -61,12 +62,7 @@ export const RegisterPage = () => {
           extraClass={styles.input}
           placeholder="Пароль"
         />
-        <Button
-          htmlType="button"
-          type="primary"
-          size="medium"
-          onClick={onClick}
-        >
+        <Button htmlType="submit" type="primary" size="medium">
           Зарегистрироваться
         </Button>
       </form>

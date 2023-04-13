@@ -10,7 +10,7 @@
   top: 288px;
 }
 
-.edit {
+.form {
   display: flex;
   flex-direction: column;
   justify-content: center;

@@ -12,6 +12,9 @@ import {
   ForgotPass,
   ResetPassword,
   NotMatch404,
+  FeedPage,
+  OrdersPage,
+  IndexPage,
 } from "../pages";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -46,14 +49,17 @@ function App() {
       <AppHeader />
       <Routes location={background || location}>
         <Route path="/" element={<Main />} />
+        <Route path="*" element={<NotMatch404 />} />
         <Route
           path="/ingredients/:ingredientId"
           element={<IngredientsDetails />}
         />
+
         <Route
           path="/login"
           element={<OnlyUnAuth component={<LoginPage />} />}
         />
+        <Route path="/feed" element={<OnlyAuth component={<FeedPage />} />} />
         <Route
           path="/register"
           element={<OnlyUnAuth component={<RegisterPage />} />}
@@ -66,12 +72,19 @@ function App() {
           path="/reset-password"
           element={<OnlyUnAuth component={<ResetPassword />} />}
         />
+
         <Route
           path="/profile"
           element={<OnlyAuth component={<ProfilePage />} />}
-        />
-        <Route path="*" element={<NotMatch404 />} />
+        >
+          <Route path="" element={<OnlyAuth component={<IndexPage />} />} />
+          <Route
+            path="orders"
+            element={<OnlyAuth component={<OrdersPage />} />}
+          />
+        </Route>
       </Routes>
+
       {background && (
         <Routes>
           <Route

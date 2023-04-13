@@ -1,6 +1,6 @@
 import React from "react";
-import BurgerConstructor from "../components/main/constructor/burger-constructor";
-import BurgerIngredients from "../components/main/ingredients/burger-ingredients";
+import BurgerConstructor from "../../components/main/constructor/burger-constructor";
+import BurgerIngredients from "../../components/main/ingredients/burger-ingredients";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { DndProvider } from "react-dnd";
 

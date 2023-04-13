@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { resetPasswordRequest } from "../services/burger-api";
+import { resetPasswordRequest } from "../../services/burger-api";
 import styles from "./reset-password.module.css";
 import {
   Input,
@@ -36,7 +36,8 @@ export function ResetPassword() {
   return (
     <div className={styles.content}>
       <form
-        className={styles.edit}
+        onSubmit={onClick}
+        className={styles.form}
         onKeyDown={(e) => {
           if (e.key === "Enter") {
             onClick(e);
@@ -58,12 +59,7 @@ export function ResetPassword() {
           extraClass={styles.input}
           placeholder="Введите код из письма"
         />
-        <Button
-          htmlType="button"
-          type="primary"
-          size="medium"
-          onClick={onClick}
-        >
+        <Button htmlType="submit" type="primary" size="medium">
           Сохранить
         </Button>
       </form>

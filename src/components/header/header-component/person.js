@@ -15,7 +15,7 @@ function Person() {
   return (
     <>
       <ProfileIcon type={matchPattern ? "primary" : "secondary"} />
-      <NavLink to="/profile" style={linkStyle} state={{ from: location }}>
+      <NavLink to="/profile" style={linkStyle}>
         <p
           className={
             matchPattern

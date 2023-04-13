@@ -1,7 +1,6 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { getUserAction } from "../services/actions/user";
-import { signInAction } from "../services/actions/user";
+import { signInAction } from "../../services/actions/user";
 
 import styles from "./login.module.css";
 import { useDispatch } from "react-redux";
@@ -15,18 +14,10 @@ export function LoginPage() {
   const dispatch = useDispatch();
   const [form, setValue] = useState({ email: "", password: "" });
 
-  const onClick = useCallback(
-    (e) => {
-      e.preventDefault();
-      dispatch(signInAction(form));
-    },
-    [dispatch, form]
-  );
-
-  useEffect(() => {
-    dispatch(getUserAction());
-  }, [dispatch]);
-  // const { user } = useSelector((store) => ({ user: store.user.user }));
+  const onClick = (e) => {
+    e.preventDefault();
+    dispatch(signInAction(form));
+  };
 
   const onChange = (e) => {
     setValue({ ...form, [e.target.name]: e.target.value });
@@ -35,7 +26,8 @@ export function LoginPage() {
   return (
     <div className={styles.content}>
       <form
-        className={styles.edit}
+        className={styles.form}
+        onSubmit={onClick}
         onKeyDown={(e) => {
           if (e.key === "Enter") {
             onClick(e);
@@ -58,12 +50,7 @@ export function LoginPage() {
           extraClass={styles.input}
           placeholder="Пароль"
         />
-        <Button
-          htmlType="button"
-          type="primary"
-          size="medium"
-          onClick={onClick}
-        >
+        <Button htmlType="submit" type="primary" size="medium">
           Войти
         </Button>
       </form>

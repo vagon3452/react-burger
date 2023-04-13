@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { forgotPasswordRequest } from "../services/burger-api";
+import { forgotPasswordRequest } from "../../services/burger-api";
 import styles from "./forgot-password.module.css";
 import {
   EmailInput,
@@ -30,7 +30,8 @@ export function ForgotPass() {
   return (
     <div className={styles.content}>
       <form
-        className={styles.edit}
+        onSubmit={onClick}
+        className={styles.form}
         onKeyDown={(e) => {
           if (e.key === "Enter") {
             onClick(e);
@@ -46,12 +47,7 @@ export function ForgotPass() {
           placeholder="Укажите E-mail"
           extraClass={styles.input}
         />
-        <Button
-          htmlType="button"
-          type="primary"
-          size="medium"
-          onClick={onClick}
-        >
+        <Button htmlType="submit" type="primary" size="medium">
           Восстановить
         </Button>
       </form>
