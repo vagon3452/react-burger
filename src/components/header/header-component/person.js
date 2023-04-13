@@ -9,6 +9,7 @@ function Person() {
     fontSize: "inherit",
     fontWeight: "inherit",
   };
+
   const matchPattern = useMatch("/profile");
 
   return (
