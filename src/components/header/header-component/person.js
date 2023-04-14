@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink, useMatch } from "react-router-dom";
+import { NavLink, useMatch, useResolvedPath } from "react-router-dom";
 import { ProfileIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 
 function Person() {
@@ -10,10 +10,10 @@ function Person() {
     fontWeight: "inherit",
   };
 
-  const matchProfile = useMatch("/profile");
-  const matchHistory = useMatch("/profile/orders");
-  const matchLogin = useMatch("/login");
-  const isProfile = matchProfile || matchHistory || matchLogin;
+  const matchPattern = useResolvedPath().pathname;
+  const isProfile = ["/profile", "/profile/orders", "/login"].find(
+    (route) => route === matchPattern
+  );
 
   return (
     <>
