@@ -32,14 +32,14 @@ const BurgerConstructor = () => {
   const total = useSelector(totalPriceSelector);
 
   const handleDrag = (bun) => {
-    dispatch({ type: ADD_BUN, item: { ...bun, uuid: uuid() } });
+    dispatch({ type: ADD_BUN, payload: { ...bun, uuid: uuid() } });
   };
 
   const ingredientDrag = useCallback(
     (ingredient) => {
       dispatch({
         type: ADD_INGREDIENTS,
-        item: { ...ingredient, uuid: uuid() },
+        payload: { ...ingredient, uuid: uuid() },
       });
     },
     [dispatch]
@@ -64,7 +64,7 @@ const BurgerConstructor = () => {
 
     newCards.splice(hoverIndex, 0, dragCard);
 
-    dispatch({ type: REPLACE, item: newCards });
+    dispatch({ type: REPLACE, payload: newCards });
   };
 
   const [openModal, setOpenModal] = useState(false);

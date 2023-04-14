@@ -10,15 +10,18 @@ function Person() {
     fontWeight: "inherit",
   };
 
-  const matchPattern = useMatch("/profile");
+  const matchProfile = useMatch("/profile");
+  const matchHistory = useMatch("/profile/orders");
+  const matchLogin = useMatch("/login");
+  const isProfile = matchProfile || matchHistory || matchLogin;
 
   return (
     <>
-      <ProfileIcon type={matchPattern ? "primary" : "secondary"} />
+      <ProfileIcon type={isProfile ? "primary" : "secondary"} />
       <NavLink to="/profile" style={linkStyle}>
         <p
           className={
-            matchPattern
+            isProfile
               ? "text text_type_main-default"
               : "text text_type_main-default text_color_inactive"
           }

@@ -15,19 +15,19 @@ export const burgerReducer = (state = initialState, action) => {
     case REPLACE: {
       return {
         ...state,
-        ingredients: action.item,
+        ingredients: action.payload,
       };
     }
     case ADD_BUN: {
       return {
         ...state,
-        bun: action.item,
+        bun: action.payload,
       };
     }
     case ADD_INGREDIENTS: {
       return {
         ...state,
-        ingredients: [...state.ingredients, action.item],
+        ingredients: [...state.ingredients, action.payload],
       };
     }
 
