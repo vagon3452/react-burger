@@ -1,0 +1,92 @@
+.modalBackground {
+  width: 2000px;
+  height: 1080px;
+  position: absolute;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+.content {
+  display: flex;
+  border-radius: 40px;
+  flex-direction: column;
+  background: #1c1c21;
+  position: fixed;
+  width: 720px;
+  min-height: 539px;
+  left: 640px;
+  top: 230px;
+}
+
+.closeIcon {
+  position: absolute;
+  top: 60px;
+  right: 40px;
+}
+
+.frame {
+  align-self: center;
+  text-align: center;
+  margin-top: 16px;
+  width: 520px;
+  min-height: 30px;
+}
+.nutrition {
+  gap: 20px;
+  margin-top: 32px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.value {
+  width: 120px;
+  height: 56px;
+  text-align: center;
+}
+
+.modal {
+  position: absolute;
+  width: 640px;
+  height: 575px;
+  left: 640px;
+  top: 208px;
+}
+.content_modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0px;
+  gap: 32px;
+
+  position: absolute;
+  width: 520px;
+  height: 118px;
+  left: 60px;
+  top: 321px;
+}
+.title {
+  position: absolute;
+  width: 640px;
+  height: 64px;
+  left: 0px;
+  top: 0px;
+
+  font-family: "JetBrains Mono";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 40px;
+
+  display: flex;
+  align-items: center;
+  text-align: center;
+
+  color: #f2f2f3;
+}
+.image {
+  position: absolute;
+  width: 480px;
+  height: 240px;
+  left: calc(50% - 480px / 2);
+  top: 65px;
+}

@@ -1,0 +1,41 @@
+.container {
+  position: absolute;
+  width: 600px;
+  height: 912px;
+  left: 380px;
+  top: 128px;
+  background: #131316;
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  order: 0;
+  align-self: stretch;
+  height: 40px;
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+
+.ingridients {
+  composes: custom-scroll from global;
+  display: flex;
+  flex-direction: column;
+  align-self: stretch;
+  height: 756px;
+  overflow-y: scroll;
+}
+
+.headline {
+  align-self: stretch;
+  height: 30px;
+  margin-top: 40px;
+  margin-bottom: 24px;
+}
+
+.columns {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px;
+  justify-content: space-between;
+}
