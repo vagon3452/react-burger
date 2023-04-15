@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink, useMatch, useResolvedPath } from "react-router-dom";
+import { NavLink, useResolvedPath } from "react-router-dom";
 import { ProfileIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 
 function Person() {
