@@ -53,6 +53,7 @@ export const signInAction = (form) => {
   return async (dispatch) => {
     try {
       const data = await loginRequest(form);
+      console.log(data)
       if (data.success) {
         const user = handleAuthData(data);
         dispatch(setUserAction(user));
@@ -105,7 +106,7 @@ export const reversUserAction = (form) => {
 
 export const signOutAction = () => {
   return async (dispatch) => {
-    await logoutRequest({ token: localStorage.getItem(REFRESH_TOKEN_KEY) });
+    const data = await logoutRequest({ token: localStorage.getItem(REFRESH_TOKEN_KEY) });
     dispatch(setUserAction(null));
     // deleteCookie("token");
     localStorage.removeItem(ACCESS_TOKEN_KEY);
@@ -123,27 +124,3 @@ export const checkUserAuth = () => {
   };
 };
 
-// export const fetchWithRefresh = (url, options) => async (dispatch) => {
-//   try {
-//     const res = await fetch(url, options);
-//     const data = await checkResponse(res);
-//     dispatch({ type: "FETCH_SUCCESS", payload: data });
-//   } catch (err) {
-//     if (err.message === "jwt expired") {
-//       const refreshData = await refreshTokenRequest();
-//       if (!refreshData.success) {
-//         dispatch({ type: "FETCH_ERROR", payload: refreshData });
-//         return Promise.reject(refreshData);
-//       }
-//       localStorage.setItem("refreshToken", refreshData.refreshToken);
-//       localStorage.setItem("accessToken", refreshData.accessToken);
-//       options.headers.authorization = refreshData.accessToken;
-//       const res = await fetch(url, options);
-//       const data = await checkResponse(res);
-//       dispatch({ type: "FETCH_SUCCESS", payload: data });
-//     } else {
-//       dispatch({ type: "FETCH_ERROR", payload: err });
-//       return Promise.reject(err);
-//     }
-//   }
-// };

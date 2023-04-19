@@ -11,6 +11,7 @@ export function getItems() {
       type: GET_ITEMS_REQUEST,
     });
     getItemsRequest().then((res) => {
+      console.log(res)
       if (res && res.success) {
         dispatch({
           type: GET_ITEMS_SUCCESS,

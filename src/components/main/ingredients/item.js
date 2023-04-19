@@ -12,7 +12,14 @@ import {
 export default function Item({ data }) {
   const { image, name, price, _id } = data;
   const total = useSelector(totalPriceSelector);
-  const currentCount = total[_id] || 0;
+
+  const count = total.count?.get(_id)
+// const res = count.next().value[1]
+  // const res = count;
+  console.log(count);
+
+  // const currentCount = total[_id] || 0;
+  const currentCount = 0;
 
   const [{ opacity }, ref] = useDrag(
     {

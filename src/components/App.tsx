@@ -22,7 +22,7 @@ import { IngredientsDetails } from "./main/ingredients/ingredient-details";
 import Modal from "./modal/modal";
 
 function App() {
-  const { isLoading, hasError } = useSelector((state) => ({
+  const { isLoading, hasError } = useSelector((state: any) => ({
     isLoading: state.cart.isLoading,
     hasError: state.cart.hasError,
   }));
@@ -34,8 +34,8 @@ function App() {
     navigate(-1);
   };
   useEffect(() => {
-    dispatch(getItems());
-    dispatch(checkUserAuth());
+    dispatch<any>(getItems());
+    dispatch<any>(checkUserAuth());
   }, [dispatch]);
 
   return isLoading ? (
@@ -57,7 +57,10 @@ function App() {
           path="/login"
           element={<OnlyUnAuth component={<LoginPage />} />}
         />
-        <Route path="/feed" element={<OnlyAuth component={<FeedPage />} />} />
+        <Route
+          path="/feed"
+          element={<OnlyAuth component={<FeedPage />} />}
+        />
         <Route
           path="/register"
           element={<OnlyUnAuth component={<RegisterPage />} />}

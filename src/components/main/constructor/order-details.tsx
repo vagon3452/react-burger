@@ -1,6 +1,10 @@
 import styles from "./burger-constructor.module.css";
+import React, { FC } from "react";
 
-export const OrderDetails = ({ image, number }) => {
+export const OrderDetails: FC<{
+  image: string;
+  number: number;
+}> = ({ image, number }) => {
   return (
     <>
       <div className={styles.title}>

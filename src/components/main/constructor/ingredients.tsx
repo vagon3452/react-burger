@@ -1,19 +1,24 @@
-import React, { useRef } from "react";
-import PropTypes from "prop-types";
+import React, { useRef, FC } from "react";
 import { useDrag, useDrop } from "react-dnd";
 import { useDispatch } from "react-redux";
 import styles from "./burger-constructor.module.css";
 import { DELETE_ITEM } from "../../../services/actions/create-burger";
-import { uuidBurgerPropTypes } from "../../../utils/prop-types";
+import {TContructorIngredient} from "../../../services/types/data"
 import {
   ConstructorElement,
   DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 
-export const Ingredients = ({ data, index, moveCard }) => {
+interface Props {
+  data: TContructorIngredient;
+  index: number;
+  moveCard: (dragIndex: number, hoverIndex: number) => void;
+  }
+
+export const Ingredients:FC<Props> = ({ data, index, moveCard }) => {
   const { name, price, image, uuid } = data;
 
-  const ref = useRef(null);
+  const ref = useRef<HTMLInputElement>(null);
 
   const dispatch = useDispatch();
 
@@ -40,7 +45,7 @@ export const Ingredients = ({ data, index, moveCard }) => {
   const [, drop] = useDrop({
     accept: "ingredient",
 
-    hover: (item, monitor) => {
+    hover: (item:{uuid:string, index:number}, monitor):void => {
       if (!ref.current) {
         return;
       }
@@ -57,7 +62,7 @@ export const Ingredients = ({ data, index, moveCard }) => {
 
       const clientOffset = monitor.getClientOffset();
 
-      const hoverClientY = clientOffset.y - hoverBoundingRect.top;
+      const hoverClientY = clientOffset!.y - hoverBoundingRect.top;
 
       if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
         return;
@@ -76,7 +81,7 @@ export const Ingredients = ({ data, index, moveCard }) => {
   return (
     <section className={`${styles.ingridient}`} style={{ opacity }} ref={ref}>
       <div style={{ display: "flex", alignItems: "center" }}>
-        <DragIcon />
+        <DragIcon type={"secondary"} />
       </div>
 
       <ConstructorElement
@@ -89,10 +94,5 @@ export const Ingredients = ({ data, index, moveCard }) => {
   );
 };
 
-Ingredients.propTypes = {
-  data: uuidBurgerPropTypes.isRequired,
-  index: PropTypes.number.isRequired,
-  moveCard: PropTypes.func.isRequired,
-};
 
 export default Ingredients;

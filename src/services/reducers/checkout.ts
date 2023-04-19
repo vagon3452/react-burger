@@ -10,8 +10,9 @@ const initialState = {
   order: null,
   hasError: false,
 };
+type TState = typeof initialState
 
-export const checkoutReducer = (state = initialState, action) => {
+export const checkoutReducer = (state:TState = initialState, action: { type: any; post: any; message: any; }) => {
   switch (action.type) {
     case POST_ITEMS_REQUEST: {
       return {
