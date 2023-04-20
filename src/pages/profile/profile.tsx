@@ -1,5 +1,5 @@
 import React from "react";
-
+import { REFRESH_TOKEN_KEY } from "../../services/actions/user";
 import { signOutAction } from "../../services/actions/user";
 import styles from "./profile.module.css";
 import { useDispatch } from "react-redux";
@@ -13,16 +13,17 @@ const linkStyle = {
   fontWeight: "inherit",
 };
 
-export function ProfilePage() {
+export function ProfilePage(): JSX.Element {
   const location = useLocation();
-
-  const isActive = (link) => location.pathname === link;
+  type TLink = "/profile" | "/profile/orders" | "/";
+  const isActive = (link: TLink): boolean => location.pathname === link;
 
   const dispatch = useDispatch();
 
-  const signOut = (e) => {
+  const signOut = (e: React.SyntheticEvent) => {
     e.preventDefault();
-    dispatch(signOutAction());
+    //@ts-ignore
+    dispatch(signOutAction({ token: localStorage.getItem(REFRESH_TOKEN_KEY) }));
   };
 
   return (

@@ -1,25 +1,23 @@
-import React, { useState } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
-import { burgerPropTypes } from "../../../utils/prop-types";
 import { totalPriceSelector } from "../../../common/total-price";
 import { useDrag } from "react-dnd";
 import styles from "./item.module.css";
+import { TIngredient } from "../../../services/types/data";
 import {
   CurrencyIcon,
   Counter,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 
-export default function Item({ data }) {
+type TItemProps = {
+  data: TIngredient;
+};
+
+export default function Item({ data }: TItemProps): JSX.Element {
   const { image, name, price, _id } = data;
   const total = useSelector(totalPriceSelector);
 
-  const count = total.count?.get(_id)
-// const res = count.next().value[1]
-  // const res = count;
-  console.log(count);
-
-  // const currentCount = total[_id] || 0;
-  const currentCount = 0;
+  const currentCount = total.count.get(_id) || 0;
 
   const [{ opacity }, ref] = useDrag(
     {
@@ -38,7 +36,7 @@ export default function Item({ data }) {
       <div style={{ display: "flex", flexDirection: "column" }}>
         <img src={image} alt={name} />
         <div className={styles.price}>
-          <p className="text text_type_digits-default mr-4">{price}</p>{" "}
+          <p className="text text_type_digits-default mr-4">{price}</p>
           <CurrencyIcon type="primary" />
         </div>
         <div style={{ height: "48px" }}>
@@ -48,7 +46,3 @@ export default function Item({ data }) {
     </section>
   );
 }
-
-Item.propTypes = {
-  data: burgerPropTypes.isRequired,
-};

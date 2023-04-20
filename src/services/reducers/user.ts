@@ -1,7 +1,7 @@
 import React from "react";
 
 import { SET_USER, SET_AUTH_CHECKED } from "../actions/user";
-import { Action } from "redux";
+
 
 const initialState = {
   user: null,
@@ -13,12 +13,12 @@ export interface IUser {
   email: string;
 }
 
-export interface IUserAction extends Action {
+export interface IUserAction {
   type: typeof SET_USER;
   payload: IUser;
 }
 
-export interface IAuthCheckedAction extends Action {
+export interface IAuthCheckedAction {
   type: typeof SET_AUTH_CHECKED;
   payload: boolean;
 }

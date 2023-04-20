@@ -1,25 +1,33 @@
-import React, { useMemo, useEffect, useRef } from "react";
+import React, { useMemo, useRef } from "react";
 import styles from "./burger-ingredients.module.css";
 import Item from "./item";
 import { useSelector } from "react-redux";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
-
+import { TIngredient } from "../../../services/types/data";
+type TSelector = {
+  items: TIngredient[];
+  isLoading: boolean;
+  hasError: boolean;
+};
 const type_bun = "bun";
 const type_sauce = "sauce";
 const type_main = "main";
 
-export default function BurgerIngredients() {
-  const { items, isLoading, hasError } = useSelector((state) => ({
+export const BurgerIngredients = (): JSX.Element => {
+  const { items, isLoading, hasError }: TSelector = useSelector((state) => ({
+    //@ts-ignore
     items: state.cart.items,
+    //@ts-ignore
     isLoading: state.cart.isLoading,
+    //@ts-ignore
     hasError: state.cart.hasError,
   }));
   const location = useLocation();
-  const bunsRef = useRef(null);
-  const sausRef = useRef(null);
-  const mainRef = useRef(null);
+  const bunsRef = useRef<HTMLDivElement | null>(null);
+  const sausRef = useRef<HTMLDivElement | null>(null);
+  const mainRef = useRef<HTMLDivElement | null>(null);
   const linkStyle = {
     textDecoration: "none",
     color: "inherit",
@@ -50,7 +58,7 @@ export default function BurgerIngredients() {
           value={type_bun}
           active={current === type_bun}
           onClick={() => (
-            bunsRef.current.scrollIntoView(), setCurrent(type_bun)
+            bunsRef.current?.scrollIntoView(), setCurrent(type_bun)
           )}
         >
           Булки
@@ -59,7 +67,7 @@ export default function BurgerIngredients() {
           value={type_sauce}
           active={current === type_sauce}
           onClick={() => (
-            sausRef.current.scrollIntoView(), setCurrent(type_sauce)
+            sausRef.current?.scrollIntoView(), setCurrent(type_sauce)
           )}
         >
           Соусы
@@ -68,7 +76,7 @@ export default function BurgerIngredients() {
           value={type_main}
           active={current === type_main}
           onClick={() => (
-            mainRef.current.scrollIntoView(), setCurrent(type_main)
+            mainRef.current?.scrollIntoView(), setCurrent(type_main)
           )}
         >
           Начинки
@@ -129,4 +137,4 @@ export default function BurgerIngredients() {
       </div>
     </div>
   );
-}
+};

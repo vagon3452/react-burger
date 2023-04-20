@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, ChangeEvent } from "react";
 import { Link } from "react-router-dom";
 import { signInAction } from "../../services/actions/user";
 
@@ -10,16 +10,17 @@ import {
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 
-export function LoginPage() {
+export function LoginPage():JSX.Element {
   const dispatch = useDispatch();
   const [form, setValue] = useState({ email: "", password: "" });
 
-  const onClick = (e) => {
+  const onClick = (e:React.SyntheticEvent) => {
     e.preventDefault();
+    //@ts-ignore
     dispatch(signInAction(form));
   };
 
-  const onChange = (e) => {
+  const onChange = (e:ChangeEvent<HTMLInputElement>) => {
     setValue({ ...form, [e.target.name]: e.target.value });
   };
 

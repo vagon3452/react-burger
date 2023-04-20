@@ -1,9 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { NavLink, useMatch } from "react-router-dom";
 import styles from "../app-header.module.css";
 import { BurgerIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 
-function Create() {
+function Create(): JSX.Element {
   const linkStyle = {
     textDecoration: "none",
     color: "inherit",

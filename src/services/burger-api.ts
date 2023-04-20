@@ -1,23 +1,17 @@
 import { REFRESH_TOKEN_KEY, ACCESS_TOKEN_KEY } from "./actions/user";
 import {
-  IGetItem,
   TRawUser,
-  ILogin,
-  IRegister,
-  IOrderRequest,
+  TRegister,
   IGetUser,
   ICheck,
-  IBodyEmail,
-  IBodyReset,
-  IBodyReg,
-  IBodyLogin,
-  IBodyOrder,
-  IBodyGetUser,
-  IBodyUpdateUser,
-  IBodyLogout,
-  IOrder,
+  TEmail,
+  TBodyReset,
+  TToken,
+  TUser,
+  TBodyLogin,
 } from "./types/user";
-import { TIngredient, TToken } from "./types/data";
+import { IGetItem, IOrderRequest, IBodyOrder, IOrder } from "./types/order";
+import { TIngredient, TTokens } from "./types/data";
 
 enum ENDPOINTS {
   login = "https://norma.nomoreparties.space/api/auth/login",
@@ -37,7 +31,7 @@ const checkResponse = <T>(res: Response) => {
     : res.json().then((err) => Promise.reject(err));
 };
 
-const refreshToken = async (): Promise<TToken> => {
+const refreshToken = async (): Promise<TTokens> => {
   const url = ENDPOINTS.refresh;
   return await fetch(url, {
     method: "POST",
@@ -47,7 +41,7 @@ const refreshToken = async (): Promise<TToken> => {
     body: JSON.stringify({
       token: localStorage.getItem(REFRESH_TOKEN_KEY),
     }),
-  }).then(checkResponse<TToken>);
+  }).then(checkResponse<TTokens>);
 };
 
 const fetchWithRefresh = async <T>(url: ENDPOINTS, options?: RequestInit) => {
@@ -101,16 +95,16 @@ const createRequest =
         authorization: localStorage.getItem(ACCESS_TOKEN_KEY) || "",
       },
       method,
-      body: JSON.stringify(form),
+      body: form && JSON.stringify(form),
     };
     return await fetchWithRefresh<T>(url, requestOptions);
   };
 
-export const loginRequest = createRequest<ILogin, IBodyLogin>(
+export const loginRequest = createRequest<TTokens, TBodyLogin>(
   ENDPOINTS.login,
   "POST"
 );
-export const registerRequest = createRequest<IRegister, IBodyReg>(
+export const registerRequest = createRequest<TRegister, TUser>(
   ENDPOINTS.register,
   "POST"
 );
@@ -122,23 +116,20 @@ export const postItemsRequest = createRequest<IOrderRequest, IBodyOrder>(
   ENDPOINTS.orders,
   "POST"
 );
-export const getUserRequest = createRequest<IGetUser, IBodyGetUser>(
-  ENDPOINTS.user,
-  "GET"
-);
-export const reversUserRequest = createRequest<IGetUser, IBodyUpdateUser>(
+export const getUserRequest = createRequest<IGetUser>(ENDPOINTS.user, "GET");
+export const updateUserRequest = createRequest<IGetUser, TUser>(
   ENDPOINTS.user,
   "PATCH"
 );
-export const logoutRequest = createRequest<ICheck, IBodyLogout>(
+export const logoutRequest = createRequest<ICheck, TToken>(
   ENDPOINTS.logout,
   "POST"
 );
-export const forgotPasswordRequest = createRequest<ICheck, IBodyEmail>(
+export const forgotPasswordRequest = createRequest<ICheck, TEmail>(
   ENDPOINTS.forgotPassword,
   "POST"
 );
-export const resetPasswordRequest = createRequest<ICheck, IBodyReset>(
+export const resetPasswordRequest = createRequest<ICheck, TBodyReset>(
   ENDPOINTS.resetPassword,
   "POST"
 );

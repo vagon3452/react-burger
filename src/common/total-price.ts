@@ -36,18 +36,20 @@ export const totalPriceSelector = createSelector(
       ? [bun, ...ingredients, bun]
       : ingredients;
 
-    return items.reduce((acc, item) => {
-      // const currentCount = acc[item._id] || 0;
-      const currentCount = acc.count || new Map<string, number>();
-      const arrayId = acc["ingredients"] || [];
-      let result = acc["totalPrice"] || 0;
-      return {
-        ...acc,
-        count: currentCount.set(item._id, currentCount.get(item._id) || 0 + 1),
-        // [item._id]: currentCount + 1,
-        ingredients: [...arrayId, item._id],
-        totalPrice: (result += item.price),
-      };
-    }, {} as TAcc);
+    return items.reduce(
+      (acc, item) => {
+        return {
+          ...acc,
+          count: acc.count.set(item._id, (acc.count.get(item._id) || 0) + 1),
+          ingredients: [...acc.ingredients, item._id],
+          totalPrice: (acc.totalPrice += item.price),
+        };
+      },
+      {
+        count: new Map(),
+        ingredients: [],
+        totalPrice: 0,
+      } as TAcc
+    );
   }
 );

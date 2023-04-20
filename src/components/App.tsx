@@ -19,6 +19,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { IngredientsDetails } from "./main/ingredients/ingredient-details";
+import * as H from "history"
 import Modal from "./modal/modal";
 
 function App() {
@@ -37,7 +38,8 @@ function App() {
     dispatch<any>(getItems());
     dispatch<any>(checkUserAuth());
   }, [dispatch]);
-
+const state = location.state as {background?: H.Location}
+const modal = state && state.background
   return isLoading ? (
     <>"Загрузка..."</>
   ) : hasError ? (
@@ -86,7 +88,7 @@ function App() {
         </Route>
       </Routes>
 
-      {background && (
+      {modal && (
         <Routes>
           <Route
             path="/ingredients/:ingredientId"

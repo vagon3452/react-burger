@@ -9,6 +9,10 @@ import { totalPriceSelector } from "../../../common/total-price";
 import image from "../../../images/done.png";
 import { CLEAR_ORDER } from "../../../services/actions/checkout";
 import {
+  TContructorIngredient,
+  TIngredient,
+} from "../../../services/types/data";
+import {
   ADD_BUN,
   ADD_INGREDIENTS,
   REPLACE,
@@ -25,18 +29,18 @@ import { useNavigate } from "react-router-dom";
 
 const type_bun = "bun";
 
-const BurgerConstructor = () => {
+export const BurgerConstructor = (): JSX.Element => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const total = useSelector(totalPriceSelector);
 
-  const handleDrag = (bun) => {
+  const handleDrag = (bun: TIngredient) => {
     dispatch({ type: ADD_BUN, payload: { ...bun, uuid: uuid() } });
   };
 
   const ingredientDrag = useCallback(
-    (ingredient) => {
+    (ingredient: TIngredient) => {
       dispatch({
         type: ADD_INGREDIENTS,
         payload: { ...ingredient, uuid: uuid() },
@@ -47,16 +51,22 @@ const BurgerConstructor = () => {
 
   const { bun, ingredients, order, isLoading, hasError, user } = useSelector(
     (state) => ({
+      //@ts-ignore
       bun: state.create.bun,
+      //@ts-ignore
       user: state.user.user,
+      //@ts-ignore
       ingredients: state.create.ingredients,
+      //@ts-ignore
       order: state.checkout.order,
+      //@ts-ignore
       isLoading: state.checkout.isLoading,
+      //@ts-ignore
       hasError: state.checkout.hasError,
     })
   );
 
-  const moveCard = (dragIndex, hoverIndex) => {
+  const moveCard = (dragIndex: number, hoverIndex: number): void => {
     const dragCard = ingredients[dragIndex];
     const newCards = [...ingredients];
 
@@ -78,12 +88,13 @@ const BurgerConstructor = () => {
       if (!user) {
         navigate("/login");
       }
+      //@ts-ignore
       dispatch(postItems({ ingredients: total.ingredients }));
       setOpenModal(true);
     }
   };
 
-  const [, drop] = useDrop({
+  const [, drop] = useDrop<TIngredient>({
     accept: "items",
     drop(items) {
       items.type !== type_bun && ingredientDrag(items);
@@ -95,7 +106,7 @@ const BurgerConstructor = () => {
       <div className={styles.burgerComponents} ref={drop}>
         <Bun bun={bun} handleDrag={handleDrag} pos={"(верх)"} type={"top"} />
         {ingredients.length ? (
-          ingredients.map((item, index) => (
+          ingredients.map((item: TContructorIngredient, index: number) => (
             <Ingredients
               key={item.uuid}
               moveCard={moveCard}
@@ -129,5 +140,3 @@ const BurgerConstructor = () => {
     </section>
   );
 };
-
-export default BurgerConstructor;

@@ -1,13 +1,23 @@
+import React, { ReactElement } from "react";
 import styles from "./ingredient-details.module.css";
 import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import { TIngredient } from "../../../services/types/data";
 
-export const IngredientsDetails = () => {
-  const items = useSelector((store) => store.cart.items);
+type TNutritionProps = {
+  children: string;
+  data: number | string;
+};
+type init = keyof TIngredient;
+
+export const IngredientsDetails = (): JSX.Element => {
+  //@ts-ignore
+  const items: TIngredient[] = useSelector((store) => store.cart.items);
   const { ingredientId } = useParams();
 
   const data = items.find((el) => el._id === ingredientId);
+
   const { name, image, calories, proteins, fat, carbohydrates } = data || {
     name: "",
     image: "",
@@ -37,7 +47,7 @@ export const IngredientsDetails = () => {
   );
 };
 
-function Nutritions({ data, children }) {
+function Nutritions({ data, children }: TNutritionProps): JSX.Element {
   return (
     <div className={styles.value}>
       <p className="text text_type_main-default">{children}</p>

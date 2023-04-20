@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-
-import { reversUserAction } from "../../services/actions/user";
+import React, { useState, ChangeEvent } from "react";
+import {TUser } from "../../services/types/user";
+import { updateUserAction } from "../../services/actions/user";
 import styles from "./profile.module.css";
 import { useSelector } from "react-redux";
 import {
@@ -8,24 +8,27 @@ import {
   Input,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 
-export const IndexPage = () => {
-  const { user } = useSelector((store) => ({ user: store.user.user }));
+type TSelectorUser = Omit<TUser, "password">
 
-  const [form, setValue] = useState({ ...user, password: "" });
+export const IndexPage = ():JSX.Element => {
+  //@ts-ignore
+  const { user }:TSelectorUser = useSelector((store) => ({ user: store.user.user }));
 
-  const cancellation = () => {
+  const [form, setValue] = useState<TUser>({ ...user, password: "" });
+
+  const cancellation = (): void => {
     setValue({ ...user, password: "" });
   };
 
-  const isUser =
+  const isUser: boolean =
     JSON.stringify({ ...user, password: "" }) === JSON.stringify(form);
 
-  const saveNewUser = (e) => {
+  const saveNewUser = (e: React.SyntheticEvent): void => {
     e.preventDefault();
-    reversUserAction(form);
+    updateUserAction(form);
   };
 
-  const onChange = (e) => {
+  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     setValue({ ...form, [e.target.name]: e.target.value });
   };
   return (

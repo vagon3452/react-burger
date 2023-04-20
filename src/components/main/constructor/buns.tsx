@@ -3,12 +3,16 @@ import PropTypes from "prop-types";
 import { useDrop } from "react-dnd";
 import styles from "./burger-constructor.module.css";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
-import { burgerPropTypes } from "../../../utils/prop-types";
+import { TIngredient } from "../../../services/types/data";
+type Props = {
+  bun: TIngredient;
+  handleDrag: (items: TIngredient) => void;
+  pos: string;
+  type: "top" | "bottom";
+};
 
-
-export const Bun = ({ bun, handleDrag, pos, type }) => {
-  
-  const [, dropTarget] = useDrop({
+export const Bun = ({ bun, handleDrag, pos, type }: Props): JSX.Element => {
+  const [, dropTarget] = useDrop<TIngredient>({
     accept: "items",
     drop(items) {
       items.type === "bun" && handleDrag(items);
@@ -33,13 +37,6 @@ export const Bun = ({ bun, handleDrag, pos, type }) => {
       )}
     </div>
   );
-};
-
-Bun.propTypes = {
-  bun: burgerPropTypes,
-  handleDrag: PropTypes.func.isRequired,
-  pos: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
 };
 
 export default Bun;

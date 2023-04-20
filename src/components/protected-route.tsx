@@ -1,6 +1,6 @@
 import { Navigate, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
-import React, { FC, ReactElement } from "react";
+import React, { ReactElement } from "react";
 
 type ProtectedRouteProps = {
   component: ReactElement;

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, ChangeEvent } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { forgotPasswordRequest } from "../../services/burger-api";
 import styles from "./forgot-password.module.css";
@@ -7,23 +7,23 @@ import {
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 
-export function ForgotPass() {
+export function ForgotPass(): JSX.Element {
   const navigate = useNavigate();
-  const onClick = (e) => {
+  const onClick = (e: React.SyntheticEvent): void => {
     e.preventDefault();
     forgotPasswordRequest(form)
       .then(() => {
-        localStorage.setItem("reset-password", true);
+        localStorage.setItem("reset-password", "true");
         navigate("/reset-password");
       })
-      .catch(() => {
-        setError(true);
+      .catch((e) => {
+        throw new Error(`error ${e}`);
       });
   };
-  const { hasError, setError } = useState(false);
+
   const [form, setValue] = useState({ email: "" });
 
-  const onChange = (e) => {
+  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     setValue({ ...form, [e.target.name]: e.target.value });
   };
 
@@ -55,7 +55,6 @@ export function ForgotPass() {
         <p>
           Вспомнили пароль? <Link to="/login">Войти</Link>
         </p>
-        {hasError && <p>что-то пошло не так</p>}
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, ChangeEvent } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { resetPasswordRequest } from "../../services/burger-api";
 import styles from "./reset-password.module.css";
@@ -8,28 +8,24 @@ import {
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 
-export function ResetPassword() {
+export function ResetPassword(): JSX.Element {
   const navigate = useNavigate();
 
   if (!localStorage.getItem("reset-password")) {
     navigate("/");
   }
 
-  const onClick = (e) => {
+  const onClick = (e: React.SyntheticEvent) => {
     e.preventDefault();
-    resetPasswordRequest(form)
-      .then(() => {
-        localStorage.removeItem("reset-password");
-        navigate("/login");
-      })
-      .catch(() => {
-        setError(true);
-      });
+    resetPasswordRequest(form).then(() => {
+      localStorage.removeItem("reset-password");
+      navigate("/login");
+    });
   };
-  const { error, setError } = useState(false);
+
   const [form, setValue] = useState({ password: "", token: "" });
 
-  const onChange = (e) => {
+  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     setValue({ ...form, [e.target.name]: e.target.value });
   };
 
@@ -67,7 +63,6 @@ export function ResetPassword() {
         <p>
           Вспомнили пароль? <Link to="/login">Войти</Link>
         </p>
-        {error && <p>что-то пошло не так</p>}
       </div>
     </div>
   );

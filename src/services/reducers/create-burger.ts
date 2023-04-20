@@ -4,13 +4,19 @@ import {
   DELETE_ITEM,
   REPLACE,
 } from "../actions/create-burger";
+import { TContructorIngredient } from "../types/data";
 
-const initialState = {
+interface BurgerState {
+  bun: null | TContructorIngredient;
+  ingredients: Array<TContructorIngredient>;
+}
+
+const initialState: BurgerState = {
   bun: null,
   ingredients: [],
 };
 
-export const burgerReducer = (state = initialState, action) => {
+export const burgerReducer = (state = initialState, action: any) => {
   switch (action.type) {
     case REPLACE: {
       return {

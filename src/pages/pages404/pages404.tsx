@@ -2,10 +2,9 @@ import React from "react";
 
 import styles from "./pages404.module.css";
 
-export function NotMatch404() {
-
+export function NotMatch404(): JSX.Element {
   return (
-    <div >
+    <div>
       <h1 className={styles.content}>404</h1>
     </div>
   );

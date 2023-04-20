@@ -5,7 +5,7 @@ import { Logo } from "@ya.praktikum/react-developer-burger-ui-components";
 import Create from "./header-component/create";
 import Order from "./header-component/order-feed";
 
-export const AppHeader = () => {
+export const AppHeader = (): JSX.Element => {
   return (
     <header className={styles.navbar}>
       <div className={styles.content}>

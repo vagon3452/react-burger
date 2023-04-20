@@ -1,28 +1,9 @@
-export type TRawUser = {
-  readonly email: string;
-  readonly name: string;
+export type TTokens = {
+  readonly success: boolean;
+  readonly accessToken: string;
+  readonly refreshToken: string;
 };
-export type TToken = {
-  success: boolean;
-  accessToken: string;
-  refreshToken: string;
-};
-// export type TRawUser = Omit<TUser, "id"> & { _id: number };
 
-export type TBurger = {
-  readonly calories: string;
-  readonly carbohydrates: string;
-  readonly fat: string;
-  readonly image: string;
-  readonly image_large: string;
-  readonly image_mobile: string;
-  readonly name: string;
-  readonly price: string;
-  readonly proteins: string;
-  readonly type: string;
-  readonly __v: string;
-  readonly _id: string;
-};
 export type TIngredient = {
   readonly _id: string;
   readonly name: string;
@@ -54,47 +35,25 @@ export type TContructorIngredient = {
   readonly uuid: string;
 };
 
-type TResponseBody<TDataKey extends string = "", TDataType = {}> = {
-  [key in TDataKey]: TDataType;
-} & {
-  success: boolean;
-  message?: string;
-  headers?: Headers;
-};
+// type TResponseBody<TDataKey extends string = "", TDataType = {}> = {
+//   [key in TDataKey]: TDataType;
+// } & {
+//   success: boolean;
+//   message?: string;
+//   headers?: Headers;
+// };
 
-interface CustomBody<T extends any> extends Body {
-  json(): Promise<T>;
-}
+// interface CustomBody<T extends any> extends Body {
+//   json(): Promise<T>;
+// }
 
-interface CustomResponse<T> extends CustomBody<T> {
-  readonly headers: Headers;
-  readonly ok: boolean;
-  readonly redirected: boolean;
-  readonly status: number;
-  readonly statusText: string;
-  readonly type: ResponseType;
-  readonly url: string;
-  clone(): Response;
-}
-interface IEndpoint {
-  login: string;
-  register: string;
-  ingredients: string;
-  orders: string;
-  user: string;
-  logout: string;
-  forgotPassword: string;
-  resetPassword: string;
-  refresh: string;
-}
-enum ENDPOINTS {
-  login = "https://norma.nomoreparties.space/api/auth/login",
-  register = "https://norma.nomoreparties.space/api/auth/register",
-  ingredients = "https://norma.nomoreparties.space/api/ingredients",
-  orders = "https://norma.nomoreparties.space/api/orders",
-  user = "https://norma.nomoreparties.space/api/auth/user`",
-  logout = "https://norma.nomoreparties.space/api/auth/logout",
-  forgotPassword = "https://norma.nomoreparties.space/api/password-reset",
-  resetPassword = "https://norma.nomoreparties.space/api/password-reset/reset",
-  refresh = "https://norma.nomoreparties.space/api/auth/token",
-}
+// interface CustomResponse<T> extends CustomBody<T> {
+//   readonly headers: Headers;
+//   readonly ok: boolean;
+//   readonly redirected: boolean;
+//   readonly status: number;
+//   readonly statusText: string;
+//   readonly type: ResponseType;
+//   readonly url: string;
+//   clone(): Response;
+// }

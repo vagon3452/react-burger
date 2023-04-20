@@ -1,7 +1,8 @@
-import React from "react";
+import React, { ChangeEvent, useState } from "react";
 import { registerUserAction } from "../../services/actions/user";
 import styles from "./register.module.css";
 import { useDispatch } from "react-redux";
+import { TUser } from "../../services/types/user";
 import {
   EmailInput,
   PasswordInput,
@@ -10,18 +11,20 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link } from "react-router-dom";
 
-export const RegisterPage = () => {
+export const RegisterPage = (): JSX.Element => {
   const dispatch = useDispatch();
-  const [value, setValue] = React.useState({
+  const [value, setValue] = useState<TUser>({
     email: "",
     password: "",
     name: "",
   });
 
-  function onClick() {
+  function onClick(e: React.SyntheticEvent) {
+    e.preventDefault();
+    //@ts-ignore
     dispatch(registerUserAction(value));
   }
-  const onChange = (e) => {
+  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     setValue({ ...value, [e.target.name]: e.target.value });
   };
   return (
