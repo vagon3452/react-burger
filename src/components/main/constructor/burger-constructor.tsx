@@ -8,6 +8,7 @@ import Modal from "../../modal/modal";
 import { totalPriceSelector } from "../../../common/total-price";
 import image from "../../../images/done.png";
 import { CLEAR_ORDER } from "../../../services/actions/checkout";
+import { ingredientType } from "../../../services/types/data";
 import {
   TContructorIngredient,
   TIngredient,
@@ -27,9 +28,8 @@ import {
 import { OrderDetails } from "./order-details";
 import { useNavigate } from "react-router-dom";
 
-const type_bun = "bun";
-
 export const BurgerConstructor = (): JSX.Element => {
+  const { type_bun } = ingredientType;
   const dispatch = useDispatch();
   const navigate = useNavigate();
 

@@ -1,19 +1,18 @@
-import React, { useMemo, useRef } from "react";
+import React, { useMemo, useRef, useState } from "react";
 import styles from "./burger-ingredients.module.css";
-import Item from "./item";
+import {Item} from "./item";
 import { useSelector } from "react-redux";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { TIngredient } from "../../../services/types/data";
+import { ingredientType } from "../../../services/types/data";
+
 type TSelector = {
   items: TIngredient[];
   isLoading: boolean;
   hasError: boolean;
 };
-const type_bun = "bun";
-const type_sauce = "sauce";
-const type_main = "main";
 
 export const BurgerIngredients = (): JSX.Element => {
   const { items, isLoading, hasError }: TSelector = useSelector((state) => ({
@@ -35,18 +34,18 @@ export const BurgerIngredients = (): JSX.Element => {
     fontWeight: "inherit",
   };
   const bun = useMemo(
-    () => items.filter((item) => item.type === type_bun),
+    () => items.filter((item) => item.type === ingredientType.type_bun),
     [items]
   );
   const saus = useMemo(
-    () => items.filter((item) => item.type === type_sauce),
+    () => items.filter((item) => item.type === ingredientType.type_sauce),
     [items]
   );
   const main = useMemo(
-    () => items.filter((item) => item.type === type_main),
+    () => items.filter((item) => item.type === ingredientType.type_main),
     [items]
   );
-  const [current, setCurrent] = React.useState(type_bun);
+  const [current, setCurrent] = useState(ingredientType.type_bun);
 
   return (
     <div className={styles.container}>
@@ -55,28 +54,31 @@ export const BurgerIngredients = (): JSX.Element => {
       </div>
       <div style={{ display: "flex" }}>
         <Tab
-          value={type_bun}
-          active={current === type_bun}
+          value={ingredientType.type_bun}
+          active={current === ingredientType.type_bun}
           onClick={() => (
-            bunsRef.current?.scrollIntoView(), setCurrent(type_bun)
+            bunsRef.current?.scrollIntoView(),
+            setCurrent(ingredientType.type_bun)
           )}
         >
           Булки
         </Tab>
         <Tab
-          value={type_sauce}
-          active={current === type_sauce}
+          value={ingredientType.type_sauce}
+          active={current === ingredientType.type_sauce}
           onClick={() => (
-            sausRef.current?.scrollIntoView(), setCurrent(type_sauce)
+            sausRef.current?.scrollIntoView(),
+            setCurrent(ingredientType.type_sauce)
           )}
         >
           Соусы
         </Tab>
         <Tab
-          value={type_main}
-          active={current === type_main}
+          value={ingredientType.type_main}
+          active={current === ingredientType.type_main}
           onClick={() => (
-            mainRef.current?.scrollIntoView(), setCurrent(type_main)
+            mainRef.current?.scrollIntoView(),
+            setCurrent(ingredientType.type_main)
           )}
         >
           Начинки

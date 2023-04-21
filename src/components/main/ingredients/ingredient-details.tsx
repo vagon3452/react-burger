@@ -1,6 +1,5 @@
-import React, { ReactElement } from "react";
+import React, { FC } from "react";
 import styles from "./ingredient-details.module.css";
-import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { TIngredient } from "../../../services/types/data";
@@ -9,7 +8,6 @@ type TNutritionProps = {
   children: string;
   data: number | string;
 };
-type init = keyof TIngredient;
 
 export const IngredientsDetails = (): JSX.Element => {
   //@ts-ignore
@@ -47,16 +45,11 @@ export const IngredientsDetails = (): JSX.Element => {
   );
 };
 
-function Nutritions({ data, children }: TNutritionProps): JSX.Element {
+const Nutritions: FC<TNutritionProps> = ({ data, children }): JSX.Element => {
   return (
     <div className={styles.value}>
       <p className="text text_type_main-default">{children}</p>
       <p className="text text_type_digits-default">{data}</p>
     </div>
   );
-}
-
-Nutritions.propTypes = {
-  data: PropTypes.number.isRequired,
-  children: PropTypes.string.isRequired,
 };

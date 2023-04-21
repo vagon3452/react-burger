@@ -4,6 +4,12 @@ export type TTokens = {
   readonly refreshToken: string;
 };
 
+export enum ingredientType {
+  type_bun = "bun",
+  type_sauce = "sauce",
+  type_main = "main",
+}
+
 export type TIngredient = {
   readonly _id: string;
   readonly name: string;

@@ -1,12 +1,15 @@
 import styles from "./burger-constructor.module.css";
-import React from "react";
+import React, { FC } from "react";
 
-type TProps = {
+type TOrderDetailsProps = {
   image: string;
   number: number;
 };
 
-export const OrderDetails = ({ image, number }: TProps): JSX.Element => {
+export const OrderDetails: FC<TOrderDetailsProps> = ({
+  image,
+  number,
+}): JSX.Element => {
   return (
     <>
       <div className={styles.title}>

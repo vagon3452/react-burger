@@ -25,10 +25,8 @@ enum ENDPOINTS {
   refresh = "https://norma.nomoreparties.space/api/auth/token",
 }
 
-const checkResponse = <T>(res: Response) => {
-  return res.ok
-    ? (res.json() as Promise<T>)
-    : res.json().then((err) => Promise.reject(err));
+const checkResponse = <T>(res: Response): Promise<T> => {
+  return res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
 };
 
 const refreshToken = async (): Promise<TTokens> => {
@@ -44,7 +42,7 @@ const refreshToken = async (): Promise<TTokens> => {
   }).then(checkResponse<TTokens>);
 };
 
-const fetchWithRefresh = async <T>(url: ENDPOINTS, options?: RequestInit) => {
+const fetchWithRefresh = async <T>(url: ENDPOINTS, options: RequestInit) => {
   try {
     const res = await fetch(url, options);
     return await checkResponse<T>(res);

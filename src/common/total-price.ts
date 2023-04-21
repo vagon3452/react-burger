@@ -7,19 +7,7 @@ interface IIngredientsState {
     ingredients: Array<TContructorIngredient>;
   };
 }
-//= Pick<TContructorIngredient, "_id"> &
 
-// type TAcc<TDataKey extends string = "", TDataType = {}> = {
-//   [key in TDataKey]: TDataType;
-// } & {
-//   ingredients: string[],
-//   totalPrice: number
-// }
-type TAcc2 = {
-  _id: number;
-  ingredients: string[];
-  totalPrice: number;
-};
 type TAcc = {
   count: Map<string, number>;
   ingredients: string[];

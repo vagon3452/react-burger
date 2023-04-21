@@ -1,4 +1,3 @@
-import { setCookie, deleteCookie } from "../cookie";
 import { TToken, TUser, TBodyLogin } from "../types/user";
 import { IUser } from "../reducers/user";
 
@@ -19,8 +18,6 @@ export const TOKEN_COOKIE_NAME = "token";
 
 const handleAuthData = (data: any) => {
   if (data.accessToken) {
-    // const authToken = data.accessToken.split("Bearer ")[1]; пока не использую куки
-    // setCookie(TOKEN_COOKIE_NAME, authToken);
     localStorage.setItem(ACCESS_TOKEN_KEY, data.accessToken);
     localStorage.setItem(REFRESH_TOKEN_KEY, data.refreshToken);
   }
@@ -117,7 +114,6 @@ export const signOutAction = (form: TToken) => {
   return async (dispatch) => {
     await logoutRequest(form);
     dispatch(setUserAction(null));
-    // deleteCookie("token");
     localStorage.removeItem(ACCESS_TOKEN_KEY);
     localStorage.removeItem(REFRESH_TOKEN_KEY);
   };

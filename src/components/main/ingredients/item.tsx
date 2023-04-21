@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import { useSelector } from "react-redux";
 import { totalPriceSelector } from "../../../common/total-price";
 import { useDrag } from "react-dnd";
@@ -13,7 +13,7 @@ type TItemProps = {
   data: TIngredient;
 };
 
-export default function Item({ data }: TItemProps): JSX.Element {
+export const Item: FC<TItemProps> = ({ data }): JSX.Element => {
   const { image, name, price, _id } = data;
   const total = useSelector(totalPriceSelector);
 
@@ -45,4 +45,4 @@ export default function Item({ data }: TItemProps): JSX.Element {
       </div>
     </section>
   );
-}
+};

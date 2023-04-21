@@ -9,11 +9,11 @@ import {
   DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 
-interface Props {
+type TIngredientsProps = {
   data: TContructorIngredient;
   index: number;
   moveCard: (dragIndex: number, hoverIndex: number) => void;
-}
+};
 type TDragElement = {
   uuid: string;
   index: number;
@@ -22,7 +22,11 @@ type TDragCollected = {
   isDragging: boolean;
 };
 
-export const Ingredients = ({ data, index, moveCard }: Props): JSX.Element => {
+export const Ingredients: FC<TIngredientsProps> = ({
+  data,
+  index,
+  moveCard,
+}): JSX.Element => {
   const { name, price, image, uuid } = data;
 
   const ref = useRef<HTMLDivElement | null>(null);
