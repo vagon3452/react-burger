@@ -106,7 +106,7 @@ export const registerRequest = createRequest<TRegister, TUser>(
   ENDPOINTS.register,
   "POST"
 );
-export const getItemsRequest = createRequest<IGetItem>(
+export const getItemsRequest = createRequest<IGetItem, null>(
   ENDPOINTS.ingredients,
   "GET"
 );

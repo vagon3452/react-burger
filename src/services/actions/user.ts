@@ -54,7 +54,6 @@ export const signInAction = (form: TBodyLogin) => {
   return async (dispatch) => {
     try {
       const data = await loginRequest(form);
-      console.log(data);
       if (data.success) {
         const user = handleAuthData(data);
         dispatch(setUserAction(user));
