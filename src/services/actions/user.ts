@@ -1,5 +1,12 @@
 import { TToken, TUser, TBodyLogin } from "../types/user";
 import { IUser } from "../reducers/user";
+import {
+  SET_USER,
+  SET_AUTH_CHECKED,
+  ACCESS_TOKEN_KEY,
+  REFRESH_TOKEN_KEY,
+  TOKEN_COOKIE_NAME,
+} from "../constants";
 
 import {
   loginRequest,
@@ -8,13 +15,6 @@ import {
   logoutRequest,
   updateUserRequest,
 } from "../burger-api";
-
-export const SET_USER = "SET_USER";
-export const SET_AUTH_CHECKED = "SET_AUTH_CHECKED";
-
-export const ACCESS_TOKEN_KEY = "accessToken";
-export const REFRESH_TOKEN_KEY = "refreshToken";
-export const TOKEN_COOKIE_NAME = "token";
 
 const handleAuthData = (data: any) => {
   if (data.accessToken) {

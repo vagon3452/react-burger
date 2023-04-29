@@ -1,0 +1,20 @@
+export const GET_ITEMS_REQUEST: "GET_ITEMS_REQUEST" = "GET_ITEMS_REQUEST";
+export const GET_ITEMS_SUCCESS: "GET_ITEMS_SUCCESS" = "GET_ITEMS_SUCCESS";
+export const GET_ITEMS_FAILED: "GET_ITEMS_FAILED" = "GET_ITEMS_FAILED";
+
+export const POST_ITEMS_REQUEST: "POST_ITEMS_REQUEST" = "POST_ITEMS_REQUEST";
+export const POST_ITEMS_SUCCESS: "POST_ITEMS_SUCCESS" = "POST_ITEMS_SUCCESS";
+export const POST_ITEMS_FAILED: "POST_ITEMS_FAILED" = "POST_ITEMS_FAILED";
+export const CLEAR_ORDER: "CLEAR_ORDER" = "CLEAR_ORDER";
+
+export const ADD_INGREDIENTS: "ADD_INGREDIENTS" = "ADD_INGREDIENTS";
+export const ADD_BUN: "ADD_BUN" = "ADD_BUN";
+export const DELETE_ITEM: "DELETE_ITEM" = "DELETE_ITEM";
+export const REPLACE: "REPLACE" = "REPLACE";
+
+export const SET_USER: "SET_USER" = "SET_USER";
+export const SET_AUTH_CHECKED: "SET_AUTH_CHECKED" = "SET_AUTH_CHECKED";
+
+export const ACCESS_TOKEN_KEY: "accessToken" = "accessToken";
+export const REFRESH_TOKEN_KEY: "refreshToken" = "refreshToken";
+export const TOKEN_COOKIE_NAME: "token" = "token";

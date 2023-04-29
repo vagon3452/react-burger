@@ -3,7 +3,7 @@ import {
   ADD_BUN,
   DELETE_ITEM,
   REPLACE,
-} from "../actions/create-burger";
+} from "../constants/index";
 import { TContructorIngredient } from "../types/data";
 
 interface BurgerState {

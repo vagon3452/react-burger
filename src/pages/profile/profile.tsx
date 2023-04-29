@@ -1,5 +1,5 @@
 import React from "react";
-import { REFRESH_TOKEN_KEY } from "../../services/actions/user";
+import { REFRESH_TOKEN_KEY } from "../../services/constants/index";
 import { signOutAction } from "../../services/actions/user";
 import styles from "./profile.module.css";
 import { useDispatch } from "react-redux";

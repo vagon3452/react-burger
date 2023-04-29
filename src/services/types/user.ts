@@ -8,6 +8,7 @@ export type TUser = {
 
 export type TRawUser = Omit<TUser, "password">;
 export type TBodyLogin = Omit<TUser, "name">;
+export type TEmail = Pick<TUser, "email">;
 
 export type TRegister = {
   readonly user: TRawUser;
@@ -19,9 +20,7 @@ export type TBodyReset = {
   readonly password: string;
 } & TToken;
 
-export type TEmail = {
-  readonly email: string;
-};
+
 export interface IGetUser {
   readonly success: boolean;
   readonly user: TRawUser;
@@ -31,4 +30,3 @@ export interface ICheck {
   readonly success: boolean;
   readonly message: string;
 }
-

@@ -1,4 +1,4 @@
-import { TIngredient, TTokens } from "./data";
+import { TIngredient } from "./data";
 
 interface IOwner {
   readonly createdAt: string;

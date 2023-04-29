@@ -1,6 +1,6 @@
 import React from "react";
 
-import { SET_USER, SET_AUTH_CHECKED } from "../actions/user";
+import { SET_USER, SET_AUTH_CHECKED } from "../constants/index";
 
 
 const initialState = {

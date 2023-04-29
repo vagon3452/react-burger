@@ -1,5 +1,5 @@
 import React, { useState, ChangeEvent } from "react";
-import {TUser } from "../../services/types/user";
+import { TUser } from "../../services/types/user";
 import { updateUserAction } from "../../services/actions/user";
 import styles from "./profile.module.css";
 import { useSelector } from "react-redux";
@@ -8,11 +8,12 @@ import {
   Input,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 
-type TSelectorUser = Omit<TUser, "password">
+type TSelectorUser = Omit<TUser, "password">;
 
-export const IndexPage = ():JSX.Element => {
+export const IndexPage = (): JSX.Element => {
   //@ts-ignore
-  const { user }:TSelectorUser = useSelector((store) => ({ user: store.user.user }));
+  const { user }: TSelectorUser = useSelector((store) => ({user: store.user.user,
+  }));
 
   const [form, setValue] = useState<TUser>({ ...user, password: "" });
 
@@ -21,7 +22,8 @@ export const IndexPage = ():JSX.Element => {
   };
 
   const isUser: boolean =
-    JSON.stringify({ ...user, password: "" }) === JSON.stringify(form);
+    Object.entries({ ...user, password: "" }).toString() ===
+    Object.entries(form).toString();
 
   const saveNewUser = (e: React.SyntheticEvent): void => {
     e.preventDefault();

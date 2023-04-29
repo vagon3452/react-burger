@@ -7,7 +7,7 @@ import { postItems } from "../../../services/actions/checkout";
 import Modal from "../../modal/modal";
 import { totalPriceSelector } from "../../../common/total-price";
 import image from "../../../images/done.png";
-import { CLEAR_ORDER } from "../../../services/actions/checkout";
+import { CLEAR_ORDER } from "../../../services/constants/index";
 import { ingredientType } from "../../../services/types/data";
 import {
   TContructorIngredient,
@@ -17,7 +17,7 @@ import {
   ADD_BUN,
   ADD_INGREDIENTS,
   REPLACE,
-} from "../../../services/actions/create-burger";
+} from "../../../services/constants/index";
 import { Bun } from "./buns";
 import { Ingredients } from "./ingredients";
 

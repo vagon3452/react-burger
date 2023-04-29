@@ -2,7 +2,7 @@ import React, { useRef, FC } from "react";
 import { useDrag, useDrop } from "react-dnd";
 import { useDispatch } from "react-redux";
 import styles from "./burger-constructor.module.css";
-import { DELETE_ITEM } from "../../../services/actions/create-burger";
+import { DELETE_ITEM } from "../../../services/constants/index";
 import { TContructorIngredient } from "../../../services/types/data";
 import {
   ConstructorElement,

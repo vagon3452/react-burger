@@ -1,4 +1,4 @@
-import { REFRESH_TOKEN_KEY, ACCESS_TOKEN_KEY } from "./actions/user";
+import { REFRESH_TOKEN_KEY, ACCESS_TOKEN_KEY } from "./constants/index";
 import {
   TRawUser,
   TRegister,
@@ -114,7 +114,10 @@ export const postItemsRequest = createRequest<IOrderRequest, IBodyOrder>(
   ENDPOINTS.orders,
   "POST"
 );
-export const getUserRequest = createRequest<IGetUser>(ENDPOINTS.user, "GET");
+export const getUserRequest = createRequest<IGetUser, null>(
+  ENDPOINTS.user,
+  "GET"
+);
 export const updateUserRequest = createRequest<IGetUser, TUser>(
   ENDPOINTS.user,
   "PATCH"

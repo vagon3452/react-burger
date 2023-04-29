@@ -2,39 +2,31 @@ import {
   GET_ITEMS_REQUEST,
   GET_ITEMS_FAILED,
   GET_ITEMS_SUCCESS,
-} from "../actions/cart";
+} from "../constants/index";
+import { TIngredient } from "../types/data";
+import { TIngredientsActions } from "../actions/cart";
 
-interface IItem {
-  _id: string;
-  name: string;
-  type: string;
-  proteins: number;
-  fat: number;
-  carbohydrates: number;
-  calories: number;
-  price: number;
-  image: string;
-  image_large: string;
-  image_mobile: string;
-  __v: number;
-}
-interface IState {
-  items: IItem[];
+interface IInitialState {
+  items: [];
   isLoading: boolean;
   hasError: boolean;
-  errorMessage?: string;
+};
+
+interface IState {
+  items: ReadonlyArray<TIngredient>;
+  isLoading: boolean;
+  hasError: boolean;
 }
-interface IAction {
-  type: string;
-  items?: IItem[];
-  message?: string;
-}
-const initialState: IState = {
+
+const initialState: IInitialState = {
   items: [],
   isLoading: false,
   hasError: false,
 };
-export const cartReducer = (state: IState = initialState, action: IAction):IState => {
+export const cartReducer = (
+  state: IInitialState = initialState,
+  action: TIngredientsActions
+): IState => {
   switch (action.type) {
     case GET_ITEMS_REQUEST: {
       return {
@@ -46,7 +38,7 @@ export const cartReducer = (state: IState = initialState, action: IAction):IStat
       return {
         ...state,
         hasError: false,
-        items: action.items || [],
+        items: action.items,
         isLoading: false,
       };
     }
@@ -55,7 +47,6 @@ export const cartReducer = (state: IState = initialState, action: IAction):IStat
         ...state,
         hasError: true,
         isLoading: false,
-        errorMessage: action.message,
       };
     }
     default: {
