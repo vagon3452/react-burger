@@ -119,9 +119,8 @@ export const signOutAction = (form: TToken) => {
   };
 };
 
-export const checkUserAuth = () => {
-  //@ts-ignore
-  return (dispatch) => {
+export const checkUserAuth = ():AppThunkAction => {
+  return (dispatch: AppDispatch) => {
     if (localStorage.getItem(ACCESS_TOKEN_KEY)) {
       dispatch(getUserAction());
     } else {

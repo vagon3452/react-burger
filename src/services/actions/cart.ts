@@ -18,37 +18,38 @@ export interface IGetItemsSuccessAction {
   readonly type: typeof GET_ITEMS_SUCCESS;
   readonly items: ReadonlyArray<TIngredient>;
 }
+export const getItemsAction = (): IGetItemsAction => ({
+  type: GET_ITEMS_REQUEST,
+});
 
+export const getItemsFailedAction = (): IGetItemsFailedAction => ({
+  type: GET_ITEMS_FAILED,
+});
+
+export const getItemsSuccessAction = (
+  items: ReadonlyArray<TIngredient>
+): IGetItemsSuccessAction => ({
+  type: GET_ITEMS_SUCCESS,
+  items,
+});
 export type TIngredientsActions =
   | IGetItemsAction
   | IGetItemsFailedAction
   | IGetItemsSuccessAction;
 
-
 export function getItems(): AppThunkAction {
-
   return function (dispatch: AppDispatch) {
-    dispatch({
-      type: GET_ITEMS_REQUEST,
-    });
+    dispatch(getItemsAction());
     getItemsRequest(null)
       .then((res) => {
         if (res && res.success) {
-          dispatch({
-            type: GET_ITEMS_SUCCESS,
-            items: res.data,
-          });
+          dispatch(getItemsSuccessAction(res.data));
         } else {
-          dispatch({
-            type: GET_ITEMS_FAILED,
-          });
+          dispatch(getItemsFailedAction());
         }
       })
       .catch((e) => {
-        dispatch({
-          type: GET_ITEMS_FAILED,
-          message: e.message,
-        });
+        dispatch(getItemsFailedAction());
       });
   };
 }

@@ -10,7 +10,7 @@ interface ICartInitialState {
   items: ReadonlyArray<TIngredient>;
   isLoading: boolean;
   hasError: boolean;
-};
+}
 
 interface ICartState {
   items: ReadonlyArray<TIngredient>;
