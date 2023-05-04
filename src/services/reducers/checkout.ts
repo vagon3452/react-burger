@@ -5,17 +5,31 @@ import {
   CLEAR_ORDER,
 } from "../constants/index";
 
-const initialState = {
+import { TRequestOrderActions } from "../actions/checkout";
+import { IOrder } from "../types/order";
+
+interface IInitialState {
+  isLoading: boolean;
+  order: null;
+  hasError: boolean;
+}
+
+const initialState: IInitialState = {
   isLoading: false,
   order: null,
   hasError: false,
 };
-type TState = typeof initialState;
+
+interface IState {
+  isLoading: boolean;
+  order: IOrder | null;
+  hasError: boolean;
+}
 
 export const checkoutReducer = (
-  state: TState = initialState,
-  action: { type: any; post: any; message: any }
-) => {
+  state: IInitialState = initialState,
+  action: TRequestOrderActions
+): IState => {
   switch (action.type) {
     case POST_ITEMS_REQUEST: {
       return {
@@ -27,7 +41,7 @@ export const checkoutReducer = (
       return {
         ...state,
         hasError: false,
-        order: action.post,
+        order: action.payload,
         isLoading: false,
       };
     }
@@ -36,7 +50,6 @@ export const checkoutReducer = (
         ...state,
         hasError: true,
         isLoading: false,
-        message: action.message,
       };
     }
     case CLEAR_ORDER: {

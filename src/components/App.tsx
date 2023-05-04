@@ -59,7 +59,8 @@ function App(): JSX.Element {
           path="/login"
           element={<OnlyUnAuth component={<LoginPage />} />}
         />
-        <Route path="/feed" element={<OnlyAuth component={<FeedPage />} />} />
+        <Route path="/feed" element={<FeedPage />} />
+        <Route path="/feed/:id" element={<FeedPage />} />
         <Route
           path="/register"
           element={<OnlyUnAuth component={<RegisterPage />} />}
@@ -81,7 +82,9 @@ function App(): JSX.Element {
           <Route
             path="orders"
             element={<OnlyAuth component={<OrdersPage />} />}
-          />
+          >
+            <Route path=":id" element={<OnlyAuth component={<FeedPage />} />} />
+          </Route>
         </Route>
       </Routes>
 

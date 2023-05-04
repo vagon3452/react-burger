@@ -9,6 +9,7 @@ import { totalPriceSelector } from "../../../common/total-price";
 import image from "../../../images/done.png";
 import { CLEAR_ORDER } from "../../../services/constants/index";
 import { ingredientType } from "../../../services/types/data";
+import { Loader } from "./loading/loader";
 import {
   TContructorIngredient,
   TIngredient,
@@ -130,7 +131,11 @@ export const BurgerConstructor = (): JSX.Element => {
           Оформить заказ
         </Button>
       </div>
-      {openModal && isLoading && "Загрузка..."}
+      {openModal && isLoading && (
+        <Modal onClose={closeModal}>
+          <Loader />
+        </Modal>
+      )}
       {openModal && hasError && "что-то пошло не так"}
       {openModal && !isLoading && !hasError && order.number && (
         <Modal onClose={closeModal}>

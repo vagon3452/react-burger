@@ -34,7 +34,7 @@ export const Ingredients: FC<TIngredientsProps> = ({
   const dispatch = useDispatch();
 
   const deleteItem = () => {
-    dispatch({ type: DELETE_ITEM, uuid });
+    dispatch({ type: DELETE_ITEM, payload: uuid });
   };
   const [{ isDragging }, drag] = useDrag<TDragElement, unknown, TDragCollected>(
     {

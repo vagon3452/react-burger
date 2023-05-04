@@ -5,18 +5,25 @@ import {
   REPLACE,
 } from "../constants/index";
 import { TContructorIngredient } from "../types/data";
+import { TConstructorActions } from "../actions/create-burger";
 
-interface BurgerState {
-  bun: null | TContructorIngredient;
+interface IInitialStateConstructor {
+  bun: null;
   ingredients: Array<TContructorIngredient>;
 }
-
-const initialState: BurgerState = {
+interface IReturnConstructorState {
+  bun: TContructorIngredient | null;
+  ingredients: Array<TContructorIngredient> | [];
+}
+const initialState: IInitialStateConstructor = {
   bun: null,
   ingredients: [],
 };
 
-export const burgerReducer = (state = initialState, action: any) => {
+export const burgerReducer = (
+  state: IInitialStateConstructor = initialState,
+  action: TConstructorActions
+): IReturnConstructorState => {
   switch (action.type) {
     case REPLACE: {
       return {
@@ -41,7 +48,7 @@ export const burgerReducer = (state = initialState, action: any) => {
       return {
         ...state,
         ingredients: [...state.ingredients].filter(
-          (item) => item.uuid !== action.uuid
+          (item) => item.uuid !== action.payload
         ),
       };
     }

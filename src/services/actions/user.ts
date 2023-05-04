@@ -1,5 +1,6 @@
 import { TToken, TUser, TBodyLogin } from "../types/user";
-import { IUser } from "../reducers/user";
+import { TRawUser } from "../types/user";
+import { AppThunkAction, AppDispatch } from "../types";
 import {
   SET_USER,
   SET_AUTH_CHECKED,
@@ -23,7 +24,7 @@ const handleAuthData = (data: any) => {
   }
   return data.user;
 };
-const setUserAction = (user: IUser | null) => {
+const setUserAction = (user: TRawUser | null) => {
   return {
     type: SET_USER,
     payload: user,

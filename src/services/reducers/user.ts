@@ -1,32 +1,26 @@
 import React from "react";
-
+import { TRawUser } from "../types/user";
 import { SET_USER, SET_AUTH_CHECKED } from "../constants/index";
-
 
 const initialState = {
   user: null,
   isAuthChecked: false,
 };
 
-export interface IUser {
-  name: string;
-  email: string;
-}
-
 export interface IUserAction {
-  type: typeof SET_USER;
-  payload: IUser;
+  readonly type: typeof SET_USER;
+  readonly payload: TRawUser;
 }
 
 export interface IAuthCheckedAction {
-  type: typeof SET_AUTH_CHECKED;
-  payload: boolean;
+  readonly type: typeof SET_AUTH_CHECKED;
+  readonly payload: boolean;
 }
 
 export type UserActionTypes = IUserAction | IAuthCheckedAction;
 
 export interface IUserState {
-  user: IUser | null;
+  user: TRawUser | null;
   isAuthChecked: boolean;
 }
 

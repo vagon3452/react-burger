@@ -1,6 +1,5 @@
 import { REFRESH_TOKEN_KEY, ACCESS_TOKEN_KEY } from "./constants/index";
 import {
-  TRawUser,
   TRegister,
   IGetUser,
   ICheck,
@@ -10,8 +9,8 @@ import {
   TUser,
   TBodyLogin,
 } from "./types/user";
-import { IGetItem, IOrderRequest, IBodyOrder, IOrder } from "./types/order";
-import { TIngredient, TTokens } from "./types/data";
+import { IGetItem, IOrderRequest, IBodyOrder } from "./types/order";
+import { TTokens } from "./types/data";
 
 enum ENDPOINTS {
   login = "https://norma.nomoreparties.space/api/auth/login",
@@ -68,17 +67,24 @@ const fetchWithRefresh = async <T>(url: ENDPOINTS, options: RequestInit) => {
     }
   }
 };
-interface TResponse {
-  success: boolean;
-  message?: string;
-  headers?: Headers;
-  user?: TRawUser;
-  accessToken?: string;
-  refreshToken?: string;
-  data?: TIngredient[];
-  name?: string;
-  order?: IOrder;
-}
+// interface TResponse {
+//   success: boolean;
+//   message?: string;
+//   headers?: Headers;
+//   user?: TRawUser;
+//   accessToken?: string;
+//   refreshToken?: string;
+//   data?: TIngredient[];
+//   name?: string;
+//   order?: IOrder;
+// }
+type TResponse =
+  | TTokens
+  | TRegister
+  | IGetItem
+  | IOrderRequest
+  | IGetUser
+  | ICheck;
 
 const createRequest =
   <T extends TResponse, D = null>(
