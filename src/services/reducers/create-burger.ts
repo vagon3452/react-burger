@@ -11,9 +11,9 @@ interface IInitialStateConstructor {
   bun: null;
   ingredients: Array<TContructorIngredient>;
 }
-interface IReturnConstructorState {
-  bun: TContructorIngredient | null;
-  ingredients: Array<TContructorIngredient> | [];
+interface IConstructorState {
+  bun: TContructorIngredient| null;
+  ingredients: Array<TContructorIngredient> ;
 }
 const initialState: IInitialStateConstructor = {
   bun: null,
@@ -21,9 +21,9 @@ const initialState: IInitialStateConstructor = {
 };
 
 export const burgerReducer = (
-  state: IInitialStateConstructor = initialState,
+  state: IConstructorState = initialState,
   action: TConstructorActions
-): IReturnConstructorState => {
+): IConstructorState => {
   switch (action.type) {
     case REPLACE: {
       return {

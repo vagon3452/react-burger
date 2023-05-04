@@ -6,27 +6,27 @@ import {
 import { TIngredient } from "../types/data";
 import { TIngredientsActions } from "../actions/cart";
 
-interface IInitialState {
-  items: [];
+interface ICartInitialState {
+  items: ReadonlyArray<TIngredient>;
   isLoading: boolean;
   hasError: boolean;
 };
 
-interface IState {
+interface ICartState {
   items: ReadonlyArray<TIngredient>;
   isLoading: boolean;
   hasError: boolean;
 }
 
-const initialState: IInitialState = {
+const initialState: ICartInitialState = {
   items: [],
   isLoading: false,
   hasError: false,
 };
 export const cartReducer = (
-  state: IInitialState = initialState,
+  state = initialState,
   action: TIngredientsActions
-): IState => {
+): ICartState => {
   switch (action.type) {
     case GET_ITEMS_REQUEST: {
       return {

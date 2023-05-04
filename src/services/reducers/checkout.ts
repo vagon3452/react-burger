@@ -8,28 +8,22 @@ import {
 import { TRequestOrderActions } from "../actions/checkout";
 import { IOrder } from "../types/order";
 
-interface IInitialState {
+interface IOrderState {
   isLoading: boolean;
-  order: null;
+  order: Readonly<IOrder> | null;
   hasError: boolean;
 }
 
-const initialState: IInitialState = {
+const initialState: IOrderState = {
   isLoading: false,
   order: null,
   hasError: false,
 };
 
-interface IState {
-  isLoading: boolean;
-  order: IOrder | null;
-  hasError: boolean;
-}
-
 export const checkoutReducer = (
-  state: IInitialState = initialState,
+  state = initialState,
   action: TRequestOrderActions
-): IState => {
+): IOrderState => {
   switch (action.type) {
     case POST_ITEMS_REQUEST: {
       return {
