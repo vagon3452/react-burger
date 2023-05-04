@@ -1,0 +1,44 @@
+
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    position: absolute;
+    width: 480px;
+    height: 430px;
+    left: calc(50% - 480px / 2);
+    top: 288px;
+  }
+  
+  .edit {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 24px;
+    width: 480px;
+    height: 286px;
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+  }
+  
+  .actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0px;
+    width: 480px;
+    height: 64px;
+    margin-top: 80px;
+    flex: none;
+    order: 2;
+    flex-grow: 0;
+  }
+  
+  .input {
+    margin-bottom: 24px;
+  }
+  
+  

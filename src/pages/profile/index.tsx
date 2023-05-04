@@ -1,0 +1,99 @@
+import React, { useState, ChangeEvent } from "react";
+import { TUser } from "../../services/types/user";
+import { updateUserAction } from "../../services/actions/user";
+import styles from "./profile.module.css";
+import { useSelector } from "react-redux";
+import {
+  Button,
+  Input,
+} from "@ya.praktikum/react-developer-burger-ui-components";
+
+type TSelectorUser = Omit<TUser, "password">;
+
+export const IndexPage = (): JSX.Element => {
+  //@ts-ignore
+  const { user }: TSelectorUser = useSelector((store) => ({user: store.user.user,
+  }));
+
+  const [form, setValue] = useState<TUser>({ ...user, password: "" });
+
+  const cancellation = (): void => {
+    setValue({ ...user, password: "" });
+  };
+
+  const isUser: boolean =
+    Object.entries({ ...user, password: "" }).toString() ===
+    Object.entries(form).toString();
+
+  const saveNewUser = (e: React.SyntheticEvent): void => {
+    e.preventDefault();
+    updateUserAction(form);
+  };
+
+  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setValue({ ...form, [e.target.name]: e.target.value });
+  };
+  return (
+    <div className={styles.content}>
+      <form
+        onSubmit={saveNewUser}
+        className={styles.form}
+        onKeyDown={(e) => {
+          if (e.key === "Enter") {
+            saveNewUser(e);
+          }
+        }}
+      >
+        <Input
+          type={"text"}
+          placeholder={"Имя"}
+          onChange={onChange}
+          icon="EditIcon"
+          value={form.name}
+          name={"name"}
+          error={false}
+          errorText={"Ошибка"}
+          size={"default"}
+          extraClass={styles.input}
+        />
+        <Input
+          type={"text"}
+          placeholder={"Логин"}
+          onChange={onChange}
+          icon="EditIcon"
+          value={form.email}
+          name={"email"}
+          error={false}
+          errorText={"Ошибка"}
+          size={"default"}
+          extraClass={styles.input}
+        />
+        <Input
+          type={"text"}
+          placeholder={"Пароль"}
+          onChange={onChange}
+          icon="EditIcon"
+          value={form.password}
+          name={"password"}
+          error={false}
+          errorText={"Ошибка"}
+          size={"default"}
+          extraClass={styles.input}
+        />
+        <div className={`${styles.button} ${isUser && styles.hiden}`}>
+          <Button
+            htmlType="button"
+            type="secondary"
+            size="medium"
+            onClick={cancellation}
+          >
+            Отмена
+          </Button>
+          <Button htmlType="submit" type="primary" size="medium">
+            Сохранить
+          </Button>
+        </div>
+      </form>
+    </div>
+  );
+};
