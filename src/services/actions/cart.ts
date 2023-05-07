@@ -5,7 +5,7 @@ import {
   GET_ITEMS_FAILED,
 } from "../constants";
 import { TIngredient } from "../types/data";
-import { AppDispatch, AppThunkAction } from "../types";
+import { AppThunkAction } from "../store";
 
 export interface IGetItemsAction {
   readonly type: typeof GET_ITEMS_REQUEST;
@@ -38,7 +38,7 @@ export type TIngredientsActions =
   | IGetItemsSuccessAction;
 
 export function getItems(): AppThunkAction {
-  return function (dispatch: AppDispatch) {
+  return function (dispatch) {
     dispatch(getItemsAction());
     getItemsRequest(null)
       .then((res) => {

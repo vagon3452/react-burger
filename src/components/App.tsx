@@ -16,11 +16,11 @@ import {
   OrdersPage,
   IndexPage,
 } from "../pages";
-import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { IngredientsDetails } from "./main/ingredients/ingredient-details";
 import * as H from "history";
 import Modal from "./modal/modal";
+import { useDispatch, useSelector } from "../services/store";
 
 function App(): JSX.Element {
   const { isLoading, hasError } = useSelector((state: any) => ({
@@ -35,8 +35,8 @@ function App(): JSX.Element {
     navigate(-1);
   };
   useEffect(() => {
-    dispatch<any>(getItems());
-    dispatch<any>(checkUserAuth());
+    dispatch(getItems());
+    dispatch(checkUserAuth());
   }, [dispatch]);
   const state = location.state as { background?: H.Location };
   const modal = state && state.background;

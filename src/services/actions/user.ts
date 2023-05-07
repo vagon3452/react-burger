@@ -1,6 +1,6 @@
 import { TToken, TUser, TBodyLogin } from "../types/user";
 import { TRawUser } from "../types/user";
-import { AppThunkAction, AppDispatch } from "../types";
+import { AppThunkAction,AppDispatch } from "../store";
 import {
   SET_USER,
   SET_AUTH_CHECKED,
