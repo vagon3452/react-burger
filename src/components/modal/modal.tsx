@@ -12,7 +12,9 @@ interface ModalProps {
 
 const Modal: FC<ModalProps> = ({ children, onClose }): React.ReactPortal => {
   const close = (e: React.KeyboardEvent) => {
-    (e.code === "Escape" || e.type === "click") && onClose();
+    if (e.code === "Escape") {
+      onClose();
+    }
   };
 
   useEffect(() => {

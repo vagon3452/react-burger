@@ -104,7 +104,7 @@ const createRequest =
     return await fetchWithRefresh<T>(url, requestOptions);
   };
 
-export const loginRequest = createRequest<TTokens, TBodyLogin>(
+export const loginRequest = createRequest<TRegister, TBodyLogin>(
   ENDPOINTS.login,
   "POST"
 );

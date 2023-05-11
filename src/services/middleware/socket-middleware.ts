@@ -1,31 +1,20 @@
 import { Middleware } from "redux";
 import { TRootState } from "../reducers";
-import {
-  connect,
-  disconnect,
-  wsConnecting,
-  wsOpen,
-  wsClose,
-  wsMessage,
-  wsError,
-} from "../actions/web-socked";
-import { AppDispatch } from "../store";
-
 
 type TwsActionTypes = {
-  wsConnect: "LIVE_TABLE_CONNECT";
-  wsDisconnect: "LIVE_TABLE_WS_DISCONNECT";
-  wsSendMessage?: "LIVE_TABLE_WS_MESSAGE";
-  wsConnecting: "LIVE_TABLE_WS_CONNECTING";
-  onOpen: "LIVE_TABLE_WS_OPEN";
-  onClose: "LIVE_TABLE_WS_CLOSE";
-  onError: "LIVE_TABLE_WS_ERROR";
-  onMessage: "LIVE_TABLE_WS_MESSAGE";
+  wsConnect: string;
+  wsDisconnect: string;
+  wsSendMessage?: string;
+  wsConnecting: string;
+  onOpen: string;
+  onClose: string;
+  onError: string;
+  onMessage: string;
 };
 
 export const socketMiddleware = (
   wsActions: TwsActionTypes
-): Middleware<{}, TRootState, AppDispatch> => {
+): Middleware<{}, TRootState> => {
   return (store) => {
     let socket: WebSocket | null = null;
     let isConnected = false;
@@ -45,17 +34,17 @@ export const socketMiddleware = (
         wsConnecting,
       } = wsActions;
 
-      if (action.type === wsConnect) {
+      if (action.type === wsConnect && !socket) {
         console.log("connect");
         url = action.payload;
         socket = new WebSocket(url);
         isConnected = true;
-        dispatch(wsConnecting());
+        dispatch({ type: wsConnecting });
       }
 
       if (socket) {
         socket.onopen = () => {
-          dispatch(onOpen());
+          dispatch({ type: onOpen });
         };
 
         socket.onerror = (err) => {
@@ -65,23 +54,24 @@ export const socketMiddleware = (
         socket.onmessage = (event) => {
           const { data } = event;
           const parsedData = JSON.parse(data);
-          dispatch(onMessage(parsedData));
+          dispatch({ type: onMessage, payload: parsedData });
         };
 
         socket.onclose = (event) => {
           if (event.code !== 1000) {
             console.log("error");
-            dispatch(onError(event.code.toString()));
+            dispatch({ type: onError, payload: event.code.toString() });
           }
           console.log("close");
-          dispatch(onClose());
+          dispatch({ type: onClose });
 
           if (isConnected) {
-            dispatch(wsConnecting());
+            dispatch({ type: wsConnecting });
             reconnectTimer = window.setTimeout(() => {
-              dispatch(wsConnect(url));
+              dispatch({ type: wsConnect, payload: url });
             }, 3000);
           }
+          socket = null
         };
 
         if (wsSendMessage && action.type === wsSendMessage) {
@@ -95,11 +85,11 @@ export const socketMiddleware = (
           isConnected = false;
           reconnectTimer = 0;
           socket.close();
-          dispatch(onClose());
+          dispatch({ type: onClose });
         }
       }
 
-      next(action);
+     return next(action);
     };
   };
 };

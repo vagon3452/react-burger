@@ -1,12 +1,12 @@
 import {
   TLiveTableActions,
   IWebSocketData,
-  LIVE_TABLE_WS_CONNECTING,
-  LIVE_TABLE_WS_MESSAGE,
-  LIVE_TABLE_WS_ERROR,
-  LIVE_TABLE_WS_OPEN,
-  LIVE_TABLE_WS_CLOSE,
-} from "../actions/web-socked";
+  FEED_TABLE_WS_CONNECTING,
+  FEED_TABLE_WS_MESSAGE,
+  FEED_TABLE_WS_ERROR,
+  FEED_TABLE_WS_OPEN,
+  FEED_TABLE_WS_CLOSE,
+} from "../actions/feed";
 export enum WebsocketStatus {
   CONNECTING = "CONNECTING...",
   ONLINE = "ONLINE",
@@ -29,28 +29,28 @@ export const feedReducer = (
   action: TLiveTableActions
 ) => {
   switch (action.type) {
-    case LIVE_TABLE_WS_CONNECTING:
+    case FEED_TABLE_WS_CONNECTING:
       return {
         ...state,
         status: WebsocketStatus.CONNECTING,
       };
-    case LIVE_TABLE_WS_OPEN:
+    case FEED_TABLE_WS_OPEN:
       return {
         ...state,
         status: WebsocketStatus.ONLINE,
         connectionError: "",
       };
-    case LIVE_TABLE_WS_CLOSE:
+    case FEED_TABLE_WS_CLOSE:
       return {
         ...state,
         status: WebsocketStatus.OFFLINE,
       };
-    case LIVE_TABLE_WS_ERROR:
+    case FEED_TABLE_WS_ERROR:
       return {
         ...state,
         connectionError: action.payload,
       };
-    case LIVE_TABLE_WS_MESSAGE:
+    case FEED_TABLE_WS_MESSAGE:
       return {
         ...state,
         table: action.payload,

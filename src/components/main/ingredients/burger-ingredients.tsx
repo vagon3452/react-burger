@@ -1,26 +1,16 @@
 import React, { useMemo, useRef, useState } from "react";
 import styles from "./burger-ingredients.module.css";
-import {Item} from "./item";
-import { useSelector } from "react-redux";
+import { Item } from "./item";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
-import { TIngredient } from "../../../services/types/data";
 import { ingredientType } from "../../../services/types/data";
-
-type TSelector = {
-  items: TIngredient[];
-  isLoading: boolean;
-  hasError: boolean;
-};
+import { useSelector } from "../../../services/store";
 
 export const BurgerIngredients = (): JSX.Element => {
-  const { items, isLoading, hasError }: TSelector = useSelector((state) => ({
-    //@ts-ignore
+  const { items, isLoading, hasError } = useSelector((state) => ({
     items: state.cart.items,
-    //@ts-ignore
     isLoading: state.cart.isLoading,
-    //@ts-ignore
     hasError: state.cart.hasError,
   }));
   const location = useLocation();

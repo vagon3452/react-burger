@@ -21,9 +21,10 @@ import { IngredientsDetails } from "./main/ingredients/ingredient-details";
 import * as H from "history";
 import Modal from "./modal/modal";
 import { useDispatch, useSelector } from "../services/store";
+import { CardList } from "../pages/feed/feed";
 
 function App(): JSX.Element {
-  const { isLoading, hasError } = useSelector((state: any) => ({
+  const { isLoading, hasError } = useSelector((state) => ({
     isLoading: state.cart.isLoading,
     hasError: state.cart.hasError,
   }));
@@ -40,6 +41,7 @@ function App(): JSX.Element {
   }, [dispatch]);
   const state = location.state as { background?: H.Location };
   const modal = state && state.background;
+
   return isLoading ? (
     <>"Загрузка..."</>
   ) : hasError ? (
@@ -60,7 +62,7 @@ function App(): JSX.Element {
           element={<OnlyUnAuth component={<LoginPage />} />}
         />
         <Route path="/feed" element={<FeedPage />} />
-        <Route path="/feed/:id" element={<FeedPage />} />
+        {/* <Route path="/feed/:id" element={<CardList order={undefined} />} /> */}
         <Route
           path="/register"
           element={<OnlyUnAuth component={<RegisterPage />} />}

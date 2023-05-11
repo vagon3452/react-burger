@@ -1,7 +1,7 @@
 import React from "react";
 import { TRawUser } from "../types/user";
 import { SET_USER, SET_AUTH_CHECKED } from "../constants/index";
-
+import { ISetUserAction } from "../actions/user";
 const initialState = {
   user: null,
   isAuthChecked: false,
@@ -17,7 +17,7 @@ export interface IAuthCheckedAction {
   readonly payload: boolean;
 }
 
-export type UserActionTypes = IUserAction | IAuthCheckedAction;
+export type UserActionTypes = IUserAction | IAuthCheckedAction | ISetUserAction;
 
 export interface IUserState {
   user: TRawUser | null;

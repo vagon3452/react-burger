@@ -6,6 +6,7 @@ import {
   POST_ITEMS_FAILED,
   CLEAR_ORDER,
 } from "../constants";
+import { AppThunkAction } from "../store";
 
 interface IPostItemsAction {
   readonly type: typeof POST_ITEMS_REQUEST;
@@ -22,38 +23,40 @@ interface IPostItemsSuccessAction {
   readonly type: typeof POST_ITEMS_SUCCESS;
   readonly payload: Readonly<IOrder>;
 }
+const postItemsRequestAction = (): IPostItemsAction => ({
+  type: POST_ITEMS_REQUEST,
+});
 
+const postItemsSuccessAction = (
+  order: Readonly<IOrder>
+): IPostItemsSuccessAction => ({
+  type: POST_ITEMS_SUCCESS,
+  payload: order,
+});
+
+const postItemsFailedAction = (): IPostItemsFailedAction => ({
+  type: POST_ITEMS_FAILED,
+});
 export type TRequestOrderActions =
   | IPostItemsAction
   | IPostItemsFailedAction
   | IPostItemsSuccessAction
   | IClearOrderAction;
-export function postItems(ingridientsID: IBodyOrder): void {
-  //@ts-ignore
+
+export function postItems(ingridientsID: IBodyOrder): AppThunkAction {
   return function (dispatch) {
-    dispatch({
-      type: POST_ITEMS_REQUEST,
-    });
+    dispatch(postItemsRequestAction());
 
     postItemsRequest(ingridientsID)
       .then((res) => {
         if (res && res.success) {
-          dispatch({
-            type: POST_ITEMS_SUCCESS,
-
-            payload: res.order,
-          });
+          dispatch(postItemsSuccessAction(res.order));
         } else {
-          dispatch({
-            type: POST_ITEMS_FAILED,
-          });
+          dispatch(postItemsFailedAction());
         }
       })
       .catch((e) => {
-        dispatch({
-          type: POST_ITEMS_FAILED,
-          message: e.message,
-        });
+        dispatch(postItemsFailedAction());
       });
   };
 }

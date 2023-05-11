@@ -2,23 +2,20 @@ import React, { useState, ChangeEvent } from "react";
 import { TUser } from "../../services/types/user";
 import { updateUserAction } from "../../services/actions/user";
 import styles from "./profile.module.css";
-import { useSelector } from "react-redux";
+
 import {
   Button,
   Input,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-
-type TSelectorUser = Omit<TUser, "password">;
+import { useSelector } from "../../services/store";
 
 export const IndexPage = (): JSX.Element => {
-  //@ts-ignore
-  const { user }: TSelectorUser = useSelector((store) => ({user: store.user.user,
-  }));
+  const { user } = useSelector((store) => ({ user: store.user.user }));
 
-  const [form, setValue] = useState<TUser>({ ...user, password: "" });
+  const [form, setValue] = useState<TUser>({ ...user!, password: "" });
 
   const cancellation = (): void => {
-    setValue({ ...user, password: "" });
+    setValue({ ...user!, password: "" });
   };
 
   const isUser: boolean =

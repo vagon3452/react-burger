@@ -15,27 +15,43 @@ import {
 import { TApplicationActions } from "./types";
 import { socketMiddleware } from "./middleware/socket-middleware";
 import {
-  connect as LiveTableWsConnect,
-  disconnect as LiveTableWsDisconnect,
-  wsConnecting as LiveTableWsConnecting,
-  wsOpen as LiveTableWsOpen,
-  wsClose as LiveTableWsClose,
-  wsMessage as LiveTableWsNessage,
-  wsError as LiveTableWsError,
-} from "./actions/web-socked";
+  FEED_TABLE_CONNECT,
+  FEED_TABLE_DISCONNECT,
+  FEED_TABLE_WS_CLOSE,
+  FEED_TABLE_WS_CONNECTING,
+  FEED_TABLE_WS_ERROR,
+  FEED_TABLE_WS_MESSAGE,
+  FEED_TABLE_WS_OPEN,
+} from "./actions/feed";
+import {
+  FEED_PROFILE_CONNECT,
+  FEED_PROFILE_DISCONNECT,
+  FEED_PROFILE_WS_CLOSE,
+  FEED_PROFILE_WS_CONNECTING,
+  FEED_PROFILE_WS_ERROR,
+  FEED_PROFILE_WS_MESSAGE,
+  FEED_PROFILE_WS_OPEN,
+} from "./actions/profile-feed";
 import { TRootState } from "./reducers";
 
-const wsActions = {
-  wsConnect: LiveTableWsConnect,
-  wsDisconnect: LiveTableWsDisconnect,
-  wsConnecting: LiveTableWsConnecting,
-  onOpen: LiveTableWsOpen,
-  onClose: LiveTableWsClose,
-  onError: LiveTableWsError,
-  onMessage: LiveTableWsNessage,
-};
-
-export const profileFeed = socketMiddleware(wsActions);
+export const profileFeed = socketMiddleware({
+  wsConnect: FEED_PROFILE_CONNECT,
+  wsDisconnect: FEED_PROFILE_DISCONNECT,
+  wsConnecting: FEED_PROFILE_WS_CONNECTING,
+  onOpen: FEED_PROFILE_WS_OPEN,
+  onClose: FEED_PROFILE_WS_CLOSE,
+  onError: FEED_PROFILE_WS_ERROR,
+  onMessage: FEED_PROFILE_WS_MESSAGE,
+});
+export const feed = socketMiddleware({
+  wsConnect: FEED_TABLE_CONNECT,
+  wsDisconnect: FEED_TABLE_DISCONNECT,
+  wsConnecting: FEED_TABLE_WS_CONNECTING,
+  onOpen: FEED_TABLE_WS_OPEN,
+  onClose: FEED_TABLE_WS_CLOSE,
+  onError: FEED_TABLE_WS_ERROR,
+  onMessage: FEED_TABLE_WS_MESSAGE,
+});
 
 export const useDispatch: () => AppDispatch = dispatchHook;
 export const useSelector: TypedUseSelectorHook<TRootState> = selectorHook;
@@ -60,6 +76,7 @@ export type AppThunkAction<ReturnType = void> = ThunkAction<
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const middleware = [
   thunk as ThunkMiddleware<TRootState, TApplicationActions>,
+  feed,
   profileFeed,
 ];
 const enhancer = composeEnhancers(applyMiddleware(...middleware));

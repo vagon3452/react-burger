@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from "react";
 import { v1 as uuid } from "uuid";
 import styles from "./burger-constructor.module.css";
-import { useSelector, useDispatch } from "react-redux";
+// import { useSelector, useDispatch } from "react-redux";
 import { useDrop } from "react-dnd";
 import { postItems } from "../../../services/actions/checkout";
 import Modal from "../../modal/modal";
@@ -28,6 +28,7 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { OrderDetails } from "./order-details";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "../../../services/store";
 
 export const BurgerConstructor = (): JSX.Element => {
   const { type_bun } = ingredientType;
@@ -52,17 +53,11 @@ export const BurgerConstructor = (): JSX.Element => {
 
   const { bun, ingredients, order, isLoading, hasError, user } = useSelector(
     (state) => ({
-      //@ts-ignore
       bun: state.create.bun,
-      //@ts-ignore
       user: state.user.user,
-      //@ts-ignore
       ingredients: state.create.ingredients,
-      //@ts-ignore
       order: state.checkout.order,
-      //@ts-ignore
       isLoading: state.checkout.isLoading,
-      //@ts-ignore
       hasError: state.checkout.hasError,
     })
   );
@@ -89,7 +84,6 @@ export const BurgerConstructor = (): JSX.Element => {
       if (!user) {
         navigate("/login");
       }
-      //@ts-ignore
       dispatch(postItems({ ingredients: total.ingredients }));
       setOpenModal(true);
     }
@@ -106,6 +100,7 @@ export const BurgerConstructor = (): JSX.Element => {
     <section className={styles.container}>
       <div className={styles.burgerComponents} ref={drop}>
         <Bun bun={bun} handleDrag={handleDrag} pos={"(верх)"} type={"top"} />
+
         {ingredients.length ? (
           ingredients.map((item: TContructorIngredient, index: number) => (
             <Ingredients
@@ -137,7 +132,7 @@ export const BurgerConstructor = (): JSX.Element => {
         </Modal>
       )}
       {openModal && hasError && "что-то пошло не так"}
-      {openModal && !isLoading && !hasError && order.number && (
+      {openModal && !isLoading && !hasError && order?.number && (
         <Modal onClose={closeModal}>
           <OrderDetails image={image} number={order.number} />
         </Modal>

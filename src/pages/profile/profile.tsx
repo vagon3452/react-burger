@@ -2,9 +2,9 @@ import React from "react";
 import { REFRESH_TOKEN_KEY } from "../../services/constants/index";
 import { signOutAction } from "../../services/actions/user";
 import styles from "./profile.module.css";
-import { useDispatch } from "react-redux";
 
 import { Link, Outlet, useLocation } from "react-router-dom";
+import { useDispatch } from "../../services/store";
 
 const linkStyle = {
   textDecoration: "none",
@@ -22,8 +22,10 @@ export function ProfilePage(): JSX.Element {
 
   const signOut = (e: React.SyntheticEvent) => {
     e.preventDefault();
-    //@ts-ignore
-    dispatch(signOutAction({ token: localStorage.getItem(REFRESH_TOKEN_KEY) }));
+    const refreshToken = localStorage.getItem(REFRESH_TOKEN_KEY);
+    if (refreshToken) {
+      dispatch(signOutAction({ token: refreshToken }));
+    }
   };
 
   return (

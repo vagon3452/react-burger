@@ -6,7 +6,7 @@ import { TIngredient } from "../../../services/types/data";
 import { ingredientType } from "../../../services/types/data";
 
 type TBunProps = {
-  bun: TIngredient;
+  bun: TIngredient | null;
   handleDrag: (items: TIngredient) => void;
   pos: string;
   type: "top" | "bottom";

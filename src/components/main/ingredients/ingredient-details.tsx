@@ -1,8 +1,8 @@
 import React, { FC } from "react";
 import styles from "./ingredient-details.module.css";
-import { useSelector } from "react-redux";
+
 import { useParams } from "react-router-dom";
-import { TIngredient } from "../../../services/types/data";
+import { useSelector } from "../../../services/store";
 
 type TNutritionProps = {
   children: string;
@@ -10,8 +10,7 @@ type TNutritionProps = {
 };
 
 export const IngredientsDetails = (): JSX.Element => {
-  //@ts-ignore
-  const items: TIngredient[] = useSelector((store) => store.cart.items);
+  const items = useSelector((store) => store.cart.items);
   const { ingredientId } = useParams();
 
   const data = items.find((el) => el._id === ingredientId);

@@ -1,8 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./orders.module.css";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
+import { useDispatch, useSelector } from "../../services/store";
+import { profileFeedConnect, profileFeedWsDisconnect } from "../../services/actions/profile-feed";
+import { ACCESS_TOKEN_KEY } from "../../services/constants";
 
 export function OrdersPage(): JSX.Element {
+  const dispatch = useDispatch()
+  useEffect(()=>{
+    const accessToken = localStorage.getItem(ACCESS_TOKEN_KEY)?.split(" ")[1]
+    const url = `wss://norma.nomoreparties.space/orders?token=${accessToken}`
+    dispatch(profileFeedConnect(url))
+
+    return () => {
+      dispatch(profileFeedWsDisconnect())
+    }
+  },[])
+const {something} = useSelector(state => ({something:state.profileFeed.something}))
+console.log(something)
   return (
     <section className={styles.content}>
       <div className={styles.list}>
