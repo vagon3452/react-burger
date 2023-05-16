@@ -3,24 +3,23 @@ import { Link } from "react-router-dom";
 import { signInAction } from "../../services/actions/user";
 
 import styles from "./login.module.css";
-import { useDispatch } from "react-redux";
+import { useDispatch } from "../../services/store";
 import {
   EmailInput,
   PasswordInput,
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 
-export function LoginPage():JSX.Element {
+export function LoginPage(): JSX.Element {
   const dispatch = useDispatch();
   const [form, setValue] = useState({ email: "", password: "" });
 
-  const onClick = (e:React.SyntheticEvent) => {
+  const onClick = (e: React.SyntheticEvent) => {
     e.preventDefault();
-    //@ts-ignore
     dispatch(signInAction(form));
   };
 
-  const onChange = (e:ChangeEvent<HTMLInputElement>) => {
+  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     setValue({ ...form, [e.target.name]: e.target.value });
   };
 

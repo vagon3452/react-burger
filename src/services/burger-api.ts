@@ -9,7 +9,12 @@ import {
   TUser,
   TBodyLogin,
 } from "./types/user";
-import { IGetItem, IOrderRequest, IBodyOrder } from "./types/order";
+import {
+  IGetItem,
+  IOrderRequest,
+  IBodyOrder,
+  TOrderRequestFromNumber,
+} from "./types/order";
 import { TTokens } from "./types/data";
 
 enum ENDPOINTS {
@@ -41,7 +46,7 @@ const refreshToken = async (): Promise<TTokens> => {
   }).then(checkResponse<TTokens>);
 };
 
-const fetchWithRefresh = async <T>(url: ENDPOINTS, options: RequestInit) => {
+const fetchWithRefresh = async <T>(url: string, options: RequestInit) => {
   try {
     const res = await fetch(url, options);
     return await checkResponse<T>(res);
@@ -67,17 +72,7 @@ const fetchWithRefresh = async <T>(url: ENDPOINTS, options: RequestInit) => {
     }
   }
 };
-// interface TResponse {
-//   success: boolean;
-//   message?: string;
-//   headers?: Headers;
-//   user?: TRawUser;
-//   accessToken?: string;
-//   refreshToken?: string;
-//   data?: TIngredient[];
-//   name?: string;
-//   order?: IOrder;
-// }
+
 type TResponse =
   | TTokens
   | TRegister
@@ -140,6 +135,33 @@ export const resetPasswordRequest = createRequest<ICheck, TBodyReset>(
   ENDPOINTS.resetPassword,
   "POST"
 );
+
+export const getOrderRequest = async (
+  number: string
+): Promise<TOrderRequestFromNumber> => {
+  const url = `${ENDPOINTS.orders}/${number}`;
+  const requestOptions: RequestInit = {
+    headers: {
+      "Content-Type": "application/json",
+      authorization: localStorage.getItem(ACCESS_TOKEN_KEY) || "",
+    },
+  };
+
+  return await fetchWithRefresh(url, requestOptions);
+};
+//  export const getOrders = (number: number) => { return getOrderRequest(`${ENDPOINTS.orders}/${number}`); };
+
+// export const getOrders = async (number:number)=> {
+//   const url = `${ENDPOINTS.orders}/${number}`
+//   const requestOptions: RequestInit = {
+//     headers: {
+//       "Content-Type": "application/json",
+//       authorization: localStorage.getItem(ACCESS_TOKEN_KEY) || "",
+//     },
+//     method: "GET",
+//   };
+//  return await fetchWithRefresh(url, requestOptions)
+// }
 
 // const BURGER_API_URL = "https://norma.nomoreparties.space/api";
 

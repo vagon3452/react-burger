@@ -21,7 +21,7 @@ import { IngredientsDetails } from "./main/ingredients/ingredient-details";
 import * as H from "history";
 import Modal from "./modal/modal";
 import { useDispatch, useSelector } from "../services/store";
-import { CardList } from "../pages/feed/feed";
+import { ModalFromDataApi } from "../pages/modal-data-api/modal-data-api";
 
 function App(): JSX.Element {
   const { isLoading, hasError } = useSelector((state) => ({
@@ -62,7 +62,7 @@ function App(): JSX.Element {
           element={<OnlyUnAuth component={<LoginPage />} />}
         />
         <Route path="/feed" element={<FeedPage />} />
-        {/* <Route path="/feed/:id" element={<CardList order={undefined} />} /> */}
+        <Route path="/feed/:id" element={<ModalFromDataApi />} />
         <Route
           path="/register"
           element={<OnlyUnAuth component={<RegisterPage />} />}
@@ -85,7 +85,10 @@ function App(): JSX.Element {
             path="orders"
             element={<OnlyAuth component={<OrdersPage />} />}
           >
-            <Route path=":id" element={<OnlyAuth component={<FeedPage />} />} />
+            <Route
+              path=":id"
+              element={<OnlyAuth component={<ModalFromDataApi />} />}
+            />
           </Route>
         </Route>
       </Routes>
@@ -97,6 +100,30 @@ function App(): JSX.Element {
             element={
               <Modal onClose={handleModalClose}>
                 <IngredientsDetails />
+              </Modal>
+            }
+          />
+        </Routes>
+      )}
+      {modal && (
+        <Routes>
+          <Route
+            path="/feed/:id"
+            element={
+              <Modal onClose={handleModalClose}>
+                <ModalFromDataApi />
+              </Modal>
+            }
+          />
+        </Routes>
+      )}
+      {modal && (
+        <Routes>
+          <Route
+            path="/profile/orders/:id"
+            element={
+              <Modal onClose={handleModalClose}>
+                <ModalFromDataApi />
               </Modal>
             }
           />

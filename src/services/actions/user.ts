@@ -81,7 +81,6 @@ export const getUserAction = (): AppThunkAction => async (dispatch) => {
   try {
     const data = await getUserRequest(null);
     if (data.success) {
-      // const user = handleAuthData(data);
       dispatch(setUserAction(data.user));
       dispatch(setAuthChecked());
     }

@@ -1,5 +1,6 @@
 import { Middleware } from "redux";
 import { TRootState } from "../reducers";
+import { getUserAction } from "../actions/user";
 
 type TwsActionTypes = {
   wsConnect: string;
@@ -48,13 +49,30 @@ export const socketMiddleware = (
         };
 
         socket.onerror = (err) => {
-          console.log(`error${err}`);
+          const error = JSON.stringify(err);
+          console.log(`error${error}`);
         };
 
-        socket.onmessage = (event) => {
-          const { data } = event;
-          const parsedData = JSON.parse(data);
-          dispatch({ type: onMessage, payload: parsedData });
+        socket.onmessage = (event: MessageEvent<string>) => {
+          try {
+            const data = JSON.parse(event.data);
+            if (data.message === "Invalid or missing token") {
+              //@ts-ignore
+              dispatch(getUserAction());
+            } else if (data.success) {
+              dispatch({ type: onMessage, payload: data });
+            }
+          } catch (err) {
+            console.error(err);
+          }
+          // const { data } = event;
+          // const parsedData = JSON.parse(data);
+          // if (parsedData.message === "Invalid or missing token") {
+          //   //@ts-ignore
+          //   dispatch(getUserAction());
+          // }
+          // console.log(parsedData);
+          // dispatch({ type: onMessage, payload: parsedData });
         };
 
         socket.onclose = (event) => {
@@ -71,7 +89,7 @@ export const socketMiddleware = (
               dispatch({ type: wsConnect, payload: url });
             }, 3000);
           }
-          socket = null
+          socket = null;
         };
 
         if (wsSendMessage && action.type === wsSendMessage) {
@@ -89,7 +107,7 @@ export const socketMiddleware = (
         }
       }
 
-     return next(action);
+      return next(action);
     };
   };
 };

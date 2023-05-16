@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from "react";
+import React, { FC, useCallback, useEffect } from "react";
 import styles from "./modal.module.css";
 import ReactDOM from "react-dom";
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
@@ -11,19 +11,22 @@ interface ModalProps {
 }
 
 const Modal: FC<ModalProps> = ({ children, onClose }): React.ReactPortal => {
-  const close = (e: React.KeyboardEvent) => {
-    if (e.code === "Escape") {
-      onClose();
-    }
-  };
+  const handleKeyDown = useCallback(
+    (e: KeyboardEvent) => {
+      if (e.code === "Escape") {
+        onClose();
+      }
+    },
+    [onClose]
+  );
 
   useEffect(() => {
-    document.addEventListener("keydown", onClose);
+    document.addEventListener("keydown", handleKeyDown, false);
 
     return () => {
-      document.removeEventListener("keydown", onClose);
+      document.removeEventListener("keydown", handleKeyDown, false);
     };
-  }, [close]);
+  }, [handleKeyDown]);
 
   return ReactDOM.createPortal(
     <div className={styles.modalBackground} onClick={onClose}>

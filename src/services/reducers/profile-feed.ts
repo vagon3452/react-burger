@@ -1,15 +1,17 @@
 import {
-  FEED_PROFILE_CONNECT,
-  FEED_PROFILE_DISCONNECT,
-  FEED_PROFILE_WS_CLOSE,
-  FEED_PROFILE_WS_CONNECTING,
   FEED_PROFILE_WS_ERROR,
   FEED_PROFILE_WS_MESSAGE,
   FEED_PROFILE_WS_OPEN,
   TProfileFeedActions,
+  IWebSocketData
 } from "../actions/profile-feed";
-const initialState = {
-  something: null,
+
+interface IProfileState {
+  privateFeed: IWebSocketData | null,
+  connectionError: string
+}
+const initialState: IProfileState = {
+  privateFeed: null,
   connectionError: "",
 };
 
@@ -31,7 +33,7 @@ export const profileFeedReducer = (
     case FEED_PROFILE_WS_MESSAGE:
       return {
         ...state,
-        something: action.payload,
+        privateFeed: action.payload,
       };
     default:
       return state;

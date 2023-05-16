@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useState } from "react";
 import { registerUserAction } from "../../services/actions/user";
 import styles from "./register.module.css";
-import { useDispatch } from "react-redux";
+import { useDispatch } from "../../services/store";
 import { TUser } from "../../services/types/user";
 import {
   EmailInput,
@@ -21,7 +21,6 @@ export const RegisterPage = (): JSX.Element => {
 
   function onClick(e: React.SyntheticEvent) {
     e.preventDefault();
-    //@ts-ignore
     dispatch(registerUserAction(value));
   }
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {

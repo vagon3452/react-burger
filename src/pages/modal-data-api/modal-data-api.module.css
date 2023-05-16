@@ -1,0 +1,163 @@
+/* .modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+} */
+.modal {
+  position: static;
+  top: 50%;
+  left: 50%;
+  /* transform: translate(-50%, -50%); */
+}
+.number {
+  margin: auto;
+  margin-top: 40px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: auto;
+  text-align: center;
+  width: 640px;
+  height: 64px;
+}
+.info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+  gap: 8px;
+  padding-top: 10px;
+  width: 640px;
+  height: 64px;
+}
+
+.status {
+  width: 640px;
+  height: 24px;
+
+  font-family: "JetBrains Mono";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+
+  display: flex;
+  align-items: center;
+
+  color: #00cccc;
+
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+}
+
+.title {
+  width: 640px;
+  height: 30px;
+
+  font-family: "JetBrains Mono";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 30px;
+
+  display: flex;
+  align-items: center;
+
+  color: #f2f2f3;
+
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+}
+
+.ingregients {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 40px;
+  padding: 0px;
+  height: 366px;
+}
+
+.scroll_area {
+  composes: custom-scroll from global;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 24px;
+  padding: auto;
+
+  width: 640px;
+  height: 312px;
+  overflow-y: auto;
+  flex: none;
+}
+
+.item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px;
+  gap: 16px;
+  width: 608px;
+  height: 64px;
+  flex: none;
+  align-self: stretch;
+  flex-grow: 0;
+}
+
+.image {
+  box-sizing: border-box;
+  width: 64px;
+  height: 64px;
+
+  background: #131316;
+  border-radius: 100px;
+
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+.text {
+  width: 320px;
+  height: 24px;
+
+  font-family: "JetBrains Mono";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+
+  display: flex;
+  align-items: center;
+
+  color: #f2f2f3;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+}
+
+.price {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0px;
+  gap: 8px;
+
+  width: 192px;
+  height: 24px;
+  flex: none;
+  order: 2;
+  flex-grow: 1;
+}
+.timestamp {
+  display: flex;
+  width: 608px;
+  justify-content: space-between;
+}

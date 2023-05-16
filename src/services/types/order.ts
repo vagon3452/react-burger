@@ -8,7 +8,7 @@ interface IOwner {
 }
 export interface IOrder {
   readonly createdAt: string;
-  readonly ingredients: TIngredient[];
+  readonly ingredients: string[];
   readonly name: string;
   readonly number: number;
   readonly owner: IOwner;
@@ -17,10 +17,17 @@ export interface IOrder {
   readonly updatedAt: string;
   readonly _id: string;
 }
+
+export type THttpOrder = Omit<IOrder, "price">;
+
+export type TOrderRequestFromNumber = {
+  readonly success: boolean;
+  readonly orders: ReadonlyArray<THttpOrder>;
+};
 export interface IOrderRequest {
   readonly success: boolean;
   readonly name: string;
-  readonly order: IOrder;
+  readonly orders: IOrder;
 }
 
 export interface IGetItem {

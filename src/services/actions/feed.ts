@@ -86,7 +86,7 @@ export const wsError = (error: string): IErrorAction => ({
 });
 
 
-export type TLiveTableActions =
+export type TFeedActions =
   | ReturnType<typeof connect>
   | ReturnType<typeof disconnect>
   | ReturnType<typeof wsConnecting>

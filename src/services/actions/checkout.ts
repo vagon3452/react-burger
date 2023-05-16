@@ -50,7 +50,7 @@ export function postItems(ingridientsID: IBodyOrder): AppThunkAction {
     postItemsRequest(ingridientsID)
       .then((res) => {
         if (res && res.success) {
-          dispatch(postItemsSuccessAction(res.order));
+          dispatch(postItemsSuccessAction(res.orders));
         } else {
           dispatch(postItemsFailedAction());
         }

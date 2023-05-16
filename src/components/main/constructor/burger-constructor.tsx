@@ -1,7 +1,6 @@
 import React, { useState, useCallback } from "react";
 import { v1 as uuid } from "uuid";
 import styles from "./burger-constructor.module.css";
-// import { useSelector, useDispatch } from "react-redux";
 import { useDrop } from "react-dnd";
 import { postItems } from "../../../services/actions/checkout";
 import Modal from "../../modal/modal";

@@ -28,6 +28,7 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
+  margin-bottom: 60px;
 }
 
 .value {

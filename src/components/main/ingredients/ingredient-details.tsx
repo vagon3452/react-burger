@@ -24,7 +24,7 @@ export const IngredientsDetails = (): JSX.Element => {
     carbohydrates: "",
   };
   return (
-    <div>
+    <>
       <div className={styles.title}>
         <p className="text text_type_main-large">Детали ингридиента</p>
       </div>
@@ -40,7 +40,7 @@ export const IngredientsDetails = (): JSX.Element => {
         <Nutritions data={fat}>Жиры, г</Nutritions>
         <Nutritions data={carbohydrates}>Углеводы, г</Nutritions>
       </div>
-    </div>
+    </>
   );
 };
 

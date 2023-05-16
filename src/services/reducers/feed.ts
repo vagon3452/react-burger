@@ -1,5 +1,5 @@
 import {
-  TLiveTableActions,
+  TFeedActions,
   IWebSocketData,
   FEED_TABLE_WS_CONNECTING,
   FEED_TABLE_WS_MESSAGE,
@@ -16,17 +16,17 @@ export enum WebsocketStatus {
 const initialState: TLiveTableStore = {
   status: WebsocketStatus.OFFLINE,
   connectionError: "",
-  table: null,
+  publicFeed: null,
 };
 interface TLiveTableStore {
   status: WebsocketStatus;
   connectionError: string;
-  table: IWebSocketData | null;
+  publicFeed: IWebSocketData | null;
 }
 
 export const feedReducer = (
   state = initialState,
-  action: TLiveTableActions
+  action: TFeedActions
 ) => {
   switch (action.type) {
     case FEED_TABLE_WS_CONNECTING:
@@ -53,7 +53,7 @@ export const feedReducer = (
     case FEED_TABLE_WS_MESSAGE:
       return {
         ...state,
-        table: action.payload,
+        publicFeed: action.payload,
       };
 
     default:

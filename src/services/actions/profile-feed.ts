@@ -31,11 +31,28 @@ interface IOpenAction {
 }
 interface IMessageAction {
   readonly type: typeof FEED_PROFILE_WS_MESSAGE;
-  payload: any;
+  payload: IWebSocketData;
 }
 interface IErrorAction {
   readonly type: typeof FEED_PROFILE_WS_ERROR;
   payload: string;
+}
+
+export interface ISocketOrders {
+  createdAt: string;
+  ingredients: Array<string>;
+  name: string;
+  number: number;
+  status: string;
+  updatedAt: string;
+  _id: string;
+}
+
+export interface IWebSocketData {
+  success: boolean;
+  orders: Array<ISocketOrders>;
+  total: number;
+  totalToday: number;
 }
 
 export const profileFeedConnect = (url: string): IConnectAction => ({
@@ -56,7 +73,7 @@ export const profileFeedWsOpen = (): IOpenAction => ({
 export const profileFeedWsConnecting = (): IConnectingAction => ({
   type: FEED_PROFILE_WS_CONNECTING,
 });
-export const profileFeedWsMessage = (message: any): IMessageAction => ({
+export const profileFeedWsMessage = (message: IWebSocketData): IMessageAction => ({
   type: FEED_PROFILE_WS_MESSAGE,
   payload: message,
 });
