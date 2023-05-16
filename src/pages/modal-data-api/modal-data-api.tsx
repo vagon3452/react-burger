@@ -107,7 +107,7 @@ export const ModalFromDataApi = () => {
         <div className={styles.scroll_area}>
           {Array.from(count).map(([id, amount]) => (
             <div className={styles.item} key={id}>
-              <picture className={styles.image}>
+              <picture className={styles.preview}>
                 <source srcSet={images.get(id)} />
                 <img src={images.get(id)} alt={"alt"} width="112" height="56" />
               </picture>

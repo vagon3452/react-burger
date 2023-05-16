@@ -5,10 +5,12 @@
   transform: translate(-50%, -50%);
 } */
 .modal {
-  position: static;
-  top: 50%;
-  left: 50%;
-  /* transform: translate(-50%, -50%); */
+  display: block;
+  align-self: center;
+  margin: auto;
+  padding: auto;
+  width: 720px;
+  height: 715px;
 }
 .number {
   margin: auto;
@@ -110,18 +112,32 @@
   flex-grow: 0;
 }
 
-.image {
+.preview {
   box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 64px;
   height: 64px;
 
   background: #131316;
   border-radius: 100px;
-
+  border: 2px;
   flex: none;
   order: 0;
   flex-grow: 0;
+  border-color: #801ab2;
 }
+
+/* :root {
+  --shadow-box-color_modal: rgba(0, 0, 0, 0.04);
+  --border-color_modal: rgba(76, 76, 255, 0.2);
+  --bg-color_overlay: rgba(0, 0, 0, 0.6);
+  --bg-color_element: #1c1c21;
+  --text-color_ready: #00cccc;
+  --gradient-color_1: #4c4cff;
+  --gradient-color_2: #801ab2;
+} */
 
 .text {
   width: 320px;
