@@ -1,6 +1,9 @@
 import React, { memo, useEffect } from "react";
 import clsx from "clsx";
-import { CurrencyIcon, FormattedDate } from "@ya.praktikum/react-developer-burger-ui-components";
+import {
+  CurrencyIcon,
+  FormattedDate,
+} from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./feed.module.css";
 import { useDispatch, useSelector } from "../../services/store";
 
@@ -80,7 +83,7 @@ export function FeedPage(): JSX.Element {
             <p>в работе:</p>
             <ul className={styles.done_numbers}>
               {publicFeed?.orders.map((list) => (
-                <li className="text text_type_digits-small">
+                <li className="text text_type_digits-small" key={list.number}>
                   {list.status !== "done" && list.number}
                 </li>
               ))}
@@ -93,7 +96,9 @@ export function FeedPage(): JSX.Element {
         </div>
         <div className={styles.complited}>
           <p className={styles.text}>Выполнено за сегодня:</p>
-          <p className="text text_type_digits-large">{publicFeed?.totalToday}</p>
+          <p className="text text_type_digits-large">
+            {publicFeed?.totalToday}
+          </p>
         </div>
       </div>
     </section>
@@ -124,7 +129,7 @@ export const CardList = memo(({ order }: TCardListProps): JSX.Element => {
         <div className={styles.order_id}>
           <p className="text text_type_digits-default">#{number}</p>
           <p className="text text_type_main-default text_color_inactive">
-          <FormattedDate date={new Date(createdAt)} />
+            <FormattedDate date={new Date(createdAt)} />
           </p>
         </div>
         <p className="text text_type_main-medium">{name}</p>
@@ -197,7 +202,7 @@ export const IngredientIcon: React.FC<IngredientIconProps> = ({
 }) => {
   const containerClasses = `${styles.container} ${extraClass}`;
   const imgContainerClasses = `${styles.container} ${styles.picture}`;
-  console.log(overflow);
+
   const pictureElement = (
     <picture className={styles.picture}>
       <source srcSet={srcSet} />

@@ -1,6 +1,8 @@
 import { Middleware } from "redux";
 import { TRootState } from "../reducers";
 import { getUserAction } from "../actions/user";
+import { refreshToken } from "../burger-api";
+import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY } from "../constants";
 
 type TwsActionTypes = {
   wsConnect: string;
@@ -56,23 +58,28 @@ export const socketMiddleware = (
         socket.onmessage = (event: MessageEvent<string>) => {
           try {
             const data = JSON.parse(event.data);
+            console.log(data);
             if (data.message === "Invalid or missing token") {
-              //@ts-ignore
-              dispatch(getUserAction());
+              refreshToken().then((refreshData) => {
+                if (refreshData.success) {
+                  console.log(refreshData);
+                  localStorage.setItem(
+                    REFRESH_TOKEN_KEY,
+                    refreshData.refreshToken
+                  );
+                  localStorage.setItem(
+                    ACCESS_TOKEN_KEY,
+                    refreshData.accessToken
+                  );
+                  dispatch({ type: wsConnect, payload: url });
+                }
+              });
             } else if (data.success) {
               dispatch({ type: onMessage, payload: data });
             }
           } catch (err) {
             console.error(err);
           }
-          // const { data } = event;
-          // const parsedData = JSON.parse(data);
-          // if (parsedData.message === "Invalid or missing token") {
-          //   //@ts-ignore
-          //   dispatch(getUserAction());
-          // }
-          // console.log(parsedData);
-          // dispatch({ type: onMessage, payload: parsedData });
         };
 
         socket.onclose = (event) => {

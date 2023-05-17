@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import styles from "./orders.module.css";
 import { useDispatch, useSelector } from "../../services/store";
 import { CardList } from "../feed/feed";
@@ -19,10 +19,13 @@ export function OrdersPage(): JSX.Element {
     fontWeight: "inherit",
   };
 
+  const tokenRef = useRef<string | undefined>("");
+
   const dispatch = useDispatch();
   useEffect(() => {
-    const accessToken = localStorage.getItem(ACCESS_TOKEN_KEY)?.split(" ")[1];
-    const url = `wss://norma.nomoreparties.space/orders?token=${accessToken}`;
+    tokenRef.current = localStorage.getItem(ACCESS_TOKEN_KEY)?.split(" ")[1];
+    console.log(`${tokenRef.current} useEffect`);
+    const url = `wss://norma.nomoreparties.space/orders?token=${tokenRef.current}`;
     dispatch(profileFeedConnect(url));
 
     return () => {

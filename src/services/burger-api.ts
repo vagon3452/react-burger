@@ -33,7 +33,7 @@ const checkResponse = <T>(res: Response): Promise<T> => {
   return res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
 };
 
-const refreshToken = async (): Promise<TTokens> => {
+export const refreshToken = async (): Promise<TTokens> => {
   const url = ENDPOINTS.refresh;
   return await fetch(url, {
     method: "POST",
