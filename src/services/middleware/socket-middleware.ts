@@ -1,8 +1,8 @@
 import { Middleware } from "redux";
 import { TRootState } from "../reducers";
-import { getUserAction } from "../actions/user";
 import { refreshToken } from "../burger-api";
 import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY } from "../constants";
+import { useRef } from "react";
 
 type TwsActionTypes = {
   wsConnect: string;
@@ -71,6 +71,7 @@ export const socketMiddleware = (
                     ACCESS_TOKEN_KEY,
                     refreshData.accessToken
                   );
+
                   dispatch({ type: wsConnect, payload: url });
                 }
               });

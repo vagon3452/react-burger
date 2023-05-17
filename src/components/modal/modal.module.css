@@ -22,27 +22,3 @@
   top: 60px;
   right: 40px;
 }
-
-
-/* .modalBackground {
-  width: 100vw;
-  height: 100vh;
-  position: fixed;
-  top: 0;
-  left: 0;
-  background-color: rgba(0, 0, 0, 0.6);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.content {
-  border-radius: 40px;
-  flex-direction: column;
-  background: #1c1c21;
-  position: relative;
-  width: 720px;
-  min-height: 0;
-  padding: 40px;
-}
- */

@@ -20,12 +20,12 @@ export function OrdersPage(): JSX.Element {
   };
 
   const tokenRef = useRef<string | undefined>("");
+  tokenRef.current = localStorage.getItem(ACCESS_TOKEN_KEY)?.split(" ")[1];
+
+  const url = `wss://norma.nomoreparties.space/orders?token=${tokenRef.current}`;
 
   const dispatch = useDispatch();
   useEffect(() => {
-    tokenRef.current = localStorage.getItem(ACCESS_TOKEN_KEY)?.split(" ")[1];
-    console.log(`${tokenRef.current} useEffect`);
-    const url = `wss://norma.nomoreparties.space/orders?token=${tokenRef.current}`;
     dispatch(profileFeedConnect(url));
 
     return () => {

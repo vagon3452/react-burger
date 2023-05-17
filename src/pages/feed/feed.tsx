@@ -143,6 +143,7 @@ export const CardList = memo(({ order }: TCardListProps): JSX.Element => {
                     src={el.image}
                     srcSet={el.image}
                     overflow={arr.length <= 6 ? 0 : arr.length - 6}
+                    extraClass={styles.items_picture}
                   />
                 )
             )}

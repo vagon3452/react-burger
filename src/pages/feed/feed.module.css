@@ -256,4 +256,11 @@
   background: var(--bg-color_overlay) content-box;
 }
 
+.items_picture {
+  margin-left: -16px;
+}
+
+.items_list > .items_picture:last-child {
+  margin-left: 0;
+}
 
