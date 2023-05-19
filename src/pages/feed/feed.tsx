@@ -30,7 +30,7 @@ export function FeedPage(): JSX.Element {
       dispatch(disconnect());
     };
   }, []);
-  
+
   const { publicFeed } = useSelector((state) => ({
     publicFeed: state.feed.publicFeed,
   }));

@@ -13,6 +13,7 @@
   position: absolute;
   width: 720px;
   min-height: 0;
+  max-height: 720px;
   left: 640px;
   top: 230px;
 }

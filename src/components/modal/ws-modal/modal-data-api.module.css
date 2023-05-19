@@ -1,16 +1,14 @@
-/* .modal {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-} */
 .modal {
   display: block;
   align-self: center;
-  margin: auto;
+  margin: 0;
   padding: auto;
   width: 720px;
   height: 715px;
+}
+.with_margin {
+  margin:auto ;
+  margin-top: 207px;
 }
 .number {
   margin: auto;

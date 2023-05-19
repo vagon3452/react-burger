@@ -19,10 +19,10 @@ export const OrderIngredients = () => {
     privateFeed: state.profileFeed.privateFeed,
   }));
 
-  const location = useLocation().pathname;
+  const location = useLocation();
 
-  const isFeedPathname = /^\/feed\/\d+$/.test(location);
-  const isProfileOrdersPathname = /^\/profile\/orders\/\d+$/.test(location);
+  const isFeedPathname = /^\/feed\/\d+$/.test(location.pathname);
+  const isProfileOrdersPathname = /^\/profile\/orders\/\d+$/.test(location.pathname);
 
   const state = isFeedPathname
     ? publicFeed
@@ -98,9 +98,11 @@ export const OrderIngredients = () => {
     pending: "Готовится",
     done: "Выполнен",
   }[status];
-
+  
+const shouldAddMarginTop = location.state===null
+const classNameModal = `${styles.modal} ${shouldAddMarginTop ? styles.with_margin : ''}`
   return (
-    <div className={styles.modal}>
+    <div className={classNameModal}>
       <div className={styles.number}>
         <p className="text text_type_digits-default">#{number}</p>
       </div>

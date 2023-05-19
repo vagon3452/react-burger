@@ -84,13 +84,12 @@ function App(): JSX.Element {
           <Route
             path="orders"
             element={<OnlyAuth component={<OrdersPage />} />}
-          >
-            <Route
-              path=":id"
-              element={<OnlyAuth component={<OrderIngredients />} />}
-            />
-          </Route>
+          />
         </Route>
+        <Route
+          path="/profile/orders/:id"
+          element={<OnlyAuth component={<OrderIngredients />} />}
+        />
       </Routes>
 
       {modal && (
