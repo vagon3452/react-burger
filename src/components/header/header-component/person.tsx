@@ -12,7 +12,8 @@ function Person(): JSX.Element {
   const location = useLocation();
   const isProfile = /^\/profile$/.test(location.pathname);
   const isProfileOrders = /^\/profile\/orders$/.test(location.pathname);
-  const isProfilePage = isProfile || isProfileOrders;
+  const isLogin = /^\/login$/.test(location.pathname);
+  const isProfilePage = isProfile || isProfileOrders || isLogin;
 
   return (
     <>
