@@ -55,7 +55,7 @@ export function FeedPage(): JSX.Element {
   };
 
   return (
-    <section className={styles.content}>
+    <div className={styles.content}>
       <div className={styles.list}>
         {publicFeed &&
           publicFeed.orders.map((order) =>
@@ -105,6 +105,6 @@ export function FeedPage(): JSX.Element {
           <p className="text text_type_digits-large">{publicFeed.totalToday}</p>
         </div>
       </div>
-    </section>
+    </div>
   );
 }

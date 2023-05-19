@@ -52,11 +52,12 @@ export function OrdersPage(): JSX.Element {
       </section>
     );
   }
+
   return (
     <section className={styles.content}>
       <div className={styles.list}>
         {privateFeed &&
-          privateFeed.orders.map((order) =>
+          [...privateFeed.orders].reverse().map((order) =>
             checkOrders(order) ? (
               <Link
                 to={`/profile/orders/${order.number}`}

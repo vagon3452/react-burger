@@ -15,7 +15,7 @@
   padding: 0px;
   gap: 16px;
   position: absolute;
-  width: 570px;
+  width: 580px;
   height: 656px;
   left: 16px;
   top: 100px;
@@ -42,6 +42,9 @@
   gap: 16px;
   max-height: 500px;
   overflow: auto;
+}
+.ingredients::-webkit-scrollbar {
+  width: 10px;
 }
 
 .ingredient_background {
