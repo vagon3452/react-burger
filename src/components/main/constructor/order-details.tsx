@@ -1,4 +1,4 @@
-import styles from "./burger-constructor.module.css";
+import styles from "./order-details.module.css"
 import React, { FC } from "react";
 
 type TOrderDetailsProps = {

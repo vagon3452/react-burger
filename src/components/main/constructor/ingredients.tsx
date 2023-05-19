@@ -1,7 +1,7 @@
 import React, { useRef, FC, memo } from "react";
 import { useDrag, useDrop } from "react-dnd";
 import { useDispatch } from "react-redux";
-import styles from "./burger-constructor.module.css";
+import styles from "./ingredients.module.css"
 import { DELETE_ITEM } from "../../../services/constants/index";
 import { TContructorIngredient } from "../../../services/types/data";
 import {
@@ -93,8 +93,8 @@ export const Ingredients: FC<TIngredientsProps> = memo(
     drag(drop(ref));
 
     return (
-      <section className={`${styles.ingridient}`} style={{ opacity }} ref={ref}>
-        <div style={{ display: "flex", alignItems: "center" }}>
+      <section className={styles.ingredient} style={{ opacity }} ref={ref}>
+        <div className={styles.icon}>
           <DragIcon type={"secondary"} />
         </div>
 

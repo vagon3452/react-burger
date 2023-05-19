@@ -97,24 +97,24 @@ export const BurgerConstructor = (): JSX.Element => {
 
   return (
     <section className={styles.container}>
-      <div className={styles.burgerComponents} ref={drop}>
+      <div className={styles.burgerComponents} >
         <Bun bun={bun} handleDrag={handleDrag} pos={"(верх)"} type={"top"} />
-
-        {ingredients.length ? (
-          ingredients.map((item: TContructorIngredient, index: number) => (
-            <Ingredients
-              key={item.uuid}
-              moveCard={moveCard}
-              index={index}
-              data={item}
-            />
-          ))
-        ) : (
-          <div className={styles.modal} style={{ paddingLeft: "24px" }}>
-            Выберите начинку
-          </div>
-        )}
-
+        <div className={styles.ingredients} ref={drop}>
+          {ingredients.length ? (
+            ingredients.map((item: TContructorIngredient, index: number) => (
+              <Ingredients
+                key={item.uuid}
+                moveCard={moveCard}
+                index={index}
+                data={item}
+              />
+            ))
+          ) : (
+            <div className={styles.ingredient_background} style={{ paddingLeft: "24px" }}>
+              Выберите начинку
+            </div>
+          )}
+        </div>
         <Bun bun={bun} handleDrag={handleDrag} pos={"(низ)"} type={"bottom"} />
       </div>
 

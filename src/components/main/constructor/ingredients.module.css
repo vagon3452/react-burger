@@ -1,0 +1,12 @@
+.ingredient {
+  display: flex;
+  flex-direction: row;
+  width: 568px;
+  max-height: 80px;
+  border-radius: 20%;
+}
+
+.icon {
+  display: "flex";
+  margin: auto;
+}

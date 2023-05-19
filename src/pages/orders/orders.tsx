@@ -46,7 +46,7 @@ export function OrdersPage(): JSX.Element {
   if (!privateFeed) {
     return (
       <section className={styles.content}>
-        <div className={styles.list}>
+        <div className={styles.no_order}>
           <h1>Заказов пока нету</h1>
         </div>
       </section>

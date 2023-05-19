@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { useDrop } from "react-dnd";
-import styles from "./burger-constructor.module.css";
+import styles from "./buns.module.css";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
 import { TIngredient } from "../../../services/types/data";
 import { ingredientType } from "../../../services/types/data";
@@ -27,8 +27,7 @@ export const Bun: FC<TBunProps> = ({
   });
   return (
     <div
-      className={`${styles.ingridient} `}
-      style={{ paddingLeft: "24px" }}
+      className={styles.ingredient}
       ref={dropTarget}
     >
       {bun ? (
@@ -40,7 +39,7 @@ export const Bun: FC<TBunProps> = ({
           thumbnail={bun.image}
         />
       ) : (
-        <div className={styles.modal}>Выберите булку</div>
+        <div className={styles.ingredient_background}>Выберите булку</div>
       )}
     </div>
   );

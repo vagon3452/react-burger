@@ -3,7 +3,7 @@ import { REFRESH_TOKEN_KEY } from "../../services/constants/index";
 import { signOutAction } from "../../services/actions/user";
 import styles from "./profile.module.css";
 
-import { Link, Outlet, useLocation } from "react-router-dom";
+import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "../../services/store";
 
 const linkStyle = {
@@ -15,6 +15,7 @@ const linkStyle = {
 
 export function ProfilePage(): JSX.Element {
   const location = useLocation();
+  const navigate = useNavigate();
   type TLink = "/profile" | "/profile/orders" | "/";
   const isActive = (link: TLink): boolean => location.pathname === link;
 
@@ -25,6 +26,8 @@ export function ProfilePage(): JSX.Element {
     const refreshToken = localStorage.getItem(REFRESH_TOKEN_KEY);
     if (refreshToken) {
       dispatch(signOutAction({ token: refreshToken }));
+    } else {
+      navigate("/login");
     }
   };
 
