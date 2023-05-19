@@ -8,6 +8,7 @@ import {
   profileFeedWsDisconnect,
 } from "../../services/actions/profile-feed";
 import { Link, useLocation } from "react-router-dom";
+import { ACCESS_TOKEN_KEY } from "../../services/constants";
 
 export function OrdersPage(): JSX.Element {
   const location = useLocation();
@@ -17,12 +18,12 @@ export function OrdersPage(): JSX.Element {
     fontSize: "inherit",
     fontWeight: "inherit",
   };
-
+  const token = localStorage.getItem(ACCESS_TOKEN_KEY)?.split(" ")[1]
   const url = `wss://norma.nomoreparties.space/orders`;
 
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(profileFeedConnect(url));
+    dispatch(profileFeedConnect(`${url}?token=${token}`));
 
     return () => {
       dispatch(profileFeedWsDisconnect());

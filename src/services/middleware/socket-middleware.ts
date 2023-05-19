@@ -19,7 +19,6 @@ export const socketMiddleware = (
   wsActions: TwsActionTypes
 ): Middleware<{}, TRootState> => {
   return (store) => {
-    let token = ""
     let socket: WebSocket | null = null;
     let isConnected = false;
     let reconnectTimer = 0;
@@ -71,12 +70,18 @@ export const socketMiddleware = (
                     ACCESS_TOKEN_KEY,
                     refreshData.accessToken
                   );
-                  token =
-                    localStorage.getItem(ACCESS_TOKEN_KEY)?.split(" ")[1] || "";
+                  const newToken = (
+                    localStorage.getItem(ACCESS_TOKEN_KEY) || ""
+                  ).split(" ")[1];
+
+                  const newUrl = url.replace(
+                    /\?token=.*/,
+                    `?token=${newToken}`
+                  );
 
                   dispatch({
                     type: wsConnect,
-                    payload: `${url}?token=${token}`,
+                    payload: newUrl,
                   });
                 }
               });
