@@ -1,7 +1,6 @@
 .content {
   display: flex;
   position: absolute;
-  height: 812px;
   left: 332px;
   top: 188px;
 }
@@ -97,5 +96,3 @@
   order: 1;
   flex-grow: 0;
 }
-
-

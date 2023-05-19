@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import styles from "./orders.module.css";
 import { useDispatch, useSelector } from "../../services/store";
 import { CardList } from "../../components/order-card/ws-card-list";
@@ -18,7 +18,7 @@ export function OrdersPage(): JSX.Element {
     fontSize: "inherit",
     fontWeight: "inherit",
   };
-  const token = localStorage.getItem(ACCESS_TOKEN_KEY)?.split(" ")[1]
+  const token = localStorage.getItem(ACCESS_TOKEN_KEY)?.split(" ")[1];
   const url = `wss://norma.nomoreparties.space/orders`;
 
   const dispatch = useDispatch();
@@ -28,7 +28,7 @@ export function OrdersPage(): JSX.Element {
     return () => {
       dispatch(profileFeedWsDisconnect());
     };
-  }, []);
+  }, [token]);
 
   const checkOrders = (order: ISocketOrders): boolean => {
     return (
@@ -43,11 +43,20 @@ export function OrdersPage(): JSX.Element {
   const { privateFeed } = useSelector((state) => ({
     privateFeed: state.profileFeed.privateFeed,
   }));
+  if (!privateFeed) {
+    return (
+      <section className={styles.content}>
+        <div className={styles.list}>
+          <h1>Заказов пока нету</h1>
+        </div>
+      </section>
+    );
+  }
   return (
     <section className={styles.content}>
       <div className={styles.list}>
         {privateFeed &&
-          privateFeed.orders?.map((order) =>
+          privateFeed.orders.map((order) =>
             checkOrders(order) ? (
               <Link
                 to={`/profile/orders/${order.number}`}

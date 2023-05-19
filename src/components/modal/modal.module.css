@@ -10,7 +10,7 @@
   border-radius: 40px;
   flex-direction: column;
   background: #1c1c21;
-  position: fixed;
+  position: absolute;
   width: 720px;
   min-height: 0;
   left: 640px;

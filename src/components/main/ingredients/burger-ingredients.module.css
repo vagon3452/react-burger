@@ -22,7 +22,8 @@
   display: flex;
   flex-direction: column;
   align-self: stretch;
-  height: 756px;
+  /* height: 756px; */
+  height: auto;
   overflow-y: scroll;
 }
 

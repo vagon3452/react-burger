@@ -21,7 +21,7 @@ import { IngredientsDetails } from "./main/ingredients/ingredient-details";
 import * as H from "history";
 import Modal from "./modal/modal";
 import { useDispatch, useSelector } from "../services/store";
-import { ModalFromDataApi } from "./modal/ws-modal/modal-data-api";
+import { OrderIngredients } from "./modal/ws-modal/modal-data-api";
 
 function App(): JSX.Element {
   const { isLoading, hasError } = useSelector((state) => ({
@@ -62,7 +62,7 @@ function App(): JSX.Element {
           element={<OnlyUnAuth component={<LoginPage />} />}
         />
         <Route path="/feed" element={<FeedPage />} />
-        <Route path="/feed/:id" element={<ModalFromDataApi />} />
+        <Route path="/feed/:id" element={<OrderIngredients />} />
         <Route
           path="/register"
           element={<OnlyUnAuth component={<RegisterPage />} />}
@@ -87,7 +87,7 @@ function App(): JSX.Element {
           >
             <Route
               path=":id"
-              element={<OnlyAuth component={<ModalFromDataApi />} />}
+              element={<OnlyAuth component={<OrderIngredients />} />}
             />
           </Route>
         </Route>
@@ -111,7 +111,7 @@ function App(): JSX.Element {
             path="/feed/:id"
             element={
               <Modal onClose={handleModalClose}>
-                <ModalFromDataApi />
+                <OrderIngredients />
               </Modal>
             }
           />
@@ -123,7 +123,7 @@ function App(): JSX.Element {
             path="/profile/orders/:id"
             element={
               <Modal onClose={handleModalClose}>
-                <ModalFromDataApi />
+                <OrderIngredients />
               </Modal>
             }
           />

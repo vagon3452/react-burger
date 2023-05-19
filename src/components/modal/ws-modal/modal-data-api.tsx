@@ -10,7 +10,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { ISocketOrders } from "../../../services/actions/feed";
 import { THttpOrder } from "../../../services/types/order";
 
-export const ModalFromDataApi = () => {
+export const OrderIngredients = () => {
   const { publicFeed } = useSelector((store) => ({
     publicFeed: store.feed.publicFeed,
   }));
