@@ -1,26 +1,26 @@
 import React from "react";
-import { NavLink, useMatch } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { ProfileIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import { element } from "prop-types";
 
 function Person(): JSX.Element {
-
   const linkStyle = {
     textDecoration: "none",
     color: "inherit",
     fontSize: "inherit",
     fontWeight: "inherit",
   };
+  const location = useLocation();
+  const isProfile = /^\/profile$/.test(location.pathname);
+  const isProfileOrders = /^\/profile\/orders$/.test(location.pathname);
+  const isProfilePage = isProfile || isProfileOrders;
 
-  const to = "/profile";
-  const matchPattern = useMatch(to);
   return (
     <>
-      <ProfileIcon type={matchPattern ? "primary" : "secondary"} />
+      <ProfileIcon type={isProfilePage ? "primary" : "secondary"} />
       <NavLink to="/profile" style={linkStyle}>
         <p
           className={
-            matchPattern
+            isProfilePage
               ? "text text_type_main-default"
               : "text text_type_main-default text_color_inactive"
           }
