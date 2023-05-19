@@ -1,13 +1,12 @@
 import React, { useEffect, useRef } from "react";
 import styles from "./orders.module.css";
 import { useDispatch, useSelector } from "../../services/store";
-import { CardList } from "../feed/feed";
+import { CardList } from "../../components/order-card/ws-card-list";
 import {
   ISocketOrders,
   profileFeedConnect,
   profileFeedWsDisconnect,
 } from "../../services/actions/profile-feed";
-import { ACCESS_TOKEN_KEY } from "../../services/constants";
 import { Link, useLocation } from "react-router-dom";
 
 export function OrdersPage(): JSX.Element {
@@ -19,10 +18,7 @@ export function OrdersPage(): JSX.Element {
     fontWeight: "inherit",
   };
 
-  const tokenRef = useRef<string | undefined>("");
-  tokenRef.current = localStorage.getItem(ACCESS_TOKEN_KEY)?.split(" ")[1];
-
-  const url = `wss://norma.nomoreparties.space/orders?token=${tokenRef.current}`;
+  const url = `wss://norma.nomoreparties.space/orders`;
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -46,7 +42,6 @@ export function OrdersPage(): JSX.Element {
   const { privateFeed } = useSelector((state) => ({
     privateFeed: state.profileFeed.privateFeed,
   }));
-  console.log(privateFeed);
   return (
     <section className={styles.content}>
       <div className={styles.list}>

@@ -3,12 +3,12 @@ import {
   FormattedDate,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./modal-data-api.module.css";
-import { useLocation, useMatch, useParams } from "react-router";
-import { useSelector } from "../../services/store";
-import { getOrderRequest } from "../../services/burger-api";
+import { useLocation, useParams } from "react-router";
+import { useSelector } from "../../../services/store";
+import { getOrderRequest } from "../../../services/burger-api";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { ISocketOrders } from "../../services/actions/feed";
-import { THttpOrder } from "../../services/types/order";
+import { ISocketOrders } from "../../../services/actions/feed";
+import { THttpOrder } from "../../../services/types/order";
 
 export const ModalFromDataApi = () => {
   const { publicFeed } = useSelector((store) => ({
@@ -88,10 +88,16 @@ export const ModalFromDataApi = () => {
     return null;
   }
 
-  const { number, name, ingredients, createdAt } = data;
+  const { number, name, ingredients, createdAt, status } = data;
 
   const { count, images, price, ingredientName } =
     ingredientMapper(ingredients);
+
+  const currentStatus = {
+    created: "Создан",
+    pending: "Готовится",
+    done: "Выполнен",
+  }[status];
 
   return (
     <div className={styles.modal}>
@@ -100,7 +106,14 @@ export const ModalFromDataApi = () => {
       </div>
       <div className={styles.info}>
         <div className={styles.title}>{name}</div>
-        <div className={styles.status}>status</div>
+        <div
+          className={`${styles.status} ${
+            status === "done" ? styles.status_done : ""
+          }
+          `}
+        >
+          {currentStatus}
+        </div>
       </div>
       <div className={styles.ingregients}>
         <div className={styles.title}>Состав:</div>

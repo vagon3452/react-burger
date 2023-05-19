@@ -13,12 +13,12 @@ export enum WebsocketStatus {
   OFFLINE = "OFFLINE",
 }
 
-const initialState: TLiveTableStore = {
+const initialState: TFeedStore = {
   status: WebsocketStatus.OFFLINE,
   connectionError: "",
   publicFeed: null,
 };
-interface TLiveTableStore {
+interface TFeedStore {
   status: WebsocketStatus;
   connectionError: string;
   publicFeed: IWebSocketData | null;

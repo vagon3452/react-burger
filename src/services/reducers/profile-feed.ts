@@ -3,8 +3,16 @@ import {
   FEED_PROFILE_WS_MESSAGE,
   FEED_PROFILE_WS_OPEN,
   TProfileFeedActions,
-  IWebSocketData
+  IWebSocketData,
+  FEED_PROFILE_WS_CONNECTING
 } from "../actions/profile-feed";
+
+export enum WebsocketStatus {
+  CONNECTING = "CONNECTING...",
+  ONLINE = "ONLINE",
+  OFFLINE = "OFFLINE",
+}
+
 
 interface IProfileState {
   privateFeed: IWebSocketData | null,
@@ -20,6 +28,10 @@ export const profileFeedReducer = (
   action: TProfileFeedActions
 ) => {
   switch (action.type) {
+    case FEED_PROFILE_WS_CONNECTING: 
+    return {
+      ...state,
+    }
     case FEED_PROFILE_WS_OPEN:
       return {
         ...state,

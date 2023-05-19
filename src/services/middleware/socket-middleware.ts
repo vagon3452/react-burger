@@ -19,6 +19,7 @@ export const socketMiddleware = (
   wsActions: TwsActionTypes
 ): Middleware<{}, TRootState> => {
   return (store) => {
+    let token = ""
     let socket: WebSocket | null = null;
     let isConnected = false;
     let reconnectTimer = 0;
@@ -58,11 +59,10 @@ export const socketMiddleware = (
         socket.onmessage = (event: MessageEvent<string>) => {
           try {
             const data = JSON.parse(event.data);
-            console.log(data);
+
             if (data.message === "Invalid or missing token") {
               refreshToken().then((refreshData) => {
                 if (refreshData.success) {
-                  console.log(refreshData);
                   localStorage.setItem(
                     REFRESH_TOKEN_KEY,
                     refreshData.refreshToken
@@ -71,8 +71,13 @@ export const socketMiddleware = (
                     ACCESS_TOKEN_KEY,
                     refreshData.accessToken
                   );
+                  token =
+                    localStorage.getItem(ACCESS_TOKEN_KEY)?.split(" ")[1] || "";
 
-                  dispatch({ type: wsConnect, payload: url });
+                  dispatch({
+                    type: wsConnect,
+                    payload: `${url}?token=${token}`,
+                  });
                 }
               });
             } else if (data.success) {

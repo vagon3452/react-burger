@@ -22,12 +22,13 @@ interface IErrorAction {
   type: typeof FEED_TABLE_WS_ERROR;
   payload: string;
 }
+type TCurrentStatus = "created" | "pending" | "done"
 export interface ISocketOrders {
   createdAt: string;
   ingredients: Array<string>;
   name: string;
   number: number;
-  status: string;
+  status: TCurrentStatus;
   updatedAt: string;
   _id: string;
 }

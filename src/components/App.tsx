@@ -21,7 +21,7 @@ import { IngredientsDetails } from "./main/ingredients/ingredient-details";
 import * as H from "history";
 import Modal from "./modal/modal";
 import { useDispatch, useSelector } from "../services/store";
-import { ModalFromDataApi } from "../pages/modal-data-api/modal-data-api";
+import { ModalFromDataApi } from "./modal/ws-modal/modal-data-api";
 
 function App(): JSX.Element {
   const { isLoading, hasError } = useSelector((state) => ({
