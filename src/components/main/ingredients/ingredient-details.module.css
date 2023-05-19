@@ -1,9 +1,22 @@
+.modal {
+  display: block;
+  align-self: center;
+  margin: 0;
+  padding: auto;
+  width: 720px;
+  height: 539px;
+}
+.with_margin {
+  margin:auto ;
+  margin-top: 207px;
+}
+
 .title {
+  margin: auto;
   margin-top: 40px;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  margin-left: auto;
   text-align: center;
   width: 640px;
   height: 64px;

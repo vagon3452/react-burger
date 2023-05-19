@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import styles from "./ingredient-details.module.css";
 
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { useSelector } from "../../../services/store";
 
 type TNutritionProps = {
@@ -10,6 +10,7 @@ type TNutritionProps = {
 };
 
 export const IngredientsDetails = (): JSX.Element => {
+  const location = useLocation()
   const items = useSelector((store) => store.cart.items);
   const { ingredientId } = useParams();
 
@@ -23,8 +24,11 @@ export const IngredientsDetails = (): JSX.Element => {
     fat: "",
     carbohydrates: "",
   };
+
+  const shouldAddMarginTop = location.state===null
+const classNameModal = `${styles.modal} ${shouldAddMarginTop ? styles.with_margin : ''}`
   return (
-    <>
+    <div className={classNameModal}>
       <div className={styles.title}>
         <p className="text text_type_main-large">Детали ингридиента</p>
       </div>
@@ -40,7 +44,7 @@ export const IngredientsDetails = (): JSX.Element => {
         <Nutritions data={fat}>Жиры, г</Nutritions>
         <Nutritions data={carbohydrates}>Углеводы, г</Nutritions>
       </div>
-    </>
+    </div>
   );
 };
 
