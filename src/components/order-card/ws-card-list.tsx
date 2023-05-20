@@ -72,7 +72,7 @@ export const CardList = memo(({ order }: TCardListProps): JSX.Element => {
           )}
         </div>
         <div className={styles.price}>
-          <p className="text text_type_digits-default">{price}</p>
+          <span className="text text_type_digits-default">{price}</span>
           <CurrencyIcon type="primary" />
         </div>
       </div>

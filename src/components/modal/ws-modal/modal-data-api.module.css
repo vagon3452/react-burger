@@ -181,3 +181,8 @@
   width: 608px;
   justify-content: space-between;
 }
+
+.total {
+  display: flex;
+  gap: 10px;
+}

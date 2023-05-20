@@ -22,7 +22,9 @@ export const OrderIngredients = () => {
   const location = useLocation();
 
   const isFeedPathname = /^\/feed\/\d+$/.test(location.pathname);
-  const isProfileOrdersPathname = /^\/profile\/orders\/\d+$/.test(location.pathname);
+  const isProfileOrdersPathname = /^\/profile\/orders\/\d+$/.test(
+    location.pathname
+  );
 
   const state = isFeedPathname
     ? publicFeed
@@ -98,9 +100,11 @@ export const OrderIngredients = () => {
     pending: "Готовится",
     done: "Выполнен",
   }[status];
-  
-const shouldAddMarginTop = location.state===null
-const classNameModal = `${styles.modal} ${shouldAddMarginTop ? styles.with_margin : ''}`
+
+  const shouldAddMarginTop = location.state === null;
+  const classNameModal = `${styles.modal} ${
+    shouldAddMarginTop ? styles.with_margin : ""
+  }`;
   return (
     <div className={classNameModal}>
       <div className={styles.number}>
@@ -135,7 +139,7 @@ const classNameModal = `${styles.modal} ${shouldAddMarginTop ? styles.with_margi
         </div>
         <div className={styles.timestamp}>
           <FormattedDate date={new Date(createdAt)} />
-          <div>
+          <div className={styles.total}>
             {totalPriceRef.current} <CurrencyIcon type="primary" />
           </div>
         </div>
