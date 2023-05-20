@@ -43,6 +43,7 @@ export function OrdersPage(): JSX.Element {
   const { privateFeed } = useSelector((state) => ({
     privateFeed: state.profileFeed.privateFeed,
   }));
+  
   if (!privateFeed) {
     return (
       <section className={styles.content}>

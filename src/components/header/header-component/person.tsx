@@ -1,6 +1,7 @@
 import React from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { ProfileIcon } from "@ya.praktikum/react-developer-burger-ui-components";
+import { useSelector } from "../../../services/store";
 
 function Person(): JSX.Element {
   const linkStyle = {
@@ -15,6 +16,8 @@ function Person(): JSX.Element {
   const isLogin = /^\/login$/.test(location.pathname);
   const isProfilePage = isProfile || isProfileOrders || isLogin;
 
+  const user = useSelector((store) => store.user.user);
+
   return (
     <>
       <ProfileIcon type={isProfilePage ? "primary" : "secondary"} />
@@ -26,7 +29,7 @@ function Person(): JSX.Element {
               : "text text_type_main-default text_color_inactive"
           }
         >
-          Личный кабинет
+          {user?.name || "Личный кабинет"}
         </p>
       </NavLink>
     </>
