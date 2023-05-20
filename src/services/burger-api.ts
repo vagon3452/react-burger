@@ -94,7 +94,7 @@ const createRequest =
         authorization: localStorage.getItem(ACCESS_TOKEN_KEY) || "",
       },
       method,
-      body: form && JSON.stringify(form),
+      body:form && JSON.stringify(form),
     };
     return await fetchWithRefresh<T>(url, requestOptions);
   };

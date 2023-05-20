@@ -10,6 +10,7 @@ function Create(): JSX.Element {
     fontSize: "inherit",
     fontWeight: "inherit",
   };
+
   const matchPattern = useMatch("/");
 
   return (
