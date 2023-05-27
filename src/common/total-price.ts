@@ -1,7 +1,7 @@
 import { createSelector } from "reselect";
 import { TContructorIngredient } from "../services/types/data";
 
-interface IIngredientsState {
+export interface IIngredientsState {
   create: {
     bun: TContructorIngredient | null;
     ingredients: Array<TContructorIngredient>;

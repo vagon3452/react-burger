@@ -42,6 +42,7 @@ export function LoginPage(): JSX.Element {
           isIcon={false}
           extraClass={styles.input}
           placeholder="E-mail"
+          data-testid="count"
         />
         <PasswordInput
           onChange={onChange}

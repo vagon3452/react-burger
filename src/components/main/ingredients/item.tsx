@@ -31,7 +31,12 @@ export const Item: FC<TItemProps> = ({ data }): JSX.Element => {
   );
 
   return (
-    <section className={styles.block} style={{ opacity }} ref={ref}>
+    <section
+      className={styles.block}
+      style={{ opacity }}
+      ref={ref}
+      data-testid={_id}
+    >
       {currentCount > 0 && <Counter count={currentCount} size="default" />}
       <div style={{ display: "flex", flexDirection: "column" }}>
         <img src={image} alt={name} />

@@ -26,10 +26,7 @@ export const Bun: FC<TBunProps> = ({
     },
   });
   return (
-    <div
-      className={styles.ingredient}
-      ref={dropTarget}
-    >
+    <div className={styles.ingredient} ref={dropTarget}>
       {bun ? (
         <ConstructorElement
           type={type}

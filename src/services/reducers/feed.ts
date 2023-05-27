@@ -12,22 +12,19 @@ export enum WebsocketStatus {
   ONLINE = "ONLINE",
   OFFLINE = "OFFLINE",
 }
-
-const initialState: TFeedStore = {
-  status: WebsocketStatus.OFFLINE,
-  connectionError: "",
-  publicFeed: null,
-};
 interface TFeedStore {
   status: WebsocketStatus;
   connectionError: string;
   publicFeed: IWebSocketData | null;
 }
 
-export const feedReducer = (
-  state = initialState,
-  action: TFeedActions
-) => {
+const initialState: TFeedStore = {
+  status: WebsocketStatus.OFFLINE,
+  connectionError: "",
+  publicFeed: null,
+};
+
+export const feedReducer = (state = initialState, action: TFeedActions) => {
   switch (action.type) {
     case FEED_TABLE_WS_CONNECTING:
       return {

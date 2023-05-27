@@ -1,6 +1,6 @@
 import React from "react";
 import { REFRESH_TOKEN_KEY } from "../../services/constants/index";
-import { signOutAction } from "../../services/actions/user";
+import { setUserAction, signOutAction } from "../../services/actions/user";
 import styles from "./profile.module.css";
 
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
@@ -28,6 +28,7 @@ export function ProfilePage(): JSX.Element {
       dispatch(signOutAction({ token: refreshToken }));
     } else {
       navigate("/login");
+      dispatch(setUserAction(null));
     }
   };
 

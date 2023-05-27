@@ -4,7 +4,7 @@ import {
   FEED_PROFILE_WS_OPEN,
   TProfileFeedActions,
   IWebSocketData,
-  FEED_PROFILE_WS_CONNECTING
+  FEED_PROFILE_WS_CONNECTING,
 } from "../actions/profile-feed";
 
 export enum WebsocketStatus {
@@ -13,12 +13,13 @@ export enum WebsocketStatus {
   OFFLINE = "OFFLINE",
 }
 
-
 interface IProfileState {
-  privateFeed: IWebSocketData | null,
-  connectionError: string
+  status: WebsocketStatus;
+  privateFeed: IWebSocketData | null;
+  connectionError: string;
 }
 const initialState: IProfileState = {
+  status: WebsocketStatus.OFFLINE,
   privateFeed: null,
   connectionError: "",
 };
@@ -28,10 +29,10 @@ export const profileFeedReducer = (
   action: TProfileFeedActions
 ) => {
   switch (action.type) {
-    case FEED_PROFILE_WS_CONNECTING: 
-    return {
-      ...state,
-    }
+    case FEED_PROFILE_WS_CONNECTING:
+      return {
+        ...state,
+      };
     case FEED_PROFILE_WS_OPEN:
       return {
         ...state,

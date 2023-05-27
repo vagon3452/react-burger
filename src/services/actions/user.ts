@@ -24,7 +24,7 @@ interface ISetAuthChecked {
   readonly type: typeof SET_AUTH_CHECKED;
   readonly payload: true;
 }
-const setAuthChecked = (): ISetAuthChecked => ({
+export const setAuthChecked = (): ISetAuthChecked => ({
   type: SET_AUTH_CHECKED,
   payload: true,
 });
@@ -36,7 +36,7 @@ const handleAuthData = (data: TRegister): TRawUser => {
   return data.user;
 };
 
-const setUserAction = (user: TRawUser | null): ISetUserAction => ({
+export const setUserAction = (user: TRawUser | null): ISetUserAction => ({
   type: SET_USER,
   payload: user,
 });
@@ -51,6 +51,7 @@ export const registerUserAction = (form: TUser): AppThunkAction => {
         dispatch(setAuthChecked());
       }
     } catch (error) {
+      console.log(`register user error ${error}`);
       localStorage.removeItem(ACCESS_TOKEN_KEY);
       localStorage.removeItem(REFRESH_TOKEN_KEY);
       dispatch(setUserAction(null));
@@ -69,6 +70,7 @@ export const signInAction = (form: TBodyLogin): AppThunkAction => {
         dispatch(setAuthChecked());
       }
     } catch (error) {
+      console.log(`sign in action error ${error}`);
       localStorage.removeItem(ACCESS_TOKEN_KEY);
       localStorage.removeItem(REFRESH_TOKEN_KEY);
       dispatch(setUserAction(null));
@@ -85,6 +87,7 @@ export const getUserAction = (): AppThunkAction => async (dispatch) => {
       dispatch(setAuthChecked());
     }
   } catch (error) {
+    console.log(`get user action error ${error}`);
     localStorage.removeItem(ACCESS_TOKEN_KEY);
     localStorage.removeItem(REFRESH_TOKEN_KEY);
     dispatch(setUserAction(null));
@@ -99,14 +102,15 @@ export const updateUserAction = (form: TUser): AppThunkAction => {
       const data = await updateUserRequest(form);
       if (data.success) {
         dispatch(setUserAction(data.user));
-        dispatch({ type: SET_AUTH_CHECKED, payload: true });
+        dispatch(setAuthChecked());
       }
     } catch (error) {
+      console.log(`update error ${error}`)
       localStorage.removeItem(ACCESS_TOKEN_KEY);
       localStorage.removeItem(REFRESH_TOKEN_KEY);
       dispatch(setUserAction(null));
     } finally {
-      dispatch({ type: SET_AUTH_CHECKED, payload: true });
+      dispatch(setAuthChecked());
     }
   };
 };
@@ -125,7 +129,7 @@ export const checkUserAuth = (): AppThunkAction => {
     if (localStorage.getItem(ACCESS_TOKEN_KEY)) {
       dispatch(getUserAction());
     } else {
-      dispatch({ type: SET_AUTH_CHECKED, payload: true });
+      dispatch(setAuthChecked());
     }
   };
 };

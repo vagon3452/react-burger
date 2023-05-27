@@ -7,9 +7,10 @@ import {
   Button,
   Input,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useSelector } from "../../services/store";
+import { useDispatch, useSelector } from "../../services/store";
 
 export const IndexPage = (): JSX.Element => {
+  const dispatch = useDispatch();
   const { user } = useSelector((store) => ({ user: store.user.user }));
 
   const [form, setValue] = useState<TUser>({ ...user!, password: "" });
@@ -24,7 +25,8 @@ export const IndexPage = (): JSX.Element => {
 
   const saveNewUser = (e: React.SyntheticEvent): void => {
     e.preventDefault();
-    updateUserAction(form);
+
+    dispatch(updateUserAction(form));
   };
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {

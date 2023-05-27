@@ -27,7 +27,7 @@ const postItemsRequestAction = (): IPostItemsAction => ({
   type: POST_ITEMS_REQUEST,
 });
 
-const postItemsSuccessAction = (
+export const postItemsSuccessAction = (
   order: Readonly<IOrder>
 ): IPostItemsSuccessAction => ({
   type: POST_ITEMS_SUCCESS,

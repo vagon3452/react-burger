@@ -22,7 +22,7 @@ interface IErrorAction {
   type: typeof FEED_TABLE_WS_ERROR;
   payload: string;
 }
-type TCurrentStatus = "created" | "pending" | "done"
+type TCurrentStatus = "created" | "pending" | "done";
 export interface ISocketOrders {
   createdAt: string;
   ingredients: Array<string>;
@@ -39,6 +39,7 @@ export interface IWebSocketData {
   total: number;
   totalToday: number;
 }
+
 
 interface IMessageAction {
   type: typeof FEED_TABLE_WS_MESSAGE;
@@ -80,12 +81,12 @@ export const wsMessage = (data: IWebSocketData): IMessageAction => ({
   type: FEED_TABLE_WS_MESSAGE,
   payload: data,
 });
+const data = { success: true, orders: [], total: 1500, totalToday: 90 };
 
 export const wsError = (error: string): IErrorAction => ({
   type: FEED_TABLE_WS_ERROR,
   payload: error,
 });
-
 
 export type TFeedActions =
   | ReturnType<typeof connect>

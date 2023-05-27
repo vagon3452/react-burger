@@ -30,7 +30,7 @@ enum ENDPOINTS {
 }
 
 const checkResponse = <T>(res: Response): Promise<T> => {
-  return res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
+  return res?.ok ? res.json() : res.json().then((err) => Promise.reject(err));
 };
 
 export const refreshToken = async (): Promise<TTokens> => {
@@ -91,10 +91,27 @@ const createRequest =
     const requestOptions: RequestInit = {
       headers: {
         "Content-Type": "application/json",
+      },
+      method,
+      body: form && JSON.stringify(form),
+    };
+    return await fetchWithRefresh<T>(url, requestOptions);
+  };
+
+const authCreateRequest =
+  <T extends TResponse, D = null>(
+    endpoint: ENDPOINTS,
+    method: "GET" | "PATCH"
+  ) =>
+  async (form: D) => {
+    const url: ENDPOINTS = endpoint;
+    const requestOptions: RequestInit = {
+      headers: {
+        "Content-Type": "application/json",
         authorization: localStorage.getItem(ACCESS_TOKEN_KEY) || "",
       },
       method,
-      body:form && JSON.stringify(form),
+      body: form && JSON.stringify(form),
     };
     return await fetchWithRefresh<T>(url, requestOptions);
   };
@@ -115,11 +132,11 @@ export const postItemsRequest = createRequest<IOrderRequest, IBodyOrder>(
   ENDPOINTS.orders,
   "POST"
 );
-export const getUserRequest = createRequest<IGetUser, null>(
+export const getUserRequest = authCreateRequest<IGetUser, null>(
   ENDPOINTS.user,
   "GET"
 );
-export const updateUserRequest = createRequest<IGetUser, TUser>(
+export const updateUserRequest = authCreateRequest<IGetUser, TUser>(
   ENDPOINTS.user,
   "PATCH"
 );
