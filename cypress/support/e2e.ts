@@ -18,3 +18,25 @@ import './commands'
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
+
+declare global {
+    namespace Cypress {
+        interface Chainable {
+            seedAndVisit(): void
+        }
+    }
+}
+declare global {
+    namespace Cypress {
+        interface Chainable {
+            sendRequestOrder(): void
+        }
+    }
+}
+declare global {
+    namespace Cypress {
+        interface Chainable {
+            setToken(token:string): void
+        }
+    }
+}

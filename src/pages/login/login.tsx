@@ -42,7 +42,7 @@ export function LoginPage(): JSX.Element {
           isIcon={false}
           extraClass={styles.input}
           placeholder="E-mail"
-          data-testid="count"
+          data-test="login"
         />
         <PasswordInput
           onChange={onChange}
@@ -50,6 +50,7 @@ export function LoginPage(): JSX.Element {
           name={"password"}
           extraClass={styles.input}
           placeholder="Пароль"
+          data-test="pass"
         />
         <Button htmlType="submit" type="primary" size="medium">
           Войти

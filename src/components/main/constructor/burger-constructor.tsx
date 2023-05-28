@@ -97,9 +97,14 @@ export const BurgerConstructor = (): JSX.Element => {
 
   return (
     <section className={styles.container}>
-      <div className={styles.burgerComponents} >
+      <div className={styles.burgerComponents}>
         <Bun bun={bun} handleDrag={handleDrag} pos={"(верх)"} type={"top"} />
-        <div className={styles.ingredients} ref={drop}>
+
+        <div
+          className={styles.ingredients}
+          ref={drop}
+          data-test="ingredients-area"
+        >
           {ingredients.length ? (
             ingredients.map((item: TContructorIngredient, index: number) => (
               <Ingredients
@@ -110,7 +115,10 @@ export const BurgerConstructor = (): JSX.Element => {
               />
             ))
           ) : (
-            <div className={styles.ingredient_background} style={{ paddingLeft: "24px" }}>
+            <div
+              className={styles.ingredient_background}
+              style={{ paddingLeft: "24px" }}
+            >
               Выберите начинку
             </div>
           )}
@@ -118,7 +126,7 @@ export const BurgerConstructor = (): JSX.Element => {
         <Bun bun={bun} handleDrag={handleDrag} pos={"(низ)"} type={"bottom"} />
       </div>
 
-      <div className={styles.info}>
+      <div className={styles.info} data-test="button-order">
         <p className="text text_type_main-medium">{total.totalPrice}</p>
         <CurrencyIcon type="primary" />
         <Button htmlType="button" type="primary" size="large" onClick={modal}>

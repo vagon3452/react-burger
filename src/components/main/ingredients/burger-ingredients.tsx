@@ -74,7 +74,7 @@ export const BurgerIngredients = (): JSX.Element => {
           Начинки
         </Tab>
       </div>
-      <div className={styles.ingridients}>
+      <div className={styles.ingridients} data-test="ingredients">
         {isLoading && "Загрузка..."}
         {hasError && "что-то пошло не так"}
         {!isLoading && !hasError && items && (

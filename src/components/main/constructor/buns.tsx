@@ -26,7 +26,7 @@ export const Bun: FC<TBunProps> = ({
     },
   });
   return (
-    <div className={styles.ingredient} ref={dropTarget}>
+    <div className={styles.ingredient} ref={dropTarget} data-test="bun-container">
       {bun ? (
         <ConstructorElement
           type={type}
@@ -36,7 +36,7 @@ export const Bun: FC<TBunProps> = ({
           thumbnail={bun.image}
         />
       ) : (
-        <div className={styles.ingredient_background}>Выберите булку</div>
+        <div className={styles.ingredient_background} >Выберите булку</div>
       )}
     </div>
   );
