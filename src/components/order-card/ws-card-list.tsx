@@ -4,10 +4,11 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useSelector } from "../../services/store";
 import { memo } from "react";
-import { ISocketOrders } from "../../services/actions/feed";
+
 import styles from "./card-list.module.css";
 import { IngredientIcon } from "./images-card/images";
 import { useLocation } from "react-router-dom";
+import { ISocketOrders } from "../../services/feed/types";
 
 type TCardListProps = {
   order: ISocketOrders;

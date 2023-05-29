@@ -4,7 +4,7 @@ import {
   applyMiddleware,
   compose,
 } from "redux";
-import { rootReducer } from "../services/reducers/index";
+import { rootReducer } from "./root-reducer";
 import thunk, { ThunkMiddleware } from "redux-thunk";
 
 import {
@@ -22,7 +22,7 @@ import {
   FEED_TABLE_WS_ERROR,
   FEED_TABLE_WS_MESSAGE,
   FEED_TABLE_WS_OPEN,
-} from "./actions/feed";
+} from "./feed/constants";
 import {
   FEED_PROFILE_CONNECT,
   FEED_PROFILE_DISCONNECT,
@@ -31,8 +31,8 @@ import {
   FEED_PROFILE_WS_ERROR,
   FEED_PROFILE_WS_MESSAGE,
   FEED_PROFILE_WS_OPEN,
-} from "./actions/profile-feed";
-import { TRootState } from "./reducers";
+} from "./profile-orders/constants";
+import { TRootState } from "./root-reducer";
 
 export const profileFeed = socketMiddleware({
   wsConnect: FEED_PROFILE_CONNECT,

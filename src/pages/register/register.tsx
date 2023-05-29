@@ -1,8 +1,8 @@
 import React, { ChangeEvent, useState } from "react";
-import { registerUserAction } from "../../services/actions/user";
+import { registerUserAction } from "../../services/auth/actions";
 import styles from "./register.module.css";
 import { useDispatch } from "../../services/store";
-import { TUser } from "../../services/types/user";
+import { TUser } from "../../services/auth/types";
 import {
   EmailInput,
   PasswordInput,

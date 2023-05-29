@@ -1,7 +1,7 @@
 import { Middleware } from "redux";
-import { TRootState } from "../reducers";
+import { TRootState } from "../root-reducer";
 import { refreshToken } from "../burger-api";
-import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY } from "../constants";
+import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY } from "../auth/constants";
 import { useRef } from "react";
 
 type TwsActionTypes = {

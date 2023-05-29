@@ -1,6 +1,6 @@
 import React, { useState, ChangeEvent } from "react";
-import { TUser } from "../../services/types/user";
-import { updateUserAction } from "../../services/actions/user";
+import { TUser } from "../../services/auth/types";
+import { updateUserAction } from "../../services/auth/actions";
 import styles from "./profile.module.css";
 
 import {

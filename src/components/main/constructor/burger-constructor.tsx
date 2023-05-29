@@ -1,26 +1,19 @@
-import React, { useState, useCallback } from "react";
-import { v1 as uuid } from "uuid";
+import React, { useState } from "react";
+import {
+  addBunToConstructor,
+  addToConstructor,
+  replaceIndex,
+} from "../../../services/constructor/actions";
 import styles from "./burger-constructor.module.css";
 import { useDrop } from "react-dnd";
-import { postItems } from "../../../services/actions/checkout";
+import { postItems } from "../../../services/order/actions";
 import Modal from "../../modal/modal";
 import { totalPriceSelector } from "../../../common/total-price";
 import image from "../../../images/done.png";
-import { CLEAR_ORDER } from "../../../services/constants/index";
-import { ingredientType } from "../../../services/types/data";
+import { CLEAR_ORDER } from "../../../services/order/constants";
 import { Loader } from "./loading/loader";
-import {
-  TContructorIngredient,
-  TIngredient,
-} from "../../../services/types/data";
-import {
-  ADD_BUN,
-  ADD_INGREDIENTS,
-  REPLACE,
-} from "../../../services/constants/index";
 import { Bun } from "./buns";
 import { Ingredients } from "./ingredients";
-
 import {
   CurrencyIcon,
   Button,
@@ -28,38 +21,40 @@ import {
 import { OrderDetails } from "./order-details";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "../../../services/store";
+import {
+  TIngredient,
+  ingredientType,
+} from "../../../services/ingredients/types";
+import {
+  create_getBun,
+  create_getIngredients,
+} from "../../../services/constructor/selectors";
+import { user_getUser } from "../../../services/auth/selectors";
+import {
+  orders_getOrder,
+  orders_isLoading,
+  orders_hasError,
+} from "../../../services/order/selectors";
 
 export const BurgerConstructor = (): JSX.Element => {
-  const { type_bun } = ingredientType;
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const bun = useSelector(create_getBun);
+  const ingredients = useSelector(create_getIngredients);
+  const user = useSelector(user_getUser);
+  const order = useSelector(orders_getOrder);
+  const isLoading = useSelector(orders_isLoading);
+  const hasError = useSelector(orders_hasError);
   const total = useSelector(totalPriceSelector);
 
   const handleDrag = (bun: TIngredient) => {
-    dispatch({ type: ADD_BUN, payload: { ...bun, uuid: uuid() } });
+    dispatch(addBunToConstructor(bun));
   };
 
-  const ingredientDrag = useCallback(
-    (ingredient: TIngredient) => {
-      dispatch({
-        type: ADD_INGREDIENTS,
-        payload: { ...ingredient, uuid: uuid() },
-      });
-    },
-    [dispatch]
-  );
-
-  const { bun, ingredients, order, isLoading, hasError, user } = useSelector(
-    (state) => ({
-      bun: state.create.bun,
-      user: state.user.user,
-      ingredients: state.create.ingredients,
-      order: state.checkout.order,
-      isLoading: state.checkout.isLoading,
-      hasError: state.checkout.hasError,
-    })
-  );
+  const ingredientDrag = (ingredient: TIngredient) => {
+    dispatch(addToConstructor(ingredient));
+  };
 
   const moveCard = (dragIndex: number, hoverIndex: number): void => {
     const dragCard = ingredients[dragIndex];
@@ -69,17 +64,18 @@ export const BurgerConstructor = (): JSX.Element => {
 
     newCards.splice(hoverIndex, 0, dragCard);
 
-    dispatch({ type: REPLACE, payload: newCards });
+    dispatch(replaceIndex(newCards));
   };
 
   const [openModal, setOpenModal] = useState(false);
+
   const closeModal = () => {
     setOpenModal(false);
     dispatch({ type: CLEAR_ORDER });
   };
 
   const modal = () => {
-    if (!!total.ingredients) {
+    if (total.ingredients.length) {
       if (!user) {
         navigate("/login");
       }
@@ -91,7 +87,7 @@ export const BurgerConstructor = (): JSX.Element => {
   const [, drop] = useDrop<TIngredient>({
     accept: "items",
     drop(items) {
-      items.type !== type_bun && ingredientDrag(items);
+      items.type !== ingredientType.type_bun && ingredientDrag(items);
     },
   });
 
@@ -106,7 +102,7 @@ export const BurgerConstructor = (): JSX.Element => {
           data-test="ingredients-area"
         >
           {ingredients.length ? (
-            ingredients.map((item: TContructorIngredient, index: number) => (
+            ingredients.map((item, index) => (
               <Ingredients
                 key={item.uuid}
                 moveCard={moveCard}
@@ -115,12 +111,7 @@ export const BurgerConstructor = (): JSX.Element => {
               />
             ))
           ) : (
-            <div
-              className={styles.ingredient_background}
-              style={{ paddingLeft: "24px" }}
-            >
-              Выберите начинку
-            </div>
+            <div className={styles.ingredient_background}>Выберите начинку</div>
           )}
         </div>
         <Bun bun={bun} handleDrag={handleDrag} pos={"(низ)"} type={"bottom"} />

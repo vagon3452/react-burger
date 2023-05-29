@@ -7,8 +7,8 @@ import { useLocation, useParams } from "react-router";
 import { useSelector } from "../../../services/store";
 import { getOrderRequest } from "../../../services/burger-api";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { ISocketOrders } from "../../../services/actions/feed";
-import { THttpOrder } from "../../../services/types/order";
+import { ISocketOrders } from "../../../services/feed/types";
+import { THttpOrder } from "../../../services/order/types";
 
 export const OrderIngredients = () => {
   const { publicFeed } = useSelector((store) => ({

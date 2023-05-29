@@ -3,6 +3,7 @@ import styles from "./ingredient-details.module.css";
 
 import { useLocation, useParams } from "react-router-dom";
 import { useSelector } from "../../../services/store";
+import { cart_getItems } from "../../../services/ingredients/selectors";
 
 type TNutritionProps = {
   children: string;
@@ -10,8 +11,10 @@ type TNutritionProps = {
 };
 
 export const IngredientsDetails = (): JSX.Element => {
-  const location = useLocation()
-  const items = useSelector((store) => store.cart.items);
+  const location = useLocation();
+
+  const items = useSelector(cart_getItems);
+
   const { ingredientId } = useParams();
 
   const data = items.find((el) => el._id === ingredientId);
@@ -25,8 +28,10 @@ export const IngredientsDetails = (): JSX.Element => {
     carbohydrates: "",
   };
 
-  const shouldAddMarginTop = location.state===null
-const classNameModal = `${styles.modal} ${shouldAddMarginTop ? styles.with_margin : ''}`
+  const shouldAddMarginTop = location.state === null;
+  const classNameModal = `${styles.modal} ${
+    shouldAddMarginTop ? styles.with_margin : ""
+  }`;
   return (
     <div className={classNameModal}>
       <div className={styles.title}>

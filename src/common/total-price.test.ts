@@ -1,4 +1,4 @@
-import { TContructorIngredient } from "../services/types/data";
+import { TContructorIngredient } from "../services/ingredients/types";
 import { ingredientArrayWithUuid } from "../utils";
 import { totalPriceSelector } from "./total-price";
 const [

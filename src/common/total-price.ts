@@ -1,5 +1,5 @@
 import { createSelector } from "reselect";
-import { TContructorIngredient } from "../services/types/data";
+import { TContructorIngredient } from "../services/ingredients/types";
 
 export interface IIngredientsState {
   create: {

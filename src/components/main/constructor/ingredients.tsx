@@ -1,13 +1,13 @@
 import React, { useRef, FC, memo } from "react";
 import { useDrag, useDrop } from "react-dnd";
 import { useDispatch } from "react-redux";
-import styles from "./ingredients.module.css"
-import { DELETE_ITEM } from "../../../services/constants/index";
-import { TContructorIngredient } from "../../../services/types/data";
+import styles from "./ingredients.module.css";
 import {
   ConstructorElement,
   DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
+import { TContructorIngredient } from "../../../services/ingredients/types";
+import { deleteIngredient } from "../../../services/constructor/actions";
 
 type TIngredientsProps = {
   data: TContructorIngredient;
@@ -31,7 +31,7 @@ export const Ingredients: FC<TIngredientsProps> = memo(
     const dispatch = useDispatch();
 
     const deleteItem = () => {
-      dispatch({ type: DELETE_ITEM, payload: uuid });
+      dispatch(deleteIngredient(uuid));
     };
     const [{ isDragging }, drag] = useDrag<
       TDragElement,

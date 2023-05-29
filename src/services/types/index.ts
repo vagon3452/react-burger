@@ -1,9 +1,9 @@
-import { TRequestOrderActions } from "../actions/checkout";
-import { TIngredientsActions } from "../actions/cart";
-import { TConstructorActions } from "../actions/create-burger";
-import { UserActionTypes } from "../reducers/user";
-import { TFeedActions } from "../actions/feed";
-import { TProfileFeedActions } from "../actions/profile-feed";
+import { TRequestOrderActions } from "../order/types";
+import { TIngredientsActions } from "../ingredients/actions";
+import { UserActionTypes } from "../auth/reducer";
+import { TFeedActions } from "../feed/actions";
+import { TProfileFeedActions } from "../profile-orders/actions";
+import { TConstructorActions } from "../constructor/types";
 
 export type TApplicationActions =
   | UserActionTypes
@@ -11,4 +11,4 @@ export type TApplicationActions =
   | TRequestOrderActions
   | TConstructorActions
   | TFeedActions
-  | TProfileFeedActions
+  | TProfileFeedActions;

@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import { OnlyAuth, OnlyUnAuth } from "./protected-route";
-import { checkUserAuth } from "../services/actions/user";
-import { getItems } from "../services/actions/cart";
+import { checkUserAuth } from "../services/auth/actions";
+import { getItems } from "../services/ingredients/actions";
 import { AppHeader } from "./header/app-header";
 import {
   Main,
@@ -22,12 +22,15 @@ import * as H from "history";
 import Modal from "./modal/modal";
 import { useDispatch, useSelector } from "../services/store";
 import { OrderIngredients } from "./modal/ws-modal/modal-data-api";
+import {
+  cart_hasError,
+  cart_isLoading,
+} from "../services/ingredients/selectors";
 
 function App(): JSX.Element {
-  const { isLoading, hasError } = useSelector((state) => ({
-    isLoading: state.cart.isLoading,
-    hasError: state.cart.hasError,
-  }));
+  const isLoading = useSelector(cart_isLoading);
+  const hasError = useSelector(cart_hasError);
+
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();

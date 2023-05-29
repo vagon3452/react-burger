@@ -2,8 +2,10 @@ import React, { FC } from "react";
 import { useDrop } from "react-dnd";
 import styles from "./buns.module.css";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
-import { TIngredient } from "../../../services/types/data";
-import { ingredientType } from "../../../services/types/data";
+import {
+  TIngredient,
+  ingredientType,
+} from "../../../services/ingredients/types";
 
 type TBunProps = {
   bun: TIngredient | null;
@@ -26,7 +28,11 @@ export const Bun: FC<TBunProps> = ({
     },
   });
   return (
-    <div className={styles.ingredient} ref={dropTarget} data-test="bun-container">
+    <div
+      className={styles.ingredient}
+      ref={dropTarget}
+      data-test="bun-container"
+    >
       {bun ? (
         <ConstructorElement
           type={type}
@@ -36,7 +42,7 @@ export const Bun: FC<TBunProps> = ({
           thumbnail={bun.image}
         />
       ) : (
-        <div className={styles.ingredient_background} >Выберите булку</div>
+        <div className={styles.ingredient_background}>Выберите булку</div>
       )}
     </div>
   );

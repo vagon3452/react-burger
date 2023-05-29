@@ -4,8 +4,8 @@ import { Item } from "./item";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
-import { ingredientType } from "../../../services/types/data";
 import { useSelector } from "../../../services/store";
+import { ingredientType } from "../../../services/ingredients/types";
 
 export const BurgerIngredients = (): JSX.Element => {
   const { items, isLoading, hasError } = useSelector((state) => ({

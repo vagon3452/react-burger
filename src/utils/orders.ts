@@ -1,4 +1,4 @@
-import { IOrder } from "../services/types/order";
+import { IOrder } from "../services/order/types";
 
 export const orderResponse: IOrder = {
   ingredients: [

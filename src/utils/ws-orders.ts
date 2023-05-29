@@ -1,4 +1,4 @@
-import { IWebSocketData } from "../services/actions/feed";
+import { IWebSocketData } from "../services/feed/types";
 
 export const socketOrders: IWebSocketData = {
   success: true,

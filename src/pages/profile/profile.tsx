@@ -1,6 +1,6 @@
 import React from "react";
-import { REFRESH_TOKEN_KEY } from "../../services/constants/index";
-import { setUserAction, signOutAction } from "../../services/actions/user";
+import { REFRESH_TOKEN_KEY } from "../../services/auth/constants";
+import { setUserAction, signOutAction } from "../../services/auth/actions";
 import styles from "./profile.module.css";
 
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
@@ -16,12 +16,16 @@ const linkStyle = {
 export function ProfilePage(): JSX.Element {
   const location = useLocation();
   const navigate = useNavigate();
-  type TLink = "/profile" | "/profile/orders" | "/";
-  const isActive = (link: TLink): boolean => location.pathname === link;
+
+  const isActive = (link: string): boolean => location.pathname === link;
 
   const dispatch = useDispatch();
-
-  const signOut = (e: React.SyntheticEvent) => {
+  const links = [
+    { path: "/profile", name: "Профиль" },
+    { path: "/profile/orders", name: "История заказов" },
+    { path: "/", name: "Выход", signOut: true },
+  ];
+  const handlerSignOut = (e: React.SyntheticEvent) => {
     e.preventDefault();
     const refreshToken = localStorage.getItem(REFRESH_TOKEN_KEY);
     if (refreshToken) {
@@ -35,51 +39,36 @@ export function ProfilePage(): JSX.Element {
   return (
     <>
       <div className={styles.navigation}>
-        <div className={styles.frame}>
-          <Link to="/profile" style={linkStyle}>
-            <p
-              className={`text text_type_main-medium ${
-                isActive("/profile")
-                  ? "text_color_primary"
-                  : "text_color_inactive"
-              }
-                
-                
-              `}
-            >
-              Профиль
-            </p>
-          </Link>
-        </div>
-        <div className={styles.frame}>
-          <Link to="/profile/orders" style={linkStyle}>
-            <p
-              className={`text text_type_main-medium ${
-                isActive("/profile/orders")
-                  ? "text_color_primary"
-                  : "text_color_inactive"
-              }
-
-              `}
-            >
-              История заказов
-            </p>
-          </Link>
-        </div>
-        <div className={styles.frame}>
-          <Link to="/" style={linkStyle}>
-            <p
-              className={`text text_type_main-medium ${
-                isActive("/") ? "text_color_primary" : "text_color_inactive"
-              }
-
-              `}
-              onClick={signOut}
-            >
-              Выход
-            </p>
-          </Link>
-        </div>
+        {links.map(({ path, name, signOut }) => {
+          return (
+            <div className={styles.frame}>
+              <Link to={path} style={linkStyle}>
+                {signOut ? (
+                  <p
+                    onClick={handlerSignOut}
+                    className={`text text_type_main-medium ${
+                      isActive(path)
+                        ? "text_color_primary"
+                        : "text_color_inactive"
+                    }`}
+                  >
+                    {name}
+                  </p>
+                ) : (
+                  <p
+                    className={`text text_type_main-medium ${
+                      isActive(path)
+                        ? "text_color_primary"
+                        : "text_color_inactive"
+                    }`}
+                  >
+                    {name}
+                  </p>
+                )}
+              </Link>
+            </div>
+          );
+        })}
       </div>
       <div className={styles.caption}>
         <p>Здесь вы можете изменять свои персональные данные</p>
@@ -87,4 +76,8 @@ export function ProfilePage(): JSX.Element {
       <Outlet />
     </>
   );
+}
+
+{
+  /* {frameLink("/", "Выход")} */
 }

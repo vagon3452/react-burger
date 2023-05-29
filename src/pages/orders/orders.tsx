@@ -3,12 +3,12 @@ import styles from "./orders.module.css";
 import { useDispatch, useSelector } from "../../services/store";
 import { CardList } from "../../components/order-card/ws-card-list";
 import {
-  ISocketOrders,
   profileFeedConnect,
   profileFeedWsDisconnect,
-} from "../../services/actions/profile-feed";
+} from "../../services/profile-orders/actions";
 import { Link, useLocation } from "react-router-dom";
-import { ACCESS_TOKEN_KEY } from "../../services/constants";
+import { ACCESS_TOKEN_KEY } from "../../services/auth/constants";
+import { ISocketOrders } from "../../services/feed/types";
 
 export function OrdersPage(): JSX.Element {
   const location = useLocation();
@@ -43,7 +43,7 @@ export function OrdersPage(): JSX.Element {
   const { privateFeed } = useSelector((state) => ({
     privateFeed: state.profileFeed.privateFeed,
   }));
-  
+
   if (!privateFeed) {
     return (
       <section className={styles.content}>

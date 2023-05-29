@@ -1,6 +1,6 @@
 import React, { useState, ChangeEvent } from "react";
 import { Link } from "react-router-dom";
-import { signInAction } from "../../services/actions/user";
+import { signInAction } from "../../services/auth/actions";
 
 import styles from "./login.module.css";
 import { useDispatch } from "../../services/store";

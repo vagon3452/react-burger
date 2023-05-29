@@ -3,13 +3,10 @@ import React, { useEffect } from "react";
 import styles from "./feed.module.css";
 import { useDispatch, useSelector } from "../../services/store";
 
-import {
-  connect,
-  disconnect,
-  ISocketOrders,
-} from "../../services/actions/feed";
+import { connect, disconnect } from "../../services/feed/actions";
 import { Link, useLocation } from "react-router-dom";
 import { CardList } from "../../components/order-card/ws-card-list";
+import { ISocketOrders } from "../../services/feed/types";
 
 const linkStyle = {
   textDecoration: "none",
