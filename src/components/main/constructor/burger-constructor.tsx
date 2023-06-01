@@ -52,7 +52,6 @@ export const BurgerConstructor = (): JSX.Element => {
   const handleDrag = (bun: TIngredient) => {
     dispatch(addBunToConstructor(bun));
   };
-  console.log(order);
 
   const ingredientDrag = (ingredient: TIngredient) => {
     dispatch(addToConstructor(ingredient));
@@ -77,7 +76,7 @@ export const BurgerConstructor = (): JSX.Element => {
   };
   const modal = () => {
     const token = localStorage.getItem(ACCESS_TOKEN_KEY);
-    console.log(token);
+
     if (total.ingredients.length > 0) {
       if (!token) {
         navigate("/login");
