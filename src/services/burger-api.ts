@@ -17,7 +17,7 @@ import {
   TOrderRequestFromNumber,
 } from "./order/types";
 
-enum ENDPOINTS {
+export enum ENDPOINTS {
   login = "https://norma.nomoreparties.space/api/auth/login",
   register = "https://norma.nomoreparties.space/api/auth/register",
   ingredients = "https://norma.nomoreparties.space/api/ingredients",
@@ -29,7 +29,7 @@ enum ENDPOINTS {
   refresh = "https://norma.nomoreparties.space/api/auth/token",
 }
 
-const checkResponse = <T>(res: Response): Promise<T> => {
+export const checkResponse = <T>(res: Response): Promise<T> => {
   return res?.ok ? res.json() : res.json().then((err) => Promise.reject(err));
 };
 
@@ -83,7 +83,7 @@ type TResponse =
 
 type TForm = TBodyReset | TEmail | TToken | IBodyOrder | TUser | TBodyLogin;
 
-const createRequest =
+export const createRequest =
   <T extends TResponse, D extends TForm>(
     endpoint: ENDPOINTS,
     method: "GET" | "POST" | "PATCH" | "PUT" | "DELETE"

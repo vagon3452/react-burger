@@ -48,9 +48,10 @@ export const registerUserAction = (form: TUser): AppThunkAction => {
         const user = handleAuthData(data);
         dispatch(setUserAction(user));
         dispatch(setAuthChecked());
+      } else {
+        dispatch(setUserAction(null));
       }
     } catch (error) {
-      console.log(`register user error ${error}`);
       localStorage.removeItem(ACCESS_TOKEN_KEY);
       localStorage.removeItem(REFRESH_TOKEN_KEY);
       dispatch(setUserAction(null));
@@ -67,9 +68,10 @@ export const signInAction = (form: TBodyLogin): AppThunkAction => {
         const user = handleAuthData(data);
         dispatch(setUserAction(user));
         dispatch(setAuthChecked());
+      } else {
+        dispatch(setUserAction(null));
       }
     } catch (error) {
-      console.log(`sign in action error ${error}`);
       localStorage.removeItem(ACCESS_TOKEN_KEY);
       localStorage.removeItem(REFRESH_TOKEN_KEY);
       dispatch(setUserAction(null));
@@ -84,9 +86,10 @@ export const getUserAction = (): AppThunkAction => async (dispatch) => {
     if (data.success) {
       dispatch(setUserAction(data.user));
       dispatch(setAuthChecked());
+    } else {
+      dispatch(setUserAction(null));
     }
   } catch (error) {
-    console.log(`get user action error`, error);
     localStorage.removeItem(ACCESS_TOKEN_KEY);
     localStorage.removeItem(REFRESH_TOKEN_KEY);
     dispatch(setUserAction(null));
@@ -102,9 +105,10 @@ export const updateUserAction = (form: TUser): AppThunkAction => {
       if (data.success) {
         dispatch(setUserAction(data.user));
         dispatch(setAuthChecked());
+      } else {
+        dispatch(setUserAction(null));
       }
     } catch (error) {
-      console.log(`update error ${error}`);
       localStorage.removeItem(ACCESS_TOKEN_KEY);
       localStorage.removeItem(REFRESH_TOKEN_KEY);
       dispatch(setUserAction(null));

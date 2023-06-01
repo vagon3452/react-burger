@@ -18,7 +18,7 @@ export interface IGetItemsSuccessAction {
   readonly type: typeof GET_ITEMS_SUCCESS;
   readonly items: ReadonlyArray<TIngredient>;
 }
-export const getItemsAction = (): IGetItemsAction => ({
+export const getItemsRequestAction = (): IGetItemsAction => ({
   type: GET_ITEMS_REQUEST,
 });
 
@@ -38,18 +38,17 @@ export type TIngredientsActions =
   | IGetItemsSuccessAction;
 
 export function getItems(): AppThunkAction {
-  return function (dispatch) {
-    dispatch(getItemsAction());
-    getItemsRequest()
-      .then((res) => {
-        if (res && res.success) {
-          dispatch(getItemsSuccessAction(res.data));
-        } else {
-          dispatch(getItemsFailedAction());
-        }
-      })
-      .catch((e) => {
+  return async function (dispatch) {
+    dispatch(getItemsRequestAction());
+    try {
+      const res = await getItemsRequest();
+      if (res.success) {
+        dispatch(getItemsSuccessAction(res.data));
+      } else {
         dispatch(getItemsFailedAction());
-      });
+      }
+    } catch (e) {
+      dispatch(getItemsFailedAction());
+    }
   };
 }

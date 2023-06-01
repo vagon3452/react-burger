@@ -1,8 +1,8 @@
-import configureMockStore from "redux-mock-store";
+// import configureMockStore from "redux-mock-store";
 import { rootReducer } from "./root-reducer";
-import { CLEAR_ORDER } from "./constants";
+import { CLEAR_ORDER } from "./order/constants";
 import configureMockStore from "redux-mock-store";
-import { GET_ITEMS_SUCCESS, GET_ITEMS_REQUEST } from "./constants";
+import { GET_ITEMS_SUCCESS, GET_ITEMS_REQUEST } from "./ingredients/constants";
 import { FEED_TABLE_WS_MESSAGE } from "./feed/actions";
 import {
   arrayIngredients,
@@ -63,7 +63,6 @@ const resStoreOrder = {
 describe("Проверка экшенов и редьюсеров", () => {
   const middleware = [thunk, feed, profileFeed];
 
-  //  const mockStore = configureMockStore(middleware);
   const enhancer = applyMiddleware(...middleware);
   let store;
 

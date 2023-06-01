@@ -3,7 +3,7 @@ import {
   POST_ITEMS_FAILED,
   POST_ITEMS_REQUEST,
   POST_ITEMS_SUCCESS,
-} from "../constants";
+} from "./constants";
 import { checkoutReducer } from "./reducer";
 
 const initialState = {

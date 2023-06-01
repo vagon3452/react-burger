@@ -2,7 +2,7 @@ import {
   GET_ITEMS_FAILED,
   GET_ITEMS_REQUEST,
   GET_ITEMS_SUCCESS,
-} from "../constants";
+} from "./constants";
 import { cartReducer } from "./reducer";
 
 const initialState = {

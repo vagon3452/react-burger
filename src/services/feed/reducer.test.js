@@ -4,7 +4,7 @@ import {
   FEED_TABLE_WS_ERROR,
   FEED_TABLE_WS_MESSAGE,
   FEED_TABLE_WS_OPEN,
-} from "./actions";
+} from "./constants"
 import { feedReducer } from "./reducer";
 
 const websocketStatus = {

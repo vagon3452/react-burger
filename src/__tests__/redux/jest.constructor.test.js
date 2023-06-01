@@ -1,5 +1,11 @@
-import { ADD_BUN, ADD_INGREDIENTS, DELETE_ITEM, REPLACE } from "./constants";
-import { burgerReducer } from "./reducer";
+import {
+  ADD_BUN,
+  ADD_INGREDIENTS,
+  DELETE_ITEM,
+  REPLACE,
+} from "../../services/constructor/constants";
+import { burgerReducer } from "../../services/constructor/reducer";
+import { initialState } from "../../services/constructor/reducer.test";
 
 const testBun = { uuid: 0, name: "Bun" };
 
@@ -7,12 +13,8 @@ const test1 = { uuid: 1, name: "Cheese" };
 const test2 = { uuid: 2, name: "Cheese" };
 const test3 = { uuid: 3, name: "Cheese" };
 
-export const initialState = {
-  bun: null,
-  ingredients: [],
-};
 
-describe("burgerReducer", () => {
+describe("constructorReducer", () => {
   it("shoulde initialize to correct default state", () => {
     expect(burgerReducer(undefined, {})).toStrictEqual(initialState);
   });

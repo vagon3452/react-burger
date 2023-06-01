@@ -18,7 +18,7 @@ interface ICartState {
   hasError: boolean;
 }
 
-const initialState: ICartInitialState = {
+export const initialState: ICartInitialState = {
   items: [],
   isLoading: false,
   hasError: false,

@@ -3,7 +3,7 @@ import { TRawUser } from "./types";
 import { SET_USER, SET_AUTH_CHECKED } from "./constants";
 import { ISetUserAction } from "./types";
 
-const initialState = {
+export const initialState = {
   user: null,
   isAuthChecked: false,
 };
