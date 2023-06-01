@@ -11,7 +11,7 @@ interface IState {
   bun: TContructorIngredient | null;
   ingredients: Array<TContructorIngredient>;
 }
-const initialState: IInitialState = {
+export const initialState: IInitialState = {
   bun: null,
   ingredients: [],
 };

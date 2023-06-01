@@ -8,7 +8,7 @@ import {
 } from "./constants";
 import { TFeedStore, WebsocketStatus } from "./types";
 
-const initialState: TFeedStore = {
+export const initialState: TFeedStore = {
   status: WebsocketStatus.OFFLINE,
   connectionError: "",
   publicFeed: null,

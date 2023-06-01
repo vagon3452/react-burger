@@ -41,7 +41,7 @@ export function ProfilePage(): JSX.Element {
       <div className={styles.navigation}>
         {links.map(({ path, name, signOut }) => {
           return (
-            <div className={styles.frame}>
+            <div className={styles.frame} key={path}>
               <Link to={path} style={linkStyle}>
                 {signOut ? (
                   <p

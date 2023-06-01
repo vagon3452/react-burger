@@ -31,12 +31,13 @@ describe("checkResponse", () => {
 
 const body = { email: "test@mail.ru", password: "12345" };
 
-describe("createRequest function", () => {
+describe("request and response", () => {
   let mockFetch;
-  const mockData = { success: true };
   beforeEach(() => {
-    mockFetch = jest.fn(() => Promise.resolve(mockData));
-    global.fetch = mockFetch;
+    mockFetch = jest.spyOn(global, "fetch").mockResolvedValue({
+      json: jest.fn().mockResolvedValue({ result: "ok" }),
+      ok: true,
+    });
   });
 
   afterEach(() => {
@@ -46,7 +47,7 @@ describe("createRequest function", () => {
   test("calls fetchWithRefresh with the correct arguments", async () => {
     const request = createRequest(ENDPOINTS.login, "POST");
     await request(body);
-    expect(mockFetch).toHaveBeenCalledWith(ENDPOINTS.user, {
+    expect(mockFetch).toHaveBeenCalledWith(ENDPOINTS.login, {
       headers: {
         "Content-Type": "application/json",
       },

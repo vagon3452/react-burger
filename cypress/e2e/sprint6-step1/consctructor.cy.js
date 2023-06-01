@@ -1,19 +1,24 @@
 describe("drag and drop test", () => {
   beforeEach(() => {
-    cy.seedAndVisit();
+    window.localStorage.setItem(
+      "refreshToken",
+      JSON.stringify("test-refreshToken")
+    );
+    window.localStorage.setItem(
+      "accessToken",
+      JSON.stringify("test-accessToken")
+    );
     cy.intercept("GET", "https://norma.nomoreparties.space/api/auth/user", {
       fixture: "user.json",
     });
-    cy.intercept("POST", "https://norma.nomoreparties.space/api/auth/login", {
-      fixture: "user.json",
+    cy.intercept("GET", "https://norma.nomoreparties.space/api/ingredients", {
+      fixture: "ingredients",
     });
+    cy.visit("http://localhost:3000");
+
     cy.intercept("POST", "https://norma.nomoreparties.space/api/orders", {
       fixture: "order.json",
     }).as("postOrder");
-
-    // cy.sendRequestOrder();
-
-    // cy.setToken("test-refreshToken");
   });
   it("should drag bun", () => {
     cy.get("[data-test=ingredients]")
@@ -66,11 +71,5 @@ describe("drag and drop test", () => {
       .trigger("dragstart");
     cy.get("[data-test=ingredients-area]").trigger("drop");
     cy.get("[data-test=button-order]").contains("Оформить заказ").click();
-
-    cy.get("[data-test=login]").type("www@yandex.ru");
-    cy.get("[data-test=pass]").type("1231321312312");
-    cy.get("body").type("{enter}");
-    cy.get("[data-test=button-order]").contains("Оформить заказ").click();
-    cy.wait("@postOrder").its("request.body")
   });
 });

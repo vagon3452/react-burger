@@ -221,12 +221,12 @@ describe("Redux store and actions user", () => {
   });
 
   // it("should dispatch setAuthChecked if no token in localStorage for checkUserAuth()", () => {
-  //   const dispatch = jest.fn();
+
 
   //   const getItemMock = jest
   //     .spyOn(localStorage, "getItem")
   //     .mockReturnValue(null);
-  //   getItemMock()(dispatch);
+ 
 
   //   const expectedAction = [actions.setAuthChecked()];
 
@@ -238,7 +238,7 @@ describe("Redux store and actions user", () => {
   //   api.getUserRequest.mockImplementationOnce(() =>
   //     Promise.resolve(mockSuccessApiResponse)
   //   );
-  //   const dispatch = jest.fn();
+
   //   const getItemMock = jest.spyOn(localStorage, "getItem");
   //   getItemMock.mockReturnValue("token");
 
@@ -246,7 +246,7 @@ describe("Redux store and actions user", () => {
   //     actions.setUserAction(rawUser),
   //     actions.setAuthChecked(),
   //   ];
-  //   checkUserAuth()(dispatch);
+
 
   //   await store.dispatch(actions.checkUserAuth());
   //   expect(store.getActions()).toEqual(expectedAction);

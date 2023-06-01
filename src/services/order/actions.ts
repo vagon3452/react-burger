@@ -13,7 +13,7 @@ import {
 } from "./constants";
 import { AppThunkAction } from "../store";
 
-const postItemsRequestAction = (): IPostItemsAction => ({
+export const postItemsRequestAction = (): IPostItemsAction => ({
   type: POST_ITEMS_REQUEST,
 });
 
@@ -24,24 +24,23 @@ export const postItemsSuccessAction = (
   payload: order,
 });
 
-const postItemsFailedAction = (): IPostItemsFailedAction => ({
+export const postItemsFailedAction = (): IPostItemsFailedAction => ({
   type: POST_ITEMS_FAILED,
 });
 
-export function postItems(ingridientsID: IBodyOrder): AppThunkAction {
-  return function (dispatch) {
+export function postItems(ingredientsID: IBodyOrder): AppThunkAction {
+  return async function (dispatch) {
     dispatch(postItemsRequestAction());
-
-    postItemsRequest(ingridientsID)
-      .then((res) => {
-        if (res && res.success) {
-          dispatch(postItemsSuccessAction(res.orders));
-        } else {
-          dispatch(postItemsFailedAction());
-        }
-      })
-      .catch((e) => {
+    try {
+      const res = await postItemsRequest(ingredientsID);
+      if (res && res.success) {
+        console.log(res)
+        dispatch(postItemsSuccessAction(res.order));
+      } else {
         dispatch(postItemsFailedAction());
-      });
+      }
+    } catch (e) {
+      dispatch(postItemsFailedAction());
+    }
   };
 }

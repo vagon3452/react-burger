@@ -93,6 +93,7 @@ export const createRequest =
     const requestOptions: RequestInit = {
       headers: {
         "Content-Type": "application/json",
+        authorization: localStorage.getItem(ACCESS_TOKEN_KEY) || "",
       },
       method,
       body: JSON.stringify(form),

@@ -13,7 +13,7 @@ interface IOrderState {
   hasError: boolean;
 }
 
-const initialState: IOrderState = {
+export const initialState: IOrderState = {
   isLoading: false,
   order: null,
   hasError: false,

@@ -42,7 +42,7 @@ export function getItems(): AppThunkAction {
     dispatch(getItemsRequestAction());
     try {
       const res = await getItemsRequest();
-      if (res.success) {
+      if (res && res.success) {
         dispatch(getItemsSuccessAction(res.data));
       } else {
         dispatch(getItemsFailedAction());

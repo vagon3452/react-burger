@@ -35,6 +35,7 @@ import {
   orders_isLoading,
   orders_hasError,
 } from "../../../services/order/selectors";
+import { ACCESS_TOKEN_KEY } from "../../../services/auth/constants";
 
 export const BurgerConstructor = (): JSX.Element => {
   const dispatch = useDispatch();
@@ -51,6 +52,7 @@ export const BurgerConstructor = (): JSX.Element => {
   const handleDrag = (bun: TIngredient) => {
     dispatch(addBunToConstructor(bun));
   };
+  console.log(order);
 
   const ingredientDrag = (ingredient: TIngredient) => {
     dispatch(addToConstructor(ingredient));
@@ -73,10 +75,11 @@ export const BurgerConstructor = (): JSX.Element => {
     setOpenModal(false);
     dispatch({ type: CLEAR_ORDER });
   };
-
   const modal = () => {
-    if (total.ingredients.length) {
-      if (!user) {
+    const token = localStorage.getItem(ACCESS_TOKEN_KEY);
+    console.log(token);
+    if (total.ingredients.length > 0) {
+      if (!token) {
         navigate("/login");
       }
       dispatch(postItems({ ingredients: total.ingredients }));

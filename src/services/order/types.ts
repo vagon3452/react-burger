@@ -33,7 +33,7 @@ export type TOrderRequestFromNumber = {
 export interface IOrderRequest {
   readonly success: boolean;
   readonly name: string;
-  readonly orders: IOrder;
+  readonly order: IOrder;
 }
 
 export interface IGetItem {
