@@ -34,7 +34,6 @@ export function postItems(ingredientsID: IBodyOrder): AppThunkAction {
     try {
       const res = await postItemsRequest(ingredientsID);
       if (res && res.success) {
-        console.log(res)
         dispatch(postItemsSuccessAction(res.order));
       } else {
         dispatch(postItemsFailedAction());

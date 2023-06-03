@@ -7,29 +7,14 @@ import {
   POST_ITEMS_FAILED,
   POST_ITEMS_REQUEST,
   POST_ITEMS_SUCCESS,
-  CLEAR_ORDER
+  CLEAR_ORDER,
 } from "../../services/order/constants";
 
 jest.mock("../../services/burger-api");
 
 const mockSuccessApiResponse = {
   success: true,
-  orders: {
-    ingredients: ["60d3463f7034a000269f45e7"],
-    owner: {
-      name: "test Name",
-      createdAt: "2021-06-23T14:43:22.587Z",
-      updateAt: "2021-06-23T14:43:22.603Z",
-      email: "v@mail.ru",
-    },
-    name: "no name",
-    _id: "",
-    price: 21,
-    status: "done",
-    number: 0,
-    createdAt: "2021-06-23T14:43:22.587Z",
-    updatedAt: "2021-06-23T14:43:22.603Z",
-  },
+  order: { number: 9999 },
 };
 
 const mockErrorApiResponse = {
@@ -56,7 +41,7 @@ describe("Redux store and order request", () => {
 
     const expectedActions = [
       actions.postItemsRequestAction(),
-      actions.postItemsSuccessAction(mockSuccessApiResponse.orders),
+      actions.postItemsSuccessAction(mockSuccessApiResponse.order),
     ];
 
     await store.dispatch(actions.postItems(TestIds));

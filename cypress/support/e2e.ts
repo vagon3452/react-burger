@@ -14,29 +14,37 @@
 // ***********************************************************
 
 // Import commands.js using ES2015 syntax:
-import './commands'
+import "./commands";
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
 
 declare global {
-    namespace Cypress {
-        interface Chainable {
-            seedAndVisit(): void
-        }
+  namespace Cypress {
+    interface Chainable {
+      seedAndVisit(): void;
     }
+  }
 }
 declare global {
-    namespace Cypress {
-        interface Chainable {
-            sendRequestOrder(): void
-        }
+  namespace Cypress {
+    interface Chainable {
+      sendRequestOrder(): void;
     }
+  }
 }
 declare global {
-    namespace Cypress {
-        interface Chainable {
-            setToken(token:string): void
-        }
+  namespace Cypress {
+    interface Chainable {
+      setToken(token: string): void;
     }
+  }
+}
+
+declare global {
+  namespace Cypress {
+    interface Chainable {
+      getRequestUser(): void;
+    }
+  }
 }

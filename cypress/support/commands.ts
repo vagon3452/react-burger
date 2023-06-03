@@ -46,36 +46,41 @@ Cypress.Commands.add("seedAndVisit", () => {
 
   cy.visit("http://localhost:3000");
 });
-// Cypress.Commands.add("sendRequestOrder", () => {
-//   cy.intercept("POST", "https://norma.nomoreparties.space/api/orders", {
-//     fixture: "order",
-//   });
 
-//   cy.visit("http://localhost:3000");
-// });
+Cypress.Commands.add("sendRequestOrder", () => {
+  cy.intercept("POST", "https://norma.nomoreparties.space/api/orders", {
+    fixture: "order",
+  });
+});
+
+Cypress.Commands.add("getRequestUser", () => {
+  cy.intercept("GET", "https://norma.nomoreparties.space/api/auth/user", {
+    fixture: "user.json",
+  });
+});
 
 // Cypress.Commands.add("setToken", (token) => {
 //   const refreshToken = { value: token };
 //   window.localStorage.setItem("refreshToken", JSON.stringify(refreshToken));
 // });
 
-Cypress.Commands.add("sendRequestOrder", () => {
-  cy.intercept("POST", "/api/orders", (req) => {
-    req.reply({
-      statusCode: 200,
-      body: {
-        success: true,
-        order: {
-          _id: "order-id",
-          number: 1,
-          status: "done",
-          name: "Burger",
-          createdAt: Date.now(),
-        },
-      },
-    });
-  }).as("createOrder");
+// Cypress.Commands.add("sendRequestOrder", () => {
+//   cy.intercept("POST", "/api/orders", (req) => {
+//     req.reply({
+//       statusCode: 200,
+//       body: {
+//         success: true,
+//         order: {
+//           _id: "order-id",
+//           number: 1,
+//           status: "done",
+//           name: "Burger",
+//           createdAt: Date.now(),
+//         },
+//       },
+//     });
+//   }).as("createOrder");
 
-  cy.get("[data-test=button-order]").contains("Оформить заказ").click();
-  cy.wait("@createOrder");
-});
+//   cy.get("[data-test=button-order]").contains("Оформить заказ").click();
+//   cy.wait("@createOrder");
+// });

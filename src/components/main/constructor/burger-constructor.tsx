@@ -8,7 +8,7 @@ import styles from "./burger-constructor.module.css";
 import { useDrop } from "react-dnd";
 import { postItems } from "../../../services/order/actions";
 import Modal from "../../modal/modal";
-import { totalPriceSelector } from "../../../common/total-price";
+import { totalPriceSelector } from "../../../services/constructor/selectors";
 import image from "../../../images/done.png";
 import { CLEAR_ORDER } from "../../../services/order/constants";
 import { Loader } from "./loading/loader";
@@ -29,7 +29,6 @@ import {
   create_getBun,
   create_getIngredients,
 } from "../../../services/constructor/selectors";
-import { user_getUser } from "../../../services/auth/selectors";
 import {
   orders_getOrder,
   orders_isLoading,
@@ -43,7 +42,6 @@ export const BurgerConstructor = (): JSX.Element => {
 
   const bun = useSelector(create_getBun);
   const ingredients = useSelector(create_getIngredients);
-  const user = useSelector(user_getUser);
   const order = useSelector(orders_getOrder);
   const isLoading = useSelector(orders_isLoading);
   const hasError = useSelector(orders_hasError);

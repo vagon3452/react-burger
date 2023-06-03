@@ -50,6 +50,7 @@ describe("request and response", () => {
     expect(mockFetch).toHaveBeenCalledWith(ENDPOINTS.login, {
       headers: {
         "Content-Type": "application/json",
+        authorization: "",
       },
       method: "POST",
       body: JSON.stringify(body),

@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { useSelector } from "react-redux";
-import { totalPriceSelector } from "../../../common/total-price";
+import { totalPriceSelector } from "../../../services/constructor/selectors";
 import { useDrag } from "react-dnd";
 import styles from "./item.module.css";
 import {

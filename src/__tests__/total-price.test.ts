@@ -1,20 +1,8 @@
 import { TContructorIngredient } from "../services/ingredients/types";
 import { ingredientArrayWithUuid } from "../utils";
-import { totalPriceSelector } from "./total-price";
-const [
-  ingredient1,
-  ingredient2,
-  ingredient3,
-  ingredient4,
-  ingredient5,
-  ingredient6,
-  ingredient7,
-  ingredient8,
-  ingredient9,
-  ingredient10,
-  ingredient11,
-  ingredient12,
-] = ingredientArrayWithUuid;
+import { totalPriceSelector } from "../services/constructor/selectors";
+const [ingredient1, ingredient2, ingredient3, ingredient4] =
+  ingredientArrayWithUuid;
 
 const ingredients = [...ingredientArrayWithUuid];
 
