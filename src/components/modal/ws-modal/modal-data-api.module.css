@@ -1,0 +1,188 @@
+.modal {
+  display: block;
+  align-self: center;
+  margin: 0;
+  padding: auto;
+  width: 720px;
+  height: 715px;
+}
+.with_margin {
+  margin:auto ;
+  margin-top: 207px;
+}
+.number {
+  margin: auto;
+  margin-top: 40px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: auto;
+  text-align: center;
+  width: 640px;
+  height: 64px;
+}
+.info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+  gap: 8px;
+  padding-top: 10px;
+  width: 640px;
+  height: 64px;
+}
+
+.status {
+  width: 640px;
+  height: 24px;
+
+  font-family: "JetBrains Mono";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+
+  display: flex;
+  align-items: center;
+
+  color: #ffffff;
+
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+}
+.status_done {
+  color: #00cccc;
+}
+
+.title {
+  width: 640px;
+  height: 30px;
+
+  font-family: "JetBrains Mono";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 30px;
+
+  display: flex;
+  align-items: center;
+
+  color: #f2f2f3;
+
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+}
+
+.ingregients {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 40px;
+  padding: 0px;
+  height: 366px;
+}
+
+.scroll_area {
+  composes: custom-scroll from global;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 24px;
+  padding: auto;
+
+  width: 640px;
+  height: 312px;
+  overflow-y: auto;
+  flex: none;
+}
+
+.item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 16px;
+  padding: 0px;
+  gap: 16px;
+  width: 608px;
+  height: 64px;
+  flex: none;
+  align-self: stretch;
+  flex-grow: 0;
+}
+
+.preview {
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 100px;
+  border-width: 2px;
+  border: 2px solid transparent;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+  background: linear-gradient(var(--bg-color_element), var(--bg-color_element))
+      content-box,
+    linear-gradient(var(--gradient-color_1), var(--gradient-color_2)) border-box;
+}
+
+:root {
+  --shadow-box-color_modal: rgba(0, 0, 0, 0.04);
+  --border-color_modal: rgba(76, 76, 255, 0.2);
+  --bg-color_overlay: rgba(0, 0, 0, 0.6);
+  --bg-color_element: #1c1c21;
+  --text-color_ready: #00cccc;
+  --gradient-color_1: #4c4cff;
+  --gradient-color_2: #801ab2;
+}
+
+.text {
+  width: 320px;
+  height: 24px;
+
+  font-family: "JetBrains Mono";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+
+  display: flex;
+  align-items: center;
+
+  color: #f2f2f3;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+}
+
+.price {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0px;
+  gap: 8px;
+
+  width: 192px;
+  height: 24px;
+  flex: none;
+  order: 2;
+  flex-grow: 1;
+}
+.timestamp {
+  display: flex;
+  margin-top: 40px;
+  width: 608px;
+  justify-content: space-between;
+}
+
+.total {
+  display: flex;
+  gap: 10px;
+}
