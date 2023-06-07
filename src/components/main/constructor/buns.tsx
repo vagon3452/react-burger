@@ -47,5 +47,3 @@ export const Bun: FC<TBunProps> = ({
     </div>
   );
 };
-
-export default Bun;

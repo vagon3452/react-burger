@@ -7,6 +7,7 @@ import { connect, disconnect } from "../../services/feed/actions";
 import { Link, useLocation } from "react-router-dom";
 import { CardList } from "../../components/order-card/ws-card-list";
 import { ISocketOrders } from "../../services/feed/types";
+import { feed_publicFeed, feed_status } from "../../services/feed/selectors";
 
 const linkStyle = {
   textDecoration: "none",
@@ -28,9 +29,7 @@ export function FeedPage(): JSX.Element {
     };
   }, []);
 
-  const { publicFeed } = useSelector((state) => ({
-    publicFeed: state.feed.publicFeed,
-  }));
+  const publicFeed = useSelector(feed_publicFeed);
 
   if (
     publicFeed === null ||
@@ -75,7 +74,7 @@ export function FeedPage(): JSX.Element {
           <div className={styles.done}>
             <p>готовы:</p>
             <ul className={styles.done_numbers}>
-              {publicFeed.orders.map((list) => (
+              {publicFeed?.orders.map((list) => (
                 <li className="text text_type_digits-small" key={list.number}>
                   {list.status === "done" && list.number}
                 </li>
@@ -85,7 +84,7 @@ export function FeedPage(): JSX.Element {
           <div className={styles.done}>
             <p>в работе:</p>
             <ul className={styles.done_numbers}>
-              {publicFeed.orders.map((list) => (
+              {publicFeed?.orders.map((list) => (
                 <li className="text text_type_digits-small" key={list.number}>
                   {list.status !== "done" && list.number}
                 </li>
@@ -95,11 +94,13 @@ export function FeedPage(): JSX.Element {
         </div>
         <div className={styles.complited}>
           <p className={styles.text}>Выполнено за все время:</p>
-          <p className="text text_type_digits-large">{publicFeed.total}</p>
+          <p className="text text_type_digits-large">{publicFeed?.total}</p>
         </div>
         <div className={styles.complited}>
           <p className={styles.text}>Выполнено за сегодня:</p>
-          <p className="text text_type_digits-large">{publicFeed.totalToday}</p>
+          <p className="text text_type_digits-large">
+            {publicFeed?.totalToday}
+          </p>
         </div>
       </div>
     </div>

@@ -9,15 +9,14 @@ import { getOrderRequest } from "../../../services/burger-api";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { ISocketOrders } from "../../../services/feed/types";
 import { THttpOrder } from "../../../services/order/types";
+import { cart_getItems } from "../../../services/ingredients/selectors";
+import { feed_publicFeed } from "../../../services/feed/selectors";
+import { profile_privateFeed } from "../../../services/profile-orders/selectors";
 
 export const OrderIngredients = () => {
-  const { publicFeed } = useSelector((store) => ({
-    publicFeed: store.feed.publicFeed,
-  }));
-  const { items } = useSelector((store) => ({ items: store.cart.items }));
-  const { privateFeed } = useSelector((state) => ({
-    privateFeed: state.profileFeed.privateFeed,
-  }));
+  const publicFeed = useSelector(feed_publicFeed);
+  const items = useSelector(cart_getItems);
+  const privateFeed = useSelector(profile_privateFeed);
 
   const location = useLocation();
 

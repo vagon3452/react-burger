@@ -75,7 +75,7 @@ export const BurgerConstructor = (): JSX.Element => {
   const modal = () => {
     const token = localStorage.getItem(ACCESS_TOKEN_KEY);
 
-    if (total.ingredients.length > 0) {
+    if (total.ingredients.length) {
       if (!token) {
         navigate("/login");
       }

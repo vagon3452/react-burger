@@ -9,6 +9,7 @@ import styles from "./card-list.module.css";
 import { IngredientIcon } from "./images-card/images";
 import { useLocation } from "react-router-dom";
 import { ISocketOrders } from "../../services/feed/types";
+import { cart_getItems } from "../../services/ingredients/selectors";
 
 type TCardListProps = {
   order: ISocketOrders;
@@ -19,7 +20,7 @@ export const CardList = memo(({ order }: TCardListProps): JSX.Element => {
 
   const isProfileOrdersPathname = /^\/profile\/orders$/.test(location.pathname);
 
-  const { items } = useSelector((store) => ({ items: store.cart.items }));
+  const items = useSelector(cart_getItems);
 
   const getIngredientsFromStore = (arrayId: string[]) => {
     return arrayId.map((id) =>

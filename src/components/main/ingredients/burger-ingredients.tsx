@@ -6,13 +6,10 @@ import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { useSelector } from "../../../services/store";
 import { ingredientType } from "../../../services/ingredients/types";
+import { cart_getItems } from "../../../services/ingredients/selectors";
 
 export const BurgerIngredients = (): JSX.Element => {
-  const { items, isLoading, hasError } = useSelector((state) => ({
-    items: state.cart.items,
-    isLoading: state.cart.isLoading,
-    hasError: state.cart.hasError,
-  }));
+  const items = useSelector(cart_getItems);
   const location = useLocation();
   const bunsRef = useRef<HTMLDivElement | null>(null);
   const sausRef = useRef<HTMLDivElement | null>(null);
@@ -75,57 +72,53 @@ export const BurgerIngredients = (): JSX.Element => {
         </Tab>
       </div>
       <div className={styles.ingridients} data-test="ingredients">
-        {isLoading && "Загрузка..."}
-        {hasError && "что-то пошло не так"}
-        {!isLoading && !hasError && items && (
-          <>
-            <div className={styles.headline} ref={bunsRef}>
-              <h2>Булки</h2>
-            </div>
-            <div className={styles.columns}>
-              {bun.map((item) => (
-                <Link
-                  to={`/ingredients/${item._id}`}
-                  state={{ background: location }}
-                  key={item._id}
-                  style={linkStyle}
-                >
-                  <Item data={item} />
-                </Link>
-              ))}
-            </div>
-            <div className={styles.headline} ref={sausRef}>
-              <h2>Соусы</h2>
-            </div>
-            <div className={styles.columns}>
-              {saus.map((item) => (
-                <Link
-                  to={`/ingredients/${item._id}`}
-                  state={{ background: location }}
-                  key={item._id}
-                  style={linkStyle}
-                >
-                  <Item data={item} />
-                </Link>
-              ))}
-            </div>
-            <div className={styles.headline} ref={mainRef}>
-              <h2>Начинка</h2>
-            </div>
-            <div className={styles.columns}>
-              {main.map((item) => (
-                <Link
-                  to={`/ingredients/${item._id}`}
-                  state={{ background: location }}
-                  key={item._id}
-                  style={linkStyle}
-                >
-                  <Item data={item} />
-                </Link>
-              ))}
-            </div>
-          </>
-        )}
+        <>
+          <div className={styles.headline} ref={bunsRef}>
+            <h2>Булки</h2>
+          </div>
+          <div className={styles.columns}>
+            {bun.map((item) => (
+              <Link
+                to={`/ingredients/${item._id}`}
+                state={{ background: location }}
+                key={item._id}
+                style={linkStyle}
+              >
+                <Item data={item} />
+              </Link>
+            ))}
+          </div>
+          <div className={styles.headline} ref={sausRef}>
+            <h2>Соусы</h2>
+          </div>
+          <div className={styles.columns}>
+            {saus.map((item) => (
+              <Link
+                to={`/ingredients/${item._id}`}
+                state={{ background: location }}
+                key={item._id}
+                style={linkStyle}
+              >
+                <Item data={item} />
+              </Link>
+            ))}
+          </div>
+          <div className={styles.headline} ref={mainRef}>
+            <h2>Начинка</h2>
+          </div>
+          <div className={styles.columns}>
+            {main.map((item) => (
+              <Link
+                to={`/ingredients/${item._id}`}
+                state={{ background: location }}
+                key={item._id}
+                style={linkStyle}
+              >
+                <Item data={item} />
+              </Link>
+            ))}
+          </div>
+        </>
       </div>
     </div>
   );
